@@ -1,21 +1,21 @@
 package mx.evin.apps.words;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.parse.Parse;
-import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
-import com.parse.SignUpCallback;
 
 import mx.evin.apps.words.model.entities.Technology;
 import mx.evin.apps.words.model.entities.UserTechnology;
+import mx.evin.apps.words.viewmodel.LoginHelper;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG_ = "MainActivityTAG_";
+    private ParseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,30 +33,17 @@ public class MainActivity extends AppCompatActivity {
         testObject.put("foo", "bar");
         testObject.saveInBackground();
 
-        ParseUser user = new ParseUser();
-        user.setUsername("my_name34");
-        user.setPassword("my_pass4");
-        user.setEmail("email334@example.com");
+        LoginHelper.loginSequence(this);
+    }
 
-        user.signUpInBackground(new SignUpCallback() {
-            public void done(ParseException e) {
-                if (e == null) {
-                    Log.d(TAG_, "User logged in");
-                    Technology technology = new Technology();
-                    technology.setName("Android");
-                    technology.saveInBackground();
+    public void userReady() {
+        user = ParseUser.getCurrentUser();
+        Log.d(TAG_, user.getUsername());
+    }
 
-                    ParseUser currentUser = ParseUser.getCurrentUser();
-
-                    UserTechnology userTechnology = new UserTechnology();
-                    userTechnology.setTechnology(technology);
-                    userTechnology.setUser(currentUser);
-                    userTechnology.saveInBackground();
-                } else {
-                    Log.d(TAG_, "Error: User NOT logged in");
-                    Log.d(TAG_, e.toString());
-                }
-            }
-        });
+    @Override
+    protected void onStop() {
+        ParseUser.logOut();
+        super.onStop();
     }
 }
