@@ -17,7 +17,7 @@ import mx.evin.apps.words.model.entities.UserTechnology;
 /**
  * Created by evin on 1/8/16.
  */
-public class CreateObject {
+public class Creator {
     //TODO Design a builder pattern for getCreateStuff
     private static final String TAG_ = "CreateObjectTAG_";
 
