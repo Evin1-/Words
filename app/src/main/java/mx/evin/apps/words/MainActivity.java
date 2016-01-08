@@ -11,6 +11,7 @@ import com.parse.ParseUser;
 import mx.evin.apps.words.model.entities.Technology;
 import mx.evin.apps.words.model.entities.UserTechnology;
 import mx.evin.apps.words.viewmodel.LoginHelper;
+import mx.evin.apps.words.viewmodel.StartupHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     public void userReady() {
         user = ParseUser.getCurrentUser();
         Log.d(TAG_, user.getUsername());
+
+        StartupHelper.createTechnologies();
     }
 
     @Override
