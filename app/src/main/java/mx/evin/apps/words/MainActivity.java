@@ -8,7 +8,9 @@ import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import mx.evin.apps.words.model.entities.Pack;
 import mx.evin.apps.words.model.entities.Technology;
+import mx.evin.apps.words.model.entities.Term;
 import mx.evin.apps.words.model.entities.UserTechnology;
 import mx.evin.apps.words.viewmodel.LoginHelper;
 import mx.evin.apps.words.viewmodel.StartupHelper;
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
         ParseObject.registerSubclass(Technology.class);
         ParseObject.registerSubclass(UserTechnology.class);
+        ParseObject.registerSubclass(Term.class);
+        ParseObject.registerSubclass(Pack.class);
 
         Parse.initialize(this);
 

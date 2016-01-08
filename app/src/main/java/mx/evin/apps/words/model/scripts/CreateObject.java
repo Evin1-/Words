@@ -9,13 +9,16 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import mx.evin.apps.words.model.entities.Pack;
 import mx.evin.apps.words.model.entities.Technology;
+import mx.evin.apps.words.model.entities.Term;
 import mx.evin.apps.words.model.entities.UserTechnology;
 
 /**
  * Created by evin on 1/8/16.
  */
 public class CreateObject {
+    //TODO Design a builder patter for getCreateStuff
     private static final String TAG_ = "CreateObjectTAG_";
 
     public static void getCreateTechnology(final String name) {
@@ -46,6 +49,45 @@ public class CreateObject {
                     userTechnology.setTechnology(technology);
                     userTechnology.setUser(user);
                     userTechnology.saveInBackground();
+                } else {
+                    Log.d(TAG_, "Retrieved the object.");
+                }
+            }
+        });
+    }
+
+    public static void getCreatePack(final String name){
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Pack");
+        query.whereEqualTo("name", name);
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+                if (object == null) {
+                    Pack pack = new Pack();
+                    pack.setName(name);
+                    pack.saveInBackground();
+                } else {
+                    Log.d(TAG_, "Retrieved the object.");
+                }
+            }
+        });
+    }
+
+    public static void getCreateTerm(final String words, final Technology technology, final Pack pack, final String docs, final String url){
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Term");
+        query.whereEqualTo("words", words);
+        query.whereEqualTo("technology", technology);
+        query.whereEqualTo("pack", pack);
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                if (object == null) {
+                    Term term = new Term();
+                    term.setWords(words);
+                    term.setTechnology(technology);
+                    term.setPack(pack);
+                    term.setDocs(docs);
+                    term.setUrl(url);
+                    term.saveInBackground();
                 } else {
                     Log.d(TAG_, "Retrieved the object.");
                 }
