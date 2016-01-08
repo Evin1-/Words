@@ -10,6 +10,9 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
+import mx.evin.apps.words.model.entities.Technology;
+import mx.evin.apps.words.model.entities.UserTechnology;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG_ = "MainActivityTAG_";
@@ -20,6 +23,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Parse.enableLocalDatastore(this);
+
+        ParseObject.registerSubclass(Technology.class);
+        ParseObject.registerSubclass(UserTechnology.class);
+
         Parse.initialize(this);
 
         ParseObject testObject = new ParseObject("TestObject");
@@ -41,5 +48,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Technology technology = new Technology();
+        technology.setName("Android");
+        technology.saveInBackground();
+
+        ParseUser currentUser = ParseUser.getCurrentUser();
+
+        UserTechnology userTechnology = new UserTechnology();
+        userTechnology.setTechnology(technology);
+        userTechnology.setUser(currentUser);
+        userTechnology.saveInBackground();
     }
 }
