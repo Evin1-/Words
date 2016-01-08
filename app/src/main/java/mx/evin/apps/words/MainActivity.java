@@ -12,8 +12,8 @@ import mx.evin.apps.words.model.entities.Pack;
 import mx.evin.apps.words.model.entities.Technology;
 import mx.evin.apps.words.model.entities.Term;
 import mx.evin.apps.words.model.entities.UserTechnology;
-import mx.evin.apps.words.viewmodel.LoginHelper;
-import mx.evin.apps.words.viewmodel.StartupHelper;
+import mx.evin.apps.words.viewmodel.LoginVM;
+import mx.evin.apps.words.viewmodel.StartupVM;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,14 +38,14 @@ public class MainActivity extends AppCompatActivity {
         testObject.put("foo", "bar");
         testObject.saveInBackground();
 
-        LoginHelper.loginSequence(this);
+        LoginVM.loginSequence(this);
     }
 
     public void userReady() {
         user = ParseUser.getCurrentUser();
         Log.d(TAG_, user.getUsername());
 
-        StartupHelper.firstTimeSetup();
+        StartupVM.firstTimeSetup();
     }
 
     @Override

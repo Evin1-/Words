@@ -13,8 +13,7 @@ import mx.evin.apps.words.model.scripts.CreateObject;
 /**
  * Created by evin on 1/8/16.
  */
-public class StartupHelper {
-    //TODO Rename Helpers
+public class StartupVM {
     private static ParseUser mUser;
 
     static{

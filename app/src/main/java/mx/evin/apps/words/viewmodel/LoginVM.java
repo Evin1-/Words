@@ -12,8 +12,7 @@ import mx.evin.apps.words.MainActivity;
 /**
  * Created by evin on 1/8/16.
  */
-public class LoginHelper {
-    //TODO Rename Helpers
+public class LoginVM {
     private static final String TAG_ = "ViewModelTAG_";
 
     public static void loginSequence(MainActivity activity) {
