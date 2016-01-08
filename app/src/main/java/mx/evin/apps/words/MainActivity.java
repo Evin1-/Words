@@ -34,30 +34,29 @@ public class MainActivity extends AppCompatActivity {
         testObject.saveInBackground();
 
         ParseUser user = new ParseUser();
-        user.setUsername("my_name");
-        user.setPassword("my_pass");
-        user.setEmail("email@example.com");
+        user.setUsername("my_name34");
+        user.setPassword("my_pass4");
+        user.setEmail("email334@example.com");
 
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {
                     Log.d(TAG_, "User logged in");
+                    Technology technology = new Technology();
+                    technology.setName("Android");
+                    technology.saveInBackground();
+
+                    ParseUser currentUser = ParseUser.getCurrentUser();
+
+                    UserTechnology userTechnology = new UserTechnology();
+                    userTechnology.setTechnology(technology);
+                    userTechnology.setUser(currentUser);
+                    userTechnology.saveInBackground();
                 } else {
                     Log.d(TAG_, "Error: User NOT logged in");
                     Log.d(TAG_, e.toString());
                 }
             }
         });
-
-        Technology technology = new Technology();
-        technology.setName("Android");
-        technology.saveInBackground();
-
-        ParseUser currentUser = ParseUser.getCurrentUser();
-
-        UserTechnology userTechnology = new UserTechnology();
-        userTechnology.setTechnology(technology);
-        userTechnology.setUser(currentUser);
-        userTechnology.saveInBackground();
     }
 }
