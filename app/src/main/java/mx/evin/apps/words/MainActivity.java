@@ -41,8 +41,7 @@ public class MainActivity extends AppCompatActivity {
         user = ParseUser.getCurrentUser();
         Log.d(TAG_, user.getUsername());
 
-        StartupHelper.createTechnologies();
-        StartupHelper.createUserTechnologies();
+        StartupHelper.firstTimeSetup();
     }
 
     @Override

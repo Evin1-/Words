@@ -20,6 +20,11 @@ public class StartupHelper {
         mUser = ParseUser.getCurrentUser();
     }
 
+    public static void firstTimeSetup(){
+        createTechnologies();
+        createUserTechnologies();
+    }
+
     public static void createTechnologies() {
         CreateObject.getCreateTechnology("Android");
         CreateObject.getCreateTechnology("iOS");
