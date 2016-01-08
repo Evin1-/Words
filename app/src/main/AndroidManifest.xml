@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mx.evin.apps.words">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,6 +19,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="com.parse.APPLICATION_ID"
+            android:value="uUeudU3d2i2hQAJWV4P6Rtko0tPyc2xuHGVTgicS" />
+        <meta-data
+            android:name="com.parse.CLIENT_KEY"
+            android:value="GaagGIBIN5z7ahmrIUMIN1XO6mR4tINmz3dDiT6D" />
     </application>
 
 </manifest>
