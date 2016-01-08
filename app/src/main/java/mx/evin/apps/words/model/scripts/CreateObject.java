@@ -18,7 +18,7 @@ import mx.evin.apps.words.model.entities.UserTechnology;
  * Created by evin on 1/8/16.
  */
 public class CreateObject {
-    //TODO Design a builder patter for getCreateStuff
+    //TODO Design a builder pattern for getCreateStuff
     private static final String TAG_ = "CreateObjectTAG_";
 
     public static void getCreateTechnology(final String name) {
@@ -26,13 +26,13 @@ public class CreateObject {
         query.whereEqualTo("name", name);
         query.getFirstInBackground(new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
-            if (object == null) {
-                Technology technology = new Technology();
-                technology.setName(name);
-                technology.saveInBackground();
-            } else {
-                Log.d(TAG_, "Retrieved the object.");
-            }
+                if (object == null) {
+                    Technology technology = new Technology();
+                    technology.setName(name);
+                    technology.saveInBackground();
+                } else {
+                    Log.d(TAG_, "Retrieved the object.");
+                }
             }
         });
     }
@@ -56,7 +56,7 @@ public class CreateObject {
         });
     }
 
-    public static void getCreatePack(final String name){
+    public static void getCreatePack(final String name) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Pack");
         query.whereEqualTo("name", name);
         query.getFirstInBackground(new GetCallback<ParseObject>() {
@@ -72,7 +72,7 @@ public class CreateObject {
         });
     }
 
-    public static void getCreateTerm(final String words, final Technology technology, final Pack pack, final String docs, final String url){
+    public static void getCreateTerm(final String words, final Technology technology, final Pack pack, final String docs, final String url) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Term");
         query.whereEqualTo("words", words);
         query.whereEqualTo("technology", technology);
