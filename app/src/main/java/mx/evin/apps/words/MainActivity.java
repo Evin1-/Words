@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG_, user.getUsername());
 
         StartupHelper.createTechnologies();
+        StartupHelper.createUserTechnologies();
     }
 
     @Override

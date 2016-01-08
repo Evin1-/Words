@@ -18,33 +18,38 @@ import mx.evin.apps.words.model.entities.UserTechnology;
 public class CreateObject {
     private static final String TAG_ = "CreateObjectTAG_";
 
-    public static void getCreateTechnology(String name){
+    public static void getCreateTechnology(final String name) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Technology");
         query.whereEqualTo("name", name);
         query.getFirstInBackground(new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
-                if (object == null) {
-                    Log.d("score", "The getFirst request failed.");
-                    Technology technology = new Technology();
-                    technology.setName("Android");
-                    technology.saveInBackground(new SaveCallback() {
-                        @Override
-                        public void done(ParseException e) {
-
-                        }
-                    });
-
-                } else {
-                    Log.d("score", "Retrieved the object.");
-                }
+            if (object == null) {
+                Technology technology = new Technology();
+                technology.setName(name);
+                technology.saveInBackground();
+            } else {
+                Log.d(TAG_, "Retrieved the object.");
+            }
             }
         });
     }
 
-    public static void getCreateUserTechnology(ParseUser user, Technology technology){
-        UserTechnology userTechnology = new UserTechnology();
-        userTechnology.setTechnology(technology);
-        userTechnology.setUser(user);
-        userTechnology.saveInBackground();
+    public static void getCreateUserTechnology(final ParseUser user, final Technology technology) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("UserTechnology");
+        query.whereEqualTo("user", user);
+        query.whereEqualTo("technology", technology);
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                if (object == null) {
+                    UserTechnology userTechnology = new UserTechnology();
+                    userTechnology.setTechnology(technology);
+                    userTechnology.setUser(user);
+                    userTechnology.saveInBackground();
+                } else {
+                    Log.d(TAG_, "Retrieved the object.");
+                }
+            }
+        });
     }
 }
