@@ -13,6 +13,7 @@ import mx.evin.apps.words.model.entities.Technology;
 import mx.evin.apps.words.model.entities.Term;
 import mx.evin.apps.words.model.entities.UserTechnology;
 import mx.evin.apps.words.viewmodel.LoginVM;
+import mx.evin.apps.words.viewmodel.ParseVM;
 import mx.evin.apps.words.viewmodel.StartupVM;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,19 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Parse.enableLocalDatastore(this);
-
-        ParseObject.registerSubclass(Technology.class);
-        ParseObject.registerSubclass(UserTechnology.class);
-        ParseObject.registerSubclass(Term.class);
-        ParseObject.registerSubclass(Pack.class);
-
-        Parse.initialize(this);
-
-        ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
-        testObject.saveInBackground();
-
+        ParseVM.parseStart(this);
         LoginVM.loginSequence(this);
     }
 
