@@ -26,25 +26,25 @@ import mx.evin.apps.words.model.entities.UserTerm;
 public class RowCreator {
     private static final String TAG_ = "CreateObjectTAG_";
 
-    public static void getCreateTechnology(String name) {
-        getCreateTechnology(name, false);
+    public static ParseObject getCreateTechnology(String name) {
+        return getCreateTechnology(name, false);
     }
 
-    public static void getCreateTechnology(String name, boolean async) {
+    public static ParseObject getCreateTechnology(String name, boolean async) {
         Technology technology = new Technology();
         technology.setName(name);
 
         HashMap<String, Object> settings = new HashMap<>();
         settings.put("name", name);
 
-        getCreateGeneric("Technology", settings, technology, async);
+        return getCreateGeneric("Technology", settings, technology, async);
     }
 
-    public static void getCreateUserTechnology(ParseUser user, Technology technology) {
-        getCreateUserTechnology(user, technology, false);
+    public static ParseObject getCreateUserTechnology(ParseUser user, Technology technology) {
+        return getCreateUserTechnology(user, technology, false);
     }
 
-    public static void getCreateUserTechnology(ParseUser user, Technology technology, boolean async) {
+    public static ParseObject getCreateUserTechnology(ParseUser user, Technology technology, boolean async) {
         UserTechnology userTechnology = new UserTechnology();
         userTechnology.setUser(user);
         userTechnology.setTechnology(technology);
@@ -53,28 +53,28 @@ public class RowCreator {
         settings.put("user", user);
         settings.put("technology", technology);
 
-        getCreateGeneric("UserTechnology", settings, userTechnology, async);
+        return getCreateGeneric("UserTechnology", settings, userTechnology, async);
     }
 
-    public static void getCreatePack(String name) {
-        getCreatePack(name, false);
+    public static ParseObject getCreatePack(String name) {
+        return getCreatePack(name, false);
     }
 
-    public static void getCreatePack(String name, boolean async) {
+    public static ParseObject getCreatePack(String name, boolean async) {
         Pack pack = new Pack();
         pack.setName(name);
 
         HashMap<String, Object> settings = new HashMap<>();
         settings.put("name", name);
 
-        getCreateGeneric("Pack", settings, pack, async);
+        return getCreateGeneric("Pack", settings, pack, async);
     }
 
-    public static void getCreateTerm(String words, Technology technology, Pack pack, String docs, String url) {
-        getCreateTerm(words, technology, pack, docs, url, false);
+    public static ParseObject getCreateTerm(String words, Technology technology, Pack pack, String docs, String url) {
+        return getCreateTerm(words, technology, pack, docs, url, false);
     }
 
-    public static void getCreateTerm(String words, Technology technology, Pack pack, String docs, String url, boolean async) {
+    public static ParseObject getCreateTerm(String words, Technology technology, Pack pack, String docs, String url, boolean async) {
         Term term = new Term();
         term.setWords(words);
         term.setTechnology(technology);
@@ -87,14 +87,14 @@ public class RowCreator {
         settings.put("technology", technology);
         settings.put("pack", pack);
 
-        getCreateGeneric("Term", settings, term, async);
+        return getCreateGeneric("Term", settings, term, async);
     }
 
-    public static void getCreateUserTerm(ParseUser user, Term term, int strength) {
-        getCreateUserTerm(user, term, strength, false);
+    public static ParseObject getCreateUserTerm(ParseUser user, Term term, int strength) {
+        return getCreateUserTerm(user, term, strength, false);
     }
 
-    public static void getCreateUserTerm(ParseUser user, Term term, int strength, boolean async) {
+    public static ParseObject getCreateUserTerm(ParseUser user, Term term, int strength, boolean async) {
         UserTerm userTerm = new UserTerm();
         userTerm.setUser(user);
         userTerm.setTerm(term);
@@ -105,14 +105,14 @@ public class RowCreator {
         settings.put("term", term);
         settings.put("strength", strength);
 
-        getCreateGeneric("UserTerm", settings, userTerm, async);
+        return getCreateGeneric("UserTerm", settings, userTerm, async);
     }
 
-    public static void getCreateTermTerm(Term term1, Term term2, int strength) {
-        getCreateTermTerm(term1, term2, strength, false);
+    public static ParseObject getCreateTermTerm(Term term1, Term term2, int strength) {
+        return getCreateTermTerm(term1, term2, strength, false);
     }
 
-    public static void getCreateTermTerm(Term term1, Term term2, int strength, boolean async) {
+    public static ParseObject getCreateTermTerm(Term term1, Term term2, int strength, boolean async) {
         TermTerm termTerm = new TermTerm();
         termTerm.setTerm1(term1);
         termTerm.setTerm2(term2);
@@ -123,15 +123,15 @@ public class RowCreator {
         settings.put("term2", term2);
         settings.put("strength", strength);
 
-        getCreateGeneric("TermTerm", settings, termTerm, async);
+        return getCreateGeneric("TermTerm", settings, termTerm, async);
 
     }
 
-    public static void getCreateTermHierarchy(Term parent, Term child){
-        getCreateTermHierarchy(parent, child, false);
+    public static ParseObject getCreateTermHierarchy(Term parent, Term child){
+        return getCreateTermHierarchy(parent, child, false);
     }
 
-    public static void getCreateTermHierarchy(Term parent, Term child, boolean async){
+    public static ParseObject getCreateTermHierarchy(Term parent, Term child, boolean async){
         TermHierarchy termHierarchy = new TermHierarchy();
         termHierarchy.setParent(parent);
         termHierarchy.setChild(child);
@@ -140,14 +140,14 @@ public class RowCreator {
         settings.put("parent", parent);
         settings.put("child", child);
 
-        getCreateGeneric("TermHierarchy", settings, termHierarchy, async);
+        return getCreateGeneric("TermHierarchy", settings, termHierarchy, async);
     }
 
-    public static void getCreateTermImplementation(Term term, Term implementation){
-        getCreateTermImplementation(term, implementation, false);
+    public static ParseObject getCreateTermImplementation(Term term, Term implementation){
+        return getCreateTermImplementation(term, implementation, false);
     }
 
-    public static void getCreateTermImplementation(Term term, Term implementation, boolean async){
+    public static ParseObject getCreateTermImplementation(Term term, Term implementation, boolean async){
         TermImplementation termImplementation = new TermImplementation();
         termImplementation.setTerm(term);
         termImplementation.setImplementation(implementation);
@@ -156,7 +156,7 @@ public class RowCreator {
         settings.put("term", term);
         settings.put("implementation", implementation);
 
-        getCreateGeneric("TermImplementation", settings, termImplementation, async);
+        return getCreateGeneric("TermImplementation", settings, termImplementation, async);
     }
 
     public static ParseObject getCreateGeneric(final String className, HashMap<String, Object> settings, final ParseObject objectToSave, boolean async) {
