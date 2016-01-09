@@ -25,16 +25,24 @@ public class RowCreator {
     private static final String TAG_ = "CreateObjectTAG_";
 
     public static void getCreateTechnology(String name) {
+        getCreateTechnology(name, false);
+    }
+
+    public static void getCreateTechnology(String name, boolean async) {
         Technology technology = new Technology();
         technology.setName(name);
 
         HashMap<String, Object> settings = new HashMap<>();
         settings.put("name", name);
 
-        getCreateGeneric("Technology", settings, technology, false);
+        getCreateGeneric("Technology", settings, technology, async);
     }
 
     public static void getCreateUserTechnology(ParseUser user, Technology technology) {
+        getCreateUserTechnology(user, technology, false);
+    }
+
+    public static void getCreateUserTechnology(ParseUser user, Technology technology, boolean async) {
         UserTechnology userTechnology = new UserTechnology();
         userTechnology.setUser(user);
         userTechnology.setTechnology(technology);
@@ -43,20 +51,28 @@ public class RowCreator {
         settings.put("user", user);
         settings.put("technology", technology);
 
-        getCreateGeneric("UserTechnology", settings, userTechnology, false);
+        getCreateGeneric("UserTechnology", settings, userTechnology, async);
     }
 
     public static void getCreatePack(String name) {
+        getCreatePack(name, false);
+    }
+
+    public static void getCreatePack(String name, boolean async) {
         Pack pack = new Pack();
         pack.setName(name);
 
         HashMap<String, Object> settings = new HashMap<>();
         settings.put("name", name);
 
-        getCreateGeneric("Pack", settings, pack, false);
+        getCreateGeneric("Pack", settings, pack, async);
     }
 
     public static void getCreateTerm(String words, Technology technology, Pack pack, String docs, String url) {
+        getCreateTerm(words, technology, pack, docs, url, false);
+    }
+
+    public static void getCreateTerm(String words, Technology technology, Pack pack, String docs, String url, boolean async) {
         Term term = new Term();
         term.setWords(words);
         term.setTechnology(technology);
@@ -71,36 +87,43 @@ public class RowCreator {
         settings.put("docs", docs);
         settings.put("url", url);
 
-        getCreateGeneric("Term", settings, term, false);
+        getCreateGeneric("Term", settings, term, async);
     }
 
-    public static void getCreateGeneric(String className, HashMap<String, Object> settings, final ParseObject objectToSave, boolean async){
+    public static void getCreateGeneric(final String className, HashMap<String, Object> settings, final ParseObject objectToSave, boolean async) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(className);
         for (Map.Entry<String, Object> entry : settings.entrySet()) {
             query.whereEqualTo(entry.getKey(), entry.getValue());
         }
 
-        if (async){
+        if (async) {
             query.getFirstInBackground(new GetCallback<ParseObject>() {
                 @Override
                 public void done(ParseObject object, ParseException e) {
                     if (object == null) {
                         objectToSave.saveEventually();
                     } else {
-                        Log.d(TAG_, "Retrieved the object." + object.getObjectId());
+                        Log.d(TAG_, "Retrieved the object " + className + " " + object.getObjectId());
                     }
                 }
             });
-        }else{
+        } else {
+            ParseObject object = null;
             try {
-                ParseObject object = query.getFirst();
-                if (object == null){
-                    objectToSave.save();
-                }else {
-                    Log.d(TAG_, "Retrieved the object." + object.getObjectId());
-                }
+                object = query.getFirst();
             } catch (ParseException e) {
-                e.printStackTrace();
+                Log.d(TAG_, "Not found, trying to create...");
+            } finally {
+                if (object == null) {
+                    try {
+                        objectToSave.save();
+                        Log.d(TAG_, "Created succesfully.");
+                    } catch (ParseException e) {
+                        Log.d(TAG_, "Failed creation");
+                    }
+                } else {
+                    Log.d(TAG_, "Retrieved the object " + className + " " + object.getObjectId());
+                }
             }
         }
     }
