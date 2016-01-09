@@ -5,7 +5,7 @@ import com.parse.ParseUser;
 import mx.evin.apps.words.model.entities.Pack;
 import mx.evin.apps.words.model.entities.Technology;
 import mx.evin.apps.words.model.queries.Lookups;
-import mx.evin.apps.words.model.scripts.Creator;
+import mx.evin.apps.words.model.scripts.RowCreator;
 
 /**
  * Created by evin on 1/8/16.
@@ -25,22 +25,22 @@ public class StartupVM {
     }
 
     public static void createTechnologies() {
-        Creator.getCreateTechnology("Android");
-        Creator.getCreateTechnology("iOS");
-        Creator.getCreateTechnology("SharePoint");
-        Creator.getCreateTechnology("Management");
+        RowCreator.getCreateTechnology("Android");
+        RowCreator.getCreateTechnology("iOS");
+        RowCreator.getCreateTechnology("SharePoint");
+        RowCreator.getCreateTechnology("Management");
     }
 
     public static void createUserTechnologies(){
         Technology technology;
 
         technology = Lookups.getTechnology("Android");
-        Creator.getCreateUserTechnology(mUser, technology);
+        RowCreator.getCreateUserTechnology(mUser, technology);
     }
 
     public static void createPacks(){
-        Creator.getCreatePack("java.lang");
-        Creator.getCreatePack("android.view");
+        RowCreator.getCreatePack("java.lang");
+        RowCreator.getCreatePack("android.view");
     }
 
     public static void createTerms(){
@@ -51,8 +51,8 @@ public class StartupVM {
         java_lang = Lookups.getPack("java.lang");
         android_view = Lookups.getPack("android.view");
 
-        Creator.getCreateTerm("Object", android, java_lang, "1", "2");
-        Creator.getCreateTerm("View", android, android_view, "3", "4");
-        Creator.getCreateTerm("ViewGroup", android, android_view, "5", "6");
+        RowCreator.getCreateTerm("Object", android, java_lang, "1", "2");
+        RowCreator.getCreateTerm("View", android, android_view, "3", "4");
+        RowCreator.getCreateTerm("ViewGroup", android, android_view, "5", "6");
     }
 }
