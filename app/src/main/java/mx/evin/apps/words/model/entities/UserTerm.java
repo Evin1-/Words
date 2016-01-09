@@ -9,6 +9,7 @@ import com.parse.ParseUser;
  */
 @ParseClassName("UserTerm")
 public class UserTerm extends ParseObject {
+
     public UserTerm() {
     }
 

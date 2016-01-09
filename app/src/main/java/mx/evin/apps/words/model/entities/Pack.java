@@ -8,6 +8,7 @@ import com.parse.ParseObject;
  */
 @ParseClassName("Pack")
 public class Pack extends ParseObject{
+
     public Pack() {
     }
 

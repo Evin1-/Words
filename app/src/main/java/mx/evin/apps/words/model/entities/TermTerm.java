@@ -8,6 +8,7 @@ import com.parse.ParseObject;
  */
 @ParseClassName("TermTerm")
 public class TermTerm extends ParseObject {
+
     public TermTerm() {
     }
 

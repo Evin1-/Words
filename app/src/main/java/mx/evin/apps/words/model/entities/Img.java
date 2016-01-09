@@ -1,6 +1,5 @@
 package mx.evin.apps.words.model.entities;
 
-import com.parse.Parse;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
@@ -9,6 +8,7 @@ import com.parse.ParseObject;
  */
 @ParseClassName("Img")
 public class Img extends ParseObject{
+
     public Img() {
     }
 

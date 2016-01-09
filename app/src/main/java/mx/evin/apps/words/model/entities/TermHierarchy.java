@@ -8,6 +8,7 @@ import com.parse.ParseObject;
  */
 @ParseClassName("TermHierarchy")
 public class TermHierarchy extends ParseObject {
+
     public TermHierarchy() {
     }
 
