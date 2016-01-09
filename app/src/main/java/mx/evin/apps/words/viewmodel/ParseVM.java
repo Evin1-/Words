@@ -5,6 +5,7 @@ import android.content.Context;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
+import mx.evin.apps.words.model.entities.Img;
 import mx.evin.apps.words.model.entities.Pack;
 import mx.evin.apps.words.model.entities.Technology;
 import mx.evin.apps.words.model.entities.Term;
@@ -29,6 +30,7 @@ public class ParseVM {
         ParseObject.registerSubclass(TermTerm.class);
         ParseObject.registerSubclass(TermHierarchy.class);
         ParseObject.registerSubclass(TermImplementation.class);
+        ParseObject.registerSubclass(Img.class);
 
         Parse.initialize(context);
 

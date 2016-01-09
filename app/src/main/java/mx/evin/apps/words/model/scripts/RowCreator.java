@@ -11,6 +11,7 @@ import com.parse.ParseUser;
 import java.util.HashMap;
 import java.util.Map;
 
+import mx.evin.apps.words.model.entities.Img;
 import mx.evin.apps.words.model.entities.Pack;
 import mx.evin.apps.words.model.entities.Technology;
 import mx.evin.apps.words.model.entities.Term;
@@ -157,6 +158,26 @@ public class RowCreator {
         settings.put("implementation", implementation);
 
         return getCreateGeneric("TermImplementation", settings, termImplementation, async);
+    }
+
+    public static ParseObject getCreateImg(String title, String url, String description, int priority, Term term) {
+        return getCreateImg(title, url, description, priority, term, false);
+    }
+
+    public static ParseObject getCreateImg(String title, String url, String description, int priority, Term term, boolean async){
+        Img img = new Img();
+        img.setTitle(title);
+        img.setUrl(url);
+        img.setDescription(description);
+        img.setPriority(priority);
+        img.setTerm(term);
+
+        HashMap<String, Object> settings = new HashMap<>();
+        settings.put("url", url);
+        settings.put("term", term);
+
+        return getCreateGeneric("Img", settings, img, async);
+
     }
 
     public static ParseObject getCreateGeneric(final String className, HashMap<String, Object> settings, final ParseObject objectToSave, boolean async) {

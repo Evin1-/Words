@@ -32,6 +32,7 @@ public class StartupVM {
         createUserTerms();
         createTermHierarchies();
         createTermImplementations();
+        createImgs();
     }
 
     public static void createTechnologies() {
@@ -98,6 +99,14 @@ public class StartupVM {
         Term term3 = terms.get("ViewGroup");
 
         RowCreator.getCreateTermImplementation(term3, term2);
+    }
+
+    public static void createImgs(){
+        Term term1 = terms.get("Object");
+        Term term2 = terms.get("View");
+        Term term3 = terms.get("ViewGroup");
+
+        RowCreator.getCreateImg("example", "https://goo.gl/OI4XQ4", "description", 1, term1);
     }
 
 }
