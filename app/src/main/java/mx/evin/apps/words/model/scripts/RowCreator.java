@@ -14,6 +14,8 @@ import java.util.Map;
 import mx.evin.apps.words.model.entities.Pack;
 import mx.evin.apps.words.model.entities.Technology;
 import mx.evin.apps.words.model.entities.Term;
+import mx.evin.apps.words.model.entities.TermHierarchy;
+import mx.evin.apps.words.model.entities.TermImplementation;
 import mx.evin.apps.words.model.entities.TermTerm;
 import mx.evin.apps.words.model.entities.UserTechnology;
 import mx.evin.apps.words.model.entities.UserTerm;
@@ -90,11 +92,11 @@ public class RowCreator {
         getCreateGeneric("Term", settings, term, async);
     }
 
-    public static void getCreateUserTerm(ParseUser user, Term term, int strength){
+    public static void getCreateUserTerm(ParseUser user, Term term, int strength) {
         getCreateUserTerm(user, term, strength, false);
     }
 
-    public static void getCreateUserTerm(ParseUser user, Term term, int strength, boolean async){
+    public static void getCreateUserTerm(ParseUser user, Term term, int strength, boolean async) {
         UserTerm userTerm = new UserTerm();
         userTerm.setUser(user);
         userTerm.setTerm(term);
@@ -108,11 +110,11 @@ public class RowCreator {
         getCreateGeneric("UserTerm", settings, userTerm, async);
     }
 
-    public static void getCreateTermTerm(Term term1, Term term2, int strength){
+    public static void getCreateTermTerm(Term term1, Term term2, int strength) {
         getCreateTermTerm(term1, term2, strength, false);
     }
 
-    public static void getCreateTermTerm(Term term1, Term term2, int strength, boolean async){
+    public static void getCreateTermTerm(Term term1, Term term2, int strength, boolean async) {
         TermTerm termTerm = new TermTerm();
         termTerm.setTerm1(term1);
         termTerm.setTerm2(term2);
@@ -125,6 +127,38 @@ public class RowCreator {
 
         getCreateGeneric("TermTerm", settings, termTerm, async);
 
+    }
+
+    public static void getCreateTermHierarchy(Term parent, Term child){
+        getCreateTermHierarchy(parent, child, false);
+    }
+
+    public static void getCreateTermHierarchy(Term parent, Term child, boolean async){
+        TermHierarchy termHierarchy = new TermHierarchy();
+        termHierarchy.setParent(parent);
+        termHierarchy.setChild(child);
+
+        HashMap<String, Object> settings = new HashMap<>();
+        settings.put("parent", parent);
+        settings.put("child", child);
+
+        getCreateGeneric("TermHierarchy", settings, termHierarchy, async);
+    }
+
+    public static void getCreateTermImplementation(Term term, Term implementation){
+        getCreateTermImplementation(term, implementation, false);
+    }
+
+    public static void getCreateTermImplementation(Term term, Term implementation, boolean async){
+        TermImplementation termImplementation = new TermImplementation();
+        termImplementation.setTerm(term);
+        termImplementation.setImplementation(implementation);
+
+        HashMap<String, Object> settings = new HashMap<>();
+        settings.put("term", term);
+        settings.put("implementation", implementation);
+
+        getCreateGeneric("TermImplementation", settings, termImplementation, async);
     }
 
     public static ParseObject getCreateGeneric(final String className, HashMap<String, Object> settings, final ParseObject objectToSave, boolean async) {
@@ -155,7 +189,7 @@ public class RowCreator {
                 if (parseObjectAux == null) {
                     try {
                         objectToSave.save();
-                        Log.d(TAG_, "Created succesfully." + className + " " + objectToSave.getObjectId());
+                        Log.d(TAG_, "Created succesfully " + className + " " + objectToSave.getObjectId());
                     } catch (ParseException e) {
                         Log.d(TAG_, "Failed creation " + e.toString());
                     }

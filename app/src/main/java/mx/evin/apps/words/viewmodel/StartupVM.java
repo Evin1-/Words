@@ -2,6 +2,8 @@ package mx.evin.apps.words.viewmodel;
 
 import com.parse.ParseUser;
 
+import java.util.HashMap;
+
 import mx.evin.apps.words.model.entities.Pack;
 import mx.evin.apps.words.model.entities.Technology;
 import mx.evin.apps.words.model.entities.Term;
@@ -12,6 +14,7 @@ import mx.evin.apps.words.model.scripts.RowCreator;
  * Created by evin on 1/8/16.
  */
 public class StartupVM {
+    //TODO terms hashmap
     private static ParseUser mUser;
 
     static{
@@ -25,6 +28,8 @@ public class StartupVM {
         createTerms();
         createTermTerms();
         createUserTerms();
+        createTermHierarchies();
+        createTermImplementations();
     }
 
     public static void createTechnologies() {
@@ -90,6 +95,38 @@ public class StartupVM {
         RowCreator.getCreateUserTerm(mUser, term1, 2);
         RowCreator.getCreateUserTerm(mUser, term2, 4);
         RowCreator.getCreateUserTerm(mUser, term3, 0);
+    }
+
+    public static void createTermHierarchies() {
+        Term term1, term2, term3;
+        Technology android;
+        Pack java_lang, android_view;
+
+        android = Lookups.getTechnology("Android");
+        java_lang = Lookups.getPack("java.lang");
+        android_view = Lookups.getPack("android.view");
+
+        term1 = Lookups.getTerm("Object", android, java_lang);
+        term2 = Lookups.getTerm("View", android, android_view);
+        term3 = Lookups.getTerm("ViewGroup", android, android_view);
+
+        RowCreator.getCreateTermHierarchy(term2, term3);
+    }
+
+    public static void createTermImplementations(){
+        Term term1, term2, term3;
+        Technology android;
+        Pack java_lang, android_view;
+
+        android = Lookups.getTechnology("Android");
+        java_lang = Lookups.getPack("java.lang");
+        android_view = Lookups.getPack("android.view");
+
+        term1 = Lookups.getTerm("Object", android, java_lang);
+        term2 = Lookups.getTerm("View", android, android_view);
+        term3 = Lookups.getTerm("ViewGroup", android, android_view);
+
+        RowCreator.getCreateTermImplementation(term3, term2);
     }
 
 }
