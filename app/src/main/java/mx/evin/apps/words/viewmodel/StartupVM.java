@@ -16,9 +16,11 @@ import mx.evin.apps.words.model.scripts.RowCreator;
 public class StartupVM {
     //TODO terms hashmap
     private static ParseUser mUser;
+    private static HashMap<String, Term> terms;
 
     static{
         mUser = ParseUser.getCurrentUser();
+        terms = new HashMap<>();
     }
 
     public static void firstTimeSetup(){
@@ -59,38 +61,23 @@ public class StartupVM {
         java_lang = Lookups.getPack("java.lang");
         android_view = Lookups.getPack("android.view");
 
-        RowCreator.getCreateTerm("Object", android, java_lang, "1", "2");
-        RowCreator.getCreateTerm("View", android, android_view, "3", "4");
-        RowCreator.getCreateTerm("ViewGroup", android, android_view, "5", "6");
+        terms.put("Object", (Term) RowCreator.getCreateTerm("Object", android, java_lang, "1", "2"));
+        terms.put("View", (Term) RowCreator.getCreateTerm("View", android, android_view, "3", "4"));
+        terms.put("ViewGroup", (Term) RowCreator.getCreateTerm("ViewGroup", android, android_view, "5", "6"));
     }
 
     public static void createTermTerms(){
-        Term term1, term2;
-        Technology android;
-        Pack java_lang, android_view;
-
-        android = Lookups.getTechnology("Android");
-        java_lang = Lookups.getPack("java.lang");
-        android_view = Lookups.getPack("android.view");
-
-        term1 = Lookups.getTerm("Object", android, java_lang);
-        term2 = Lookups.getTerm("ViewGroup", android, android_view);
+        Term term1 = terms.get("Object");
+        Term term2 = terms.get("View");
+        Term term3 = terms.get("ViewGroup");
 
         RowCreator.getCreateTermTerm(term1, term2, 3);
     }
 
     public static void createUserTerms(){
-        Term term1, term2, term3;
-        Technology android;
-        Pack java_lang, android_view;
-
-        android = Lookups.getTechnology("Android");
-        java_lang = Lookups.getPack("java.lang");
-        android_view = Lookups.getPack("android.view");
-
-        term1 = Lookups.getTerm("Object", android, java_lang);
-        term2 = Lookups.getTerm("View", android, android_view);
-        term3 = Lookups.getTerm("ViewGroup", android, android_view);
+        Term term1 = terms.get("Object");
+        Term term2 = terms.get("View");
+        Term term3 = terms.get("ViewGroup");
 
         RowCreator.getCreateUserTerm(mUser, term1, 2);
         RowCreator.getCreateUserTerm(mUser, term2, 4);
@@ -98,33 +85,17 @@ public class StartupVM {
     }
 
     public static void createTermHierarchies() {
-        Term term1, term2, term3;
-        Technology android;
-        Pack java_lang, android_view;
-
-        android = Lookups.getTechnology("Android");
-        java_lang = Lookups.getPack("java.lang");
-        android_view = Lookups.getPack("android.view");
-
-        term1 = Lookups.getTerm("Object", android, java_lang);
-        term2 = Lookups.getTerm("View", android, android_view);
-        term3 = Lookups.getTerm("ViewGroup", android, android_view);
+        Term term1 = terms.get("Object");
+        Term term2 = terms.get("View");
+        Term term3 = terms.get("ViewGroup");
 
         RowCreator.getCreateTermHierarchy(term2, term3);
     }
 
     public static void createTermImplementations(){
-        Term term1, term2, term3;
-        Technology android;
-        Pack java_lang, android_view;
-
-        android = Lookups.getTechnology("Android");
-        java_lang = Lookups.getPack("java.lang");
-        android_view = Lookups.getPack("android.view");
-
-        term1 = Lookups.getTerm("Object", android, java_lang);
-        term2 = Lookups.getTerm("View", android, android_view);
-        term3 = Lookups.getTerm("ViewGroup", android, android_view);
+        Term term1 = terms.get("Object");
+        Term term2 = terms.get("View");
+        Term term3 = terms.get("ViewGroup");
 
         RowCreator.getCreateTermImplementation(term3, term2);
     }
