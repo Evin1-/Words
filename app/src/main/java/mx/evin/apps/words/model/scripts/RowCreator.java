@@ -90,8 +90,10 @@ public class RowCreator {
         getCreateGeneric("Term", settings, term, async);
     }
 
-    public static void getCreateGeneric(final String className, HashMap<String, Object> settings, final ParseObject objectToSave, boolean async) {
+    public static ParseObject getCreateGeneric(final String className, HashMap<String, Object> settings, final ParseObject objectToSave, boolean async) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(className);
+        ParseObject parseObjectAux = null;
+
         for (Map.Entry<String, Object> entry : settings.entrySet()) {
             query.whereEqualTo(entry.getKey(), entry.getValue());
         }
@@ -108,23 +110,24 @@ public class RowCreator {
                 }
             });
         } else {
-            ParseObject object = null;
             try {
-                object = query.getFirst();
+                parseObjectAux = query.getFirst();
             } catch (ParseException e) {
                 Log.d(TAG_, "Not found, trying to create...");
             } finally {
-                if (object == null) {
+                if (parseObjectAux == null) {
                     try {
                         objectToSave.save();
                         Log.d(TAG_, "Created succesfully.");
                     } catch (ParseException e) {
-                        Log.d(TAG_, "Failed creation");
+                        Log.d(TAG_, "Failed creation " + e.toString());
                     }
                 } else {
-                    Log.d(TAG_, "Retrieved the object " + className + " " + object.getObjectId());
+                    Log.d(TAG_, "Retrieved the object " + className + " " + parseObjectAux.getObjectId());
                 }
             }
         }
+
+        return parseObjectAux;
     }
 }
