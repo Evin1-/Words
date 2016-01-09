@@ -14,7 +14,6 @@ import mx.evin.apps.words.model.scripts.RowCreator;
  * Created by evin on 1/8/16.
  */
 public class StartupVM {
-    //TODO terms hashmap
     private static ParseUser mUser;
     private static HashMap<String, Term> terms;
 
