@@ -33,7 +33,7 @@ public class LoginVM {
                 if (user != null) {
                     activity.userReady();
                 } else {
-                    Log.d(TAG_, "Error: User LOGGED IN");
+                    Log.d(TAG_, "Error: User NOT LOGGED IN");
                     Log.d(TAG_, e.toString());
                     startSignUp(activity);
                 }
