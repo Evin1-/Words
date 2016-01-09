@@ -7,11 +7,9 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import mx.evin.apps.words.model.entities.Pack;
 import mx.evin.apps.words.model.entities.Technology;

@@ -4,14 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.parse.Parse;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
 
-import mx.evin.apps.words.model.entities.Pack;
-import mx.evin.apps.words.model.entities.Technology;
-import mx.evin.apps.words.model.entities.Term;
-import mx.evin.apps.words.model.entities.UserTechnology;
 import mx.evin.apps.words.viewmodel.LoginVM;
 import mx.evin.apps.words.viewmodel.ParseVM;
 import mx.evin.apps.words.viewmodel.StartupVM;
