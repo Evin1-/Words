@@ -86,8 +86,6 @@ public class RowCreator {
         settings.put("words", words);
         settings.put("technology", technology);
         settings.put("pack", pack);
-//        settings.put("docs", docs);
-//        settings.put("url", url);
 
         getCreateGeneric("Term", settings, term, async);
     }
