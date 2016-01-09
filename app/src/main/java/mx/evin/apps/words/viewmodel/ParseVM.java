@@ -8,7 +8,9 @@ import com.parse.ParseObject;
 import mx.evin.apps.words.model.entities.Pack;
 import mx.evin.apps.words.model.entities.Technology;
 import mx.evin.apps.words.model.entities.Term;
+import mx.evin.apps.words.model.entities.TermTerm;
 import mx.evin.apps.words.model.entities.UserTechnology;
+import mx.evin.apps.words.model.entities.UserTerm;
 
 /**
  * Created by evin on 1/8/16.
@@ -21,6 +23,8 @@ public class ParseVM {
         ParseObject.registerSubclass(UserTechnology.class);
         ParseObject.registerSubclass(Term.class);
         ParseObject.registerSubclass(Pack.class);
+        ParseObject.registerSubclass(TermTerm.class);
+        ParseObject.registerSubclass(UserTerm.class);
 
         Parse.initialize(context);
 

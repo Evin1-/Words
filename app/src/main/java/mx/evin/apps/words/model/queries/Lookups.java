@@ -1,11 +1,13 @@
 package mx.evin.apps.words.model.queries;
 
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import mx.evin.apps.words.model.entities.Pack;
 import mx.evin.apps.words.model.entities.Technology;
+import mx.evin.apps.words.model.entities.Term;
 
 /**
  * Created by evin on 1/8/16.
@@ -37,5 +39,22 @@ public class Lookups {
         }
 
         return pack;
+    }
+
+    public static Term getTerm(String words, Technology technology, Pack pack) {
+        Term term = null;
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Term");
+        query.whereEqualTo("words", words);
+        query.whereEqualTo("technology", technology);
+        query.whereEqualTo("pack", pack);
+
+        try {
+            term = (Term) query.getFirst();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return term;
     }
 }

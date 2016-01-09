@@ -4,6 +4,7 @@ import com.parse.ParseUser;
 
 import mx.evin.apps.words.model.entities.Pack;
 import mx.evin.apps.words.model.entities.Technology;
+import mx.evin.apps.words.model.entities.Term;
 import mx.evin.apps.words.model.queries.Lookups;
 import mx.evin.apps.words.model.scripts.RowCreator;
 
@@ -22,6 +23,8 @@ public class StartupVM {
         createUserTechnologies();
         createPacks();
         createTerms();
+        createTermTerms();
+        createUserTerms();
     }
 
     public static void createTechnologies() {
@@ -55,4 +58,38 @@ public class StartupVM {
         RowCreator.getCreateTerm("View", android, android_view, "3", "4");
         RowCreator.getCreateTerm("ViewGroup", android, android_view, "5", "6");
     }
+
+    public static void createTermTerms(){
+        Term term1, term2;
+        Technology android;
+        Pack java_lang, android_view;
+
+        android = Lookups.getTechnology("Android");
+        java_lang = Lookups.getPack("java.lang");
+        android_view = Lookups.getPack("android.view");
+
+        term1 = Lookups.getTerm("Object", android, java_lang);
+        term2 = Lookups.getTerm("ViewGroup", android, android_view);
+
+        RowCreator.getCreateTermTerm(term1, term2, 3);
+    }
+
+    public static void createUserTerms(){
+        Term term1, term2, term3;
+        Technology android;
+        Pack java_lang, android_view;
+
+        android = Lookups.getTechnology("Android");
+        java_lang = Lookups.getPack("java.lang");
+        android_view = Lookups.getPack("android.view");
+
+        term1 = Lookups.getTerm("Object", android, java_lang);
+        term2 = Lookups.getTerm("View", android, android_view);
+        term3 = Lookups.getTerm("ViewGroup", android, android_view);
+
+        RowCreator.getCreateUserTerm(mUser, term1, 2);
+        RowCreator.getCreateUserTerm(mUser, term2, 4);
+        RowCreator.getCreateUserTerm(mUser, term3, 0);
+    }
+
 }

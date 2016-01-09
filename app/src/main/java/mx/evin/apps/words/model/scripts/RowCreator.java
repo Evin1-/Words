@@ -14,7 +14,9 @@ import java.util.Map;
 import mx.evin.apps.words.model.entities.Pack;
 import mx.evin.apps.words.model.entities.Technology;
 import mx.evin.apps.words.model.entities.Term;
+import mx.evin.apps.words.model.entities.TermTerm;
 import mx.evin.apps.words.model.entities.UserTechnology;
+import mx.evin.apps.words.model.entities.UserTerm;
 
 /**
  * Created by evin on 1/8/16.
@@ -82,10 +84,47 @@ public class RowCreator {
         settings.put("words", words);
         settings.put("technology", technology);
         settings.put("pack", pack);
-        settings.put("docs", docs);
-        settings.put("url", url);
+//        settings.put("docs", docs);
+//        settings.put("url", url);
 
         getCreateGeneric("Term", settings, term, async);
+    }
+
+    public static void getCreateUserTerm(ParseUser user, Term term, int strength){
+        getCreateUserTerm(user, term, strength, false);
+    }
+
+    public static void getCreateUserTerm(ParseUser user, Term term, int strength, boolean async){
+        UserTerm userTerm = new UserTerm();
+        userTerm.setUser(user);
+        userTerm.setTerm(term);
+        userTerm.setStrength(strength);
+
+        HashMap<String, Object> settings = new HashMap<>();
+        settings.put("user", user);
+        settings.put("term", term);
+        settings.put("strength", strength);
+
+        getCreateGeneric("UserTerm", settings, userTerm, async);
+    }
+
+    public static void getCreateTermTerm(Term term1, Term term2, int strength){
+        getCreateTermTerm(term1, term2, strength, false);
+    }
+
+    public static void getCreateTermTerm(Term term1, Term term2, int strength, boolean async){
+        TermTerm termTerm = new TermTerm();
+        termTerm.setTerm1(term1);
+        termTerm.setTerm2(term2);
+        termTerm.setStrength(strength);
+
+        HashMap<String, Object> settings = new HashMap<>();
+        settings.put("term1", term1);
+        settings.put("term2", term2);
+        settings.put("strength", strength);
+
+        getCreateGeneric("TermTerm", settings, termTerm, async);
+
     }
 
     public static ParseObject getCreateGeneric(final String className, HashMap<String, Object> settings, final ParseObject objectToSave, boolean async) {
@@ -116,7 +155,7 @@ public class RowCreator {
                 if (parseObjectAux == null) {
                     try {
                         objectToSave.save();
-                        Log.d(TAG_, "Created succesfully.");
+                        Log.d(TAG_, "Created succesfully." + className + " " + objectToSave.getObjectId());
                     } catch (ParseException e) {
                         Log.d(TAG_, "Failed creation " + e.toString());
                     }
