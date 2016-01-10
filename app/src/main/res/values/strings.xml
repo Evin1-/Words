@@ -17,4 +17,6 @@
     <string name="nav_logout">Log out</string>
     <string name="drawer_open">Opening</string>
     <string name="drawer_close">Closing</string>
+    <string name="nav_cool">Cool stuff</string>
+    <string name="nav_home">Home</string>
 </resources>
