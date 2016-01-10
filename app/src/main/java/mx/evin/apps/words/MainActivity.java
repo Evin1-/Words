@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         user = ParseUser.getCurrentUser();
         Log.d(TAG_, user.getUsername());
 
-        StartupVM.firstTimeSetup();
+//        StartupVM.firstTimeSetup();
     }
 
     @Override

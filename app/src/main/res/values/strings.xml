@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Words</string>
+    <string name="mic_icon_description">Microphone icon</string>
+    <string name="url_icon_description">Link icon</string>
+    <string name="document_icon_description">Document icon</string>
+    <string name="a_main_search_term">Search a Term&#8230;</string>
 </resources>

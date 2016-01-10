@@ -13,6 +13,7 @@ import mx.evin.apps.words.MainActivity;
  * Created by evin on 1/8/16.
  */
 public class LoginVM {
+    //TODO Login with Facebook, Twitter and Google+
     private static final String TAG_ = "ViewModelTAG_";
 
     public static void loginSequence(MainActivity activity) {
