@@ -15,6 +15,7 @@ import android.view.View;
 import com.parse.ParseUser;
 
 import mx.evin.apps.words.viewmodel.LoginVM;
+import mx.evin.apps.words.viewmodel.MainVM;
 import mx.evin.apps.words.viewmodel.ParseVM;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         ParseVM.parseStart(this);
         LoginVM.loginSequence(this);
+        MainVM.initializeMain();
 
         //TODO Remove in production
         easyLife();
