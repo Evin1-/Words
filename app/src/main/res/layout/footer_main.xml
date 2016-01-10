@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        card_view:cardElevation="@dimen/a_main_cardview_elevation">
+
+        <LinearLayout
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/addTyped"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="55"
+                android:background="@android:color/transparent"
+                android:onClick="add_term"
+                android:text="@string/a_main_search_term"
+                android:textAllCaps="false"
+                android:textColor="@color/color_light_gray" />
+
+            <ImageButton
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="@dimen/a_main_icon_size"
+                android:layout_height="@dimen/a_main_icon_size"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/url_icon_description"
+                android:padding="@dimen/a_main_icon_padding"
+                android:tint="@color/color_light_gray"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_mode_edit_black_48dp" />
+
+            <ImageButton
+                android:id="@+id/addMic"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="@dimen/a_main_icon_size"
+                android:layout_height="@dimen/a_main_icon_size"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/mic_icon_description"
+                android:onClick="add_term_voice"
+                android:tint="@color/color_light_gray"
+                android:padding="@dimen/a_main_icon_padding"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_mic_black_48dp" />
+
+            <ImageButton
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="@dimen/a_main_icon_size"
+                android:layout_height="@dimen/a_main_icon_size"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/document_icon_description"
+                android:padding="@dimen/a_main_icon_padding"
+                android:tint="@color/color_light_gray"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_search_black_48dp" />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</merge>
