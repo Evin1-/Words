@@ -1,9 +1,18 @@
 <resources>
     <string name="app_name">Words</string>
+
+    <string name="a_main_search_term">Search a Term&#8230;</string>
+
     <string name="mic_icon_description">Microphone icon</string>
     <string name="url_icon_description">Link icon</string>
     <string name="document_icon_description">Document icon</string>
-    <string name="a_main_search_term">Search a Term&#8230;</string>
+
     <string name="nav_change_technology">Change technology</string>
     <string name="nav_history">My history</string>
+    <string name="nav_toggle_images">Hide images</string>
+    <string name="nav_connect_facebook">Connect with Facebook</string>
+    <string name="nav_connect_twitter">Connect with Twitter</string>
+    <string name="nav_rate">Rate app</string>
+    <string name="nav_about">About</string>
+    <string name="nav_logout">Log out</string>
 </resources>

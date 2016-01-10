@@ -4,41 +4,42 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camera"
-            android:icon="@android:drawable/ic_btn_speak_now"
+            android:icon="@drawable/ic_android_black_48dp"
             android:title="@string/nav_change_technology" />
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@android:drawable/ic_btn_speak_now"
+            android:icon="@drawable/ic_history_black_48dp"
             android:title="@string/nav_history" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@android:drawable/ic_btn_speak_now"
-            android:title="Hide images" />
+            android:icon="@drawable/ic_photo_black_48dp"
+            android:title="@string/nav_toggle_images" />
 
         <item
-            android:id="@+id/nav_connect"
-            android:icon="@android:drawable/ic_btn_speak_now"
-            android:title="Hide images" />
+            android:id="@+id/nav_connect_facebook"
+            android:icon="@drawable/ic_face_black_48dp"
+            android:title="@string/nav_connect_facebook" />
+
+        <item
+            android:id="@+id/nav_connect_twitter"
+            android:icon="@drawable/ic_person_outline_black_48dp"
+            android:title="@string/nav_connect_twitter" />
     </group>
 
-    <item android:title="Words">
+    <item android:title="@string/app_name">
         <menu>
             <item
-                android:id="@+id/nav_rate"
-                android:icon="@android:drawable/ic_btn_speak_now"
-                android:title="Connect with Facebook" />
-            <item
                 android:id="@+id/nav_about"
-                android:icon="@android:drawable/ic_btn_speak_now"
-                android:title="Like app" />
+                android:icon="@drawable/ic_rate_review_black_48dp"
+                android:title="@string/nav_rate" />
             <item
                 android:id="@+id/nav_help"
-                android:icon="@android:drawable/ic_btn_speak_now"
-                android:title="Log out" />
+                android:icon="@drawable/ic_airline_seat_flat_black_48dp"
+                android:title="@string/nav_about" />
             <item
                 android:id="@+id/nav_logout"
-                android:icon="@drawable/ic_search_black_48dp"
-                android:title="Log out" />
+                android:icon="@drawable/ic_exit_to_app_black_48dp"
+                android:title="@string/nav_logout" />
         </menu>
     </item>
 
