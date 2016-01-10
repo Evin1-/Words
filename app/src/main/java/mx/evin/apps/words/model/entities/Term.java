@@ -8,6 +8,7 @@ import com.parse.ParseObject;
  */
 @ParseClassName("Term")
 public class Term extends ParseObject {
+    //TODO Add video url
 
     public Term() {
     }
