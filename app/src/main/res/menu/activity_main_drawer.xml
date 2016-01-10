@@ -3,15 +3,15 @@
     <!-- TODO Change icon colors depending on technology-->
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_technology"
             android:icon="@drawable/ic_android_black_48dp"
             android:title="@string/nav_change_technology" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_history"
             android:icon="@drawable/ic_history_black_48dp"
             android:title="@string/nav_history" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_images"
             android:icon="@drawable/ic_photo_black_48dp"
             android:title="@string/nav_toggle_images" />
 
@@ -29,11 +29,11 @@
     <item android:title="@string/app_name">
         <menu>
             <item
-                android:id="@+id/nav_about"
+                android:id="@+id/nav_rate"
                 android:icon="@drawable/ic_rate_review_black_48dp"
                 android:title="@string/nav_rate" />
             <item
-                android:id="@+id/nav_help"
+                android:id="@+id/nav_about"
                 android:icon="@drawable/ic_airline_seat_flat_black_48dp"
                 android:title="@string/nav_about" />
             <item
