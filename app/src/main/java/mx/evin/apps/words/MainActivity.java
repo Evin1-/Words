@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     //TODO Set transparent background
     //TODO Remove easyLife
     //TODO Optimize imports
+    //TODO Sharing and opening on push notification
     private static final String TAG_ = "MainActivityTAG_";
     private ParseUser mUser;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         ParseVM.parseStart(this);
         LoginVM.loginSequence(this);
 
+        //TODO Remove in production
         easyLife();
     }
 
@@ -105,6 +107,9 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.nav_technology:
                         Log.d(TAG_, "Technology");
+                        break;
+                    case R.id.nav_history:
+                        Log.d(TAG_, "History");
                         break;
                 }
 
