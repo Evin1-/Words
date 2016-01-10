@@ -3,13 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/a_main_rv"
+    <FrameLayout
+        android:id="@+id/a_main_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/a_main_recyclerview_margin_bottom">
+        android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+    </FrameLayout>
 
     <include
         layout="@layout/footer_main"

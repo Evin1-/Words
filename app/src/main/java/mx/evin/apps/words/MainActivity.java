@@ -1,5 +1,7 @@
 package mx.evin.apps.words;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.parse.ParseUser;
 
@@ -23,22 +26,33 @@ public class MainActivity extends AppCompatActivity {
     //TODO Remove easyLife
     //TODO Optimize imports
     //TODO Sharing and opening on push notification
+    //TODO Change layout on landscape
     private static final String TAG_ = "MainActivityTAG_";
+    private static final String LAST_TERM_KEY_ = "last_term";
     private ParseUser mUser;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
+    private FrameLayout mMainFragment;
+    private SharedPreferences mSharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.a_main_drawer);
+        mNavigationView = (NavigationView) findViewById(R.id.a_main_nav);
+        mMainFragment = (FrameLayout) findViewById(R.id.a_main_frame);
+        mSharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+
         configureActionBar();
 
         ParseVM.parseStart(this);
         LoginVM.loginSequence(this);
         MainVM.initializeMain();
+
+        setMainFragment();
 
         //TODO Remove in production
         easyLife();
@@ -84,9 +98,6 @@ public class MainActivity extends AppCompatActivity {
             actionBar.setHomeButtonEnabled(true);
         }
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.a_main_drawer);
-        mNavigationView = (NavigationView) findViewById(R.id.a_main_nav);
-
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
@@ -119,6 +130,15 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    private void setMainFragment() {
+        String last_term = mSharedPref.getString(LAST_TERM_KEY_, "--");
+        if (last_term.equals("--")){
+            Log.d(TAG_, "NONE");
+        }else {
+            Log.d(TAG_, "SOME");
+        }
     }
 
     private void easyLife() {
