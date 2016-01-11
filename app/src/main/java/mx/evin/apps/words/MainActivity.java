@@ -17,6 +17,7 @@ import android.widget.FrameLayout;
 
 import com.parse.ParseUser;
 
+import mx.evin.apps.words.view.StartingFragment;
 import mx.evin.apps.words.viewmodel.LoginVM;
 import mx.evin.apps.words.viewmodel.MainVM;
 import mx.evin.apps.words.viewmodel.ParseVM;
@@ -136,14 +137,15 @@ public class MainActivity extends AppCompatActivity {
         String last_term = mSharedPref.getString(LAST_TERM_KEY_, "--");
         if (last_term.equals("--")){
             Log.d(TAG_, "NONE");
+            getSupportFragmentManager().beginTransaction().add(mMainFragment.getId(), new StartingFragment()).commit();
         }else {
             Log.d(TAG_, "SOME");
         }
     }
 
     private void easyLife() {
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.a_main_drawer);
-        drawerLayout.openDrawer(GravityCompat.START);
+//        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.a_main_drawer);
+//        drawerLayout.openDrawer(GravityCompat.START);
     }
 
     public void userReady() {
