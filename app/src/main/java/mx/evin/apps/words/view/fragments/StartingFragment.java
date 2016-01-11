@@ -1,4 +1,4 @@
-package mx.evin.apps.words.view;
+package mx.evin.apps.words.view.fragments;
 
 
 import android.os.Bundle;
