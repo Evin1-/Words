@@ -17,7 +17,8 @@ import android.widget.FrameLayout;
 
 import com.parse.ParseUser;
 
-import mx.evin.apps.words.view.StartingFragment;
+import mx.evin.apps.words.view.fragments.MainFragment;
+import mx.evin.apps.words.view.fragments.StartingFragment;
 import mx.evin.apps.words.viewmodel.LoginVM;
 import mx.evin.apps.words.viewmodel.MainVM;
 import mx.evin.apps.words.viewmodel.ParseVM;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     //TODO Optimize imports
     //TODO Sharing and opening on push notification
     //TODO Change layout on landscape
+    //TODO Select techonology at first
     private static final String TAG_ = "MainActivityTAG_";
     private static final String LAST_TERM_KEY_ = "last_term";
     private ParseUser mUser;
@@ -140,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().add(mMainFragment.getId(), new StartingFragment()).commit();
         }else {
             Log.d(TAG_, "SOME");
+            getSupportFragmentManager().beginTransaction().add(mMainFragment.getId(), new MainFragment()).commit();
         }
     }
 
