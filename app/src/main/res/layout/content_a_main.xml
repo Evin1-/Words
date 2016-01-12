@@ -12,7 +12,7 @@
     </FrameLayout>
 
     <include
-        layout="@layout/footer_main"
+        layout="@layout/footer_a_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

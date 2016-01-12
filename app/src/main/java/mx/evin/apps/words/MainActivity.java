@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setMainFragment() {
         String last_term = mSharedPref.getString(LAST_TERM_KEY_, "--");
-        if (last_term.equals("--")){
+        if (!last_term.equals("--")){
             Log.d(TAG_, "NONE");
             getSupportFragmentManager().beginTransaction().replace(mMainFragment.getId(), new StartingFragment()).commit();
         }else {
