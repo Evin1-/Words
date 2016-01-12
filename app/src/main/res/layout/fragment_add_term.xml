@@ -1,21 +1,23 @@
 <!-- fragment_edit_name.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/edit_name"
     android:padding="50dp"
     android:minHeight="600dp"
     android:layout_height="600dp"
     android:layout_width="wrap_content"
     android:layout_gravity="center"
-    android:orientation="vertical"  >
+    android:orientation="vertical">
 
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/inputTerm"
+        app:hintTextAppearance="@style/MainColorTextInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <EditText
-            android:hint="Term"
+            android:hint="@string/a_main_search_term"
             android:id="@+id/editInputTerm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,7 +30,7 @@
         android:id="@+id/recAuto"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" >
 
     </android.support.v7.widget.RecyclerView>
 
