@@ -13,6 +13,7 @@
 
     <dimen name="f_starting_button_margin_top">28dp</dimen>
     <dimen name="f_starting_title_size">20sp</dimen>
-    <dimen name="f_main_separator_height">0dp</dimen>
+    <dimen name="f_main_separator_height">5dp</dimen>
+    <dimen name="f_main_card_padding">10dp</dimen>
 
 </resources>
