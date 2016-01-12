@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -17,6 +18,7 @@ import android.widget.FrameLayout;
 
 import com.parse.ParseUser;
 
+import mx.evin.apps.words.view.fragments.AddTermFragment;
 import mx.evin.apps.words.view.fragments.MainFragment;
 import mx.evin.apps.words.view.fragments.StartingFragment;
 import mx.evin.apps.words.viewmodel.LoginVM;
@@ -151,10 +153,20 @@ public class MainActivity extends AppCompatActivity {
 //        drawerLayout.openDrawer(GravityCompat.START);
     }
 
+    public void addTermType(){
+        FragmentManager fm = getSupportFragmentManager();
+        AddTermFragment addTermFragment = AddTermFragment.newInstance("Add a term\u2026");
+        addTermFragment.show(fm, "fragment_addTyped");
+    }
+
     public void userReady() {
         mUser = ParseUser.getCurrentUser();
         Log.d(TAG_, mUser.getUsername());
 
 //        StartupVM.firstTimeSetup();
+    }
+
+    public void add_term(View view) {
+        addTermType();
     }
 }

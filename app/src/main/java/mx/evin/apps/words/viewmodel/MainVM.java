@@ -44,4 +44,8 @@ public class MainVM {
         });
     }
 
+    public static ArrayList<String> getTerms(){
+        return mTerms;
+    }
+
 }

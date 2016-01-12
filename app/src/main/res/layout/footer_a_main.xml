@@ -36,6 +36,7 @@
                 android:layout_height="@dimen/a_main_icon_size"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/url_icon_description"
+                android:onClick="add_term"
                 android:padding="@dimen/a_main_icon_padding"
                 android:tint="@color/color_light_gray"
                 android:scaleType="fitCenter"
