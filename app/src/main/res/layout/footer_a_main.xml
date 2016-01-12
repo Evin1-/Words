@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <!-- TODO put values in dims.xml-->
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +20,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/addTyped"
+                android:id="@+id/a_main_search_type_btn"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -31,6 +32,7 @@
                 android:textColor="@color/color_light_gray" />
 
             <ImageButton
+                android:id="@+id/a_main_search_type_icon"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="@dimen/a_main_icon_size"
                 android:layout_height="@dimen/a_main_icon_size"
@@ -43,7 +45,7 @@
                 android:src="@drawable/ic_mode_edit_black_48dp" />
 
             <ImageButton
-                android:id="@+id/addMic"
+                android:id="@+id/a_main_search_talk_icon"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="@dimen/a_main_icon_size"
                 android:layout_height="@dimen/a_main_icon_size"
@@ -56,6 +58,7 @@
                 android:src="@drawable/ic_mic_black_48dp" />
 
             <ImageButton
+                android:id="@+id/a_main_search_google_icon"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="@dimen/a_main_icon_size"
                 android:layout_height="@dimen/a_main_icon_size"
