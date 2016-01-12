@@ -17,6 +17,7 @@ import android.widget.EditText;
 import java.util.ArrayList;
 
 import mx.evin.apps.words.R;
+import mx.evin.apps.words.view.decorations.SpacesItemDecoration;
 import mx.evin.apps.words.viewmodel.MainVM;
 import mx.evin.apps.words.viewmodel.adapters.TermAutoAdapter;
 
@@ -61,8 +62,8 @@ public class AddTermFragment extends DialogFragment {
         final TermAutoAdapter adapter = new TermAutoAdapter(terms);
         rvTerms.setAdapter(adapter);
         rvTerms.setLayoutManager(new LinearLayoutManager(getContext()));
-//        SpacesItemDecoration decoration = new SpacesItemDecoration(5);
-//        rvTerms.addItemDecoration(decoration);
+        SpacesItemDecoration decoration = new SpacesItemDecoration(5);
+        rvTerms.addItemDecoration(decoration);
 
         mEditText.addTextChangedListener(new TextWatcher() {
             @Override
