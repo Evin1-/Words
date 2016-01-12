@@ -19,12 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- Put parse keys here -->
         <meta-data
             android:name="com.parse.APPLICATION_ID"
-            android:value="uUeudU3d2i2hQAJWV4P6Rtko0tPyc2xuHGVTgicS" />
+            android:value="" />
         <meta-data
             android:name="com.parse.CLIENT_KEY"
-            android:value="GaagGIBIN5z7ahmrIUMIN1XO6mR4tINmz3dDiT6D" />
+            android:value="" />
     </application>
 
 </manifest>
