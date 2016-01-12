@@ -2,38 +2,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_horizontal_margin"
     tools:context=".view.fragments.MainFragment">
+
+    <TextView
+        android:id="@+id/f_main_technology_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:text="@string/f_placeholder"
+        android:textColor="@color/color_primary"
+        android:textSize="17sp"
+        android:textStyle="bold" />
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/activity_horizontal_margin">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/details_tec"
-                    android:layout_width="match_parent"
+                    android:id="@+id/f_main_title_txt"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:text="Technology"
-                    android:textColor="@color/color_primary"
-                    android:textSize="17dp"
+                    android:layout_weight="10"
+                    android:gravity="start"
+                    android:text="@string/f_placeholder"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/details_package"
-                    android:layout_width="match_parent"
+                    android:id="@+id/f_main_pack_txt"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="8"
                     android:gravity="end"
-                    android:text="Technology"
+                    android:text="@string/f_placeholder"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -43,86 +58,22 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/f_placeholder"
+                    android:textColor="@color/color_primary"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/f_main_separator_height"
+                    android:background="@android:color/transparent" />
+
+                <TextView
                     android:id="@+id/details_doc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="5dp"
-                    android:background="@android:color/transparent" />
-
-                <LinearLayout
-                    android:id="@+id/linearHierarchy"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Hierarchy"
-                        android:textColor="@color/color_primary"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/details_hierarchy"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="5dp"
-                    android:background="@android:color/transparent" />
-
-                <LinearLayout
-                    android:id="@+id/linearSubclasses"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Subclasses"
-                        android:textColor="@color/color_primary"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/details_children"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="5dp"
-                    android:background="@android:color/transparent" />
-
-                <LinearLayout
-                    android:id="@+id/linearImplementations"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Implementations"
-                        android:textColor="@color/color_primary"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/details_implementations"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="5dp"
-                    android:background="@android:color/transparent" />
 
             </LinearLayout>
         </LinearLayout>
