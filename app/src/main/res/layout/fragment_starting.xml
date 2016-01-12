@@ -18,7 +18,7 @@
     <Button
         style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
         android:layout_marginTop="@dimen/f_starting_button_margin_top"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/f_starting_get_started"/>
 
