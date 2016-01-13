@@ -68,7 +68,8 @@ public class AddTermFragment extends DialogFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String searchText = s.toString();
+                String searchText = s.toString().toLowerCase();
+                mAdapter.getFilter().filter(searchText);
             }
 
             @Override
@@ -81,6 +82,5 @@ public class AddTermFragment extends DialogFragment {
     @Override
     public void onPause() {
         super.onPause();
-//        ((MainActivity) getActivity()).refreshRecycler();
     }
 }
