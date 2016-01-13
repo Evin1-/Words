@@ -19,7 +19,7 @@ import mx.evin.apps.words.view.fragments.MainFragment;
  */
 public class MainVM {
     private static final String TAG_ = "ParseVMTAG_";
-    public static ArrayList<String> mTerms;
+    public static ArrayList<Term> mTerms;
 
     static {
         mTerms = new ArrayList<>();
@@ -36,7 +36,7 @@ public class MainVM {
             public void done(List<ParseObject> objects, ParseException e) {
                 if (e == null){
                     for (ParseObject term : objects) {
-                        mTerms.add(((Term) term).getWords());
+                        mTerms.add((Term) term);
                     }
                     AddTermFragment.mTerms = mTerms;
                     AddTermFragment.mAdapter.notifyDataSetChanged();
@@ -48,7 +48,7 @@ public class MainVM {
         });
     }
 
-    public static ArrayList<String> getTerms(){
+    public static ArrayList<Term> getTerms(){
         return mTerms;
     }
 

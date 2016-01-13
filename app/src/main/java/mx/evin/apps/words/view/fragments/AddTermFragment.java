@@ -17,6 +17,7 @@ import android.widget.EditText;
 import java.util.ArrayList;
 
 import mx.evin.apps.words.R;
+import mx.evin.apps.words.model.entities.Term;
 import mx.evin.apps.words.view.decorations.SpacesItemDecoration;
 import mx.evin.apps.words.viewmodel.MainVM;
 import mx.evin.apps.words.viewmodel.adapters.TermAutoAdapter;
@@ -27,7 +28,7 @@ import mx.evin.apps.words.viewmodel.adapters.TermAutoAdapter;
 public class AddTermFragment extends DialogFragment {
 
     private EditText mEditText;
-    public static ArrayList<String> mTerms;
+    public static ArrayList<Term> mTerms;
     public static TermAutoAdapter mAdapter;
 
     static {

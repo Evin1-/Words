@@ -15,14 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mx.evin.apps.words.R;
+import mx.evin.apps.words.model.entities.Term;
 
 /**
  * Created by evin on 12/19/15.
  */
 public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHolder> implements Filterable{
 
-    private static List<String> mOriginalTerms;
-    private static List<String> mFilteredTerms;
+    private static List<Term> mOriginalTerms;
+    private static List<Term> mFilteredTerms;
     private static final String TAG_ = "TermAutoAdapterTAG_";
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -45,7 +46,7 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
         }
     }
 
-    public TermAutoAdapter(List<String> terms) {
+    public TermAutoAdapter(List<Term> terms) {
         mOriginalTerms = terms;
         mFilteredTerms = terms;
     }
@@ -62,10 +63,10 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(TermAutoAdapter.ViewHolder viewHolder, int position) {
-        String term = mFilteredTerms.get(position);
+        Term term = mFilteredTerms.get(position);
 
         TextView textRelated = viewHolder.txtTerm;
-        textRelated.setText(term);
+        textRelated.setText(term.getWords());
     }
 
     @Override
@@ -79,11 +80,11 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
         Filter filter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                ArrayList<String> results = new ArrayList<>();
+                ArrayList<Term> results = new ArrayList<>();
 
-                for (String s : mOriginalTerms){
-                    if (s.toLowerCase().contains(constraint)){
-                        results.add(s);
+                for (Term term : mOriginalTerms){
+                    if (term.getWords().toLowerCase().contains(constraint)){
+                        results.add(term);
                     }
                 }
 
@@ -95,7 +96,7 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                mFilteredTerms = (List<String>) results.values;
+                mFilteredTerms = (List<Term>) results.values;
                 notifyDataSetChanged();
             }
         };
