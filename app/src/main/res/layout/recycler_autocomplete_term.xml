@@ -35,7 +35,7 @@
                 android:textAllCaps="true"
                 android:textStyle="bold"
                 android:textSize="12sp"
-                android:textColor="@color/color_primary"
+                android:textColor="@color/color_accent"
                 android:layout_gravity="end"
                 android:text="Add"
                 android:gravity="end"
