@@ -17,6 +17,8 @@ import mx.evin.apps.words.R;
  */
 public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHolder> {
 
+    private static List<String> mTerms;
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView txtTerm;
         public TextView txtNumber;
@@ -48,8 +50,6 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
             });
         }
     }
-
-    private List<String> mTerms;
 
     public TermAutoAdapter(List<String> terms) {
         mTerms = terms;

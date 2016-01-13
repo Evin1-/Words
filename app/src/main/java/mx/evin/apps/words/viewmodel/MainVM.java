@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mx.evin.apps.words.model.entities.Term;
+import mx.evin.apps.words.view.fragments.AddTermFragment;
+import mx.evin.apps.words.view.fragments.MainFragment;
 
 /**
  * Created by evin on 1/10/16.
@@ -36,6 +38,8 @@ public class MainVM {
                     for (ParseObject term : objects) {
                         mTerms.add(((Term) term).getWords());
                     }
+                    AddTermFragment.mTerms = mTerms;
+                    AddTermFragment.mAdapter.notifyDataSetChanged();
                     Log.d(TAG_, Integer.toString(mTerms.size()));
                 }else {
                     Log.d(TAG_, "Error retrieving terms + " + e.toString());

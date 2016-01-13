@@ -1,6 +1,7 @@
 package mx.evin.apps.words.view.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -27,6 +28,13 @@ import mx.evin.apps.words.viewmodel.adapters.TermAutoAdapter;
 public class AddTermFragment extends DialogFragment {
 
     private EditText mEditText;
+    public static ArrayList<String> mTerms;
+    public static TermAutoAdapter mAdapter;
+
+    static {
+        mTerms = MainVM.getTerms();
+        mAdapter = new TermAutoAdapter(mTerms);
+    }
 
     public AddTermFragment() {
 
@@ -51,16 +59,11 @@ public class AddTermFragment extends DialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mEditText = (EditText) view.findViewById(R.id.editInputTerm);
-        String title = getArguments().getString("title", "Add Term");
-        getDialog().setTitle(title);
         mEditText.requestFocus();
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
-        ArrayList<String> terms = MainVM.getTerms();
-
-        final RecyclerView rvTerms = (RecyclerView) getView().findViewById(R.id.recAuto);
-        final TermAutoAdapter adapter = new TermAutoAdapter(terms);
-        rvTerms.setAdapter(adapter);
+        RecyclerView rvTerms = (RecyclerView) getView().findViewById(R.id.recAuto);
+        rvTerms.setAdapter(mAdapter);
         rvTerms.setLayoutManager(new LinearLayoutManager(getContext()));
         SpacesItemDecoration decoration = new SpacesItemDecoration(5);
         rvTerms.addItemDecoration(decoration);
