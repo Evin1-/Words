@@ -1,6 +1,5 @@
 package mx.evin.apps.words.view.fragments;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -40,15 +39,6 @@ public class AddTermFragment extends DialogFragment {
 
     }
 
-    public static AddTermFragment newInstance(String title) {
-        AddTermFragment frag = new AddTermFragment();
-
-        Bundle args = new Bundle();
-        args.putString("title", title);
-        frag.setArguments(args);
-        return frag;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,11 +48,13 @@ public class AddTermFragment extends DialogFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         mEditText = (EditText) view.findViewById(R.id.editInputTerm);
         mEditText.requestFocus();
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
-        RecyclerView rvTerms = (RecyclerView) getView().findViewById(R.id.recAuto);
+        RecyclerView rvTerms = (RecyclerView) view.findViewById(R.id.recAuto);
+
         rvTerms.setAdapter(mAdapter);
         rvTerms.setLayoutManager(new LinearLayoutManager(getContext()));
         SpacesItemDecoration decoration = new SpacesItemDecoration(5);
@@ -77,10 +69,6 @@ public class AddTermFragment extends DialogFragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String searchText = s.toString();
-//                if (searchText.trim().length() > 0)
-//                    rvTerms.setAdapter(new TermAutoAdapter(Term.getFavTermsList(searchText, 5)));
-//                else
-//                    rvTerms.setAdapter(adapter);
             }
 
             @Override

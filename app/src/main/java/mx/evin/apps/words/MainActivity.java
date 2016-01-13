@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.parse.ParseUser;
@@ -24,6 +25,7 @@ import mx.evin.apps.words.view.fragments.StartingFragment;
 import mx.evin.apps.words.viewmodel.LoginVM;
 import mx.evin.apps.words.viewmodel.MainVM;
 import mx.evin.apps.words.viewmodel.ParseVM;
+import mx.evin.apps.words.viewmodel.StartupVM;
 
 public class MainActivity extends AppCompatActivity {
     //TODO Set transparent background
@@ -151,11 +153,12 @@ public class MainActivity extends AppCompatActivity {
     private void easyLife() {
 //        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.a_main_drawer);
 //        drawerLayout.openDrawer(GravityCompat.START);
+        ((Button) findViewById(R.id.a_main_search_type_btn)).callOnClick();
     }
 
     public void addTermType(){
         FragmentManager fm = getSupportFragmentManager();
-        AddTermFragment addTermFragment = AddTermFragment.newInstance("Add a term\u2026");
+        AddTermFragment addTermFragment = new AddTermFragment();
         addTermFragment.show(fm, "fragment_addTyped");
     }
 
