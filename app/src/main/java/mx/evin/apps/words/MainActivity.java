@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
     private void easyLife() {
 //        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.a_main_drawer);
 //        drawerLayout.openDrawer(GravityCompat.START);
-        ((Button) findViewById(R.id.a_main_search_type_btn)).callOnClick();
+        findViewById(R.id.a_main_search_type_btn).callOnClick();
     }
 
     public void addTermType(){
