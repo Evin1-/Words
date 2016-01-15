@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     //TODO Optimize imports
     //TODO Sharing and opening on push notification
     //TODO Change layout on landscape
-    //TODO Select techonology at first
+    //TODO Select technology at first
     private static final String TAG_ = "MainActivityTAG_";
     private static final String LAST_TERM_KEY_ = Constants.LAST_TERM_KEY;
     private ParseUser mUser;
