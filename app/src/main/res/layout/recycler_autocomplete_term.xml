@@ -5,29 +5,32 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
-        android:padding="8dp"
+        android:padding="@dimen/recycler_autocomplete_card_padding"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
             android:id="@+id/txtTerm"
             android:ellipsize="end"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+        
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/txtPack"
                 android:textAllCaps="true"
                 android:textStyle="bold"
-                android:textSize="13sp"
+                android:textSize="@dimen/recycler_autocomplete_pack_font_size"
                 android:textColor="@android:color/black"
                 android:layout_gravity="start"
                 android:text="Android"
                 android:gravity="start"
-                android:padding="2dp"
+                android:padding="@dimen/recycler_autocomplete_text_padding"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
@@ -35,12 +38,12 @@
             <TextView
                 android:textAllCaps="true"
                 android:textStyle="bold"
-                android:textSize="12sp"
+                android:textSize="@dimen/recycler_autocomplete_btn_font_size"
                 android:textColor="@color/color_accent"
                 android:layout_gravity="end"
                 android:text="Add"
                 android:gravity="end"
-                android:padding="2dp"
+                android:padding="@dimen/recycler_autocomplete_text_padding"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />

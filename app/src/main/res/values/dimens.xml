@@ -15,5 +15,12 @@
     <dimen name="f_starting_title_size">20sp</dimen>
     <dimen name="f_main_separator_height">5dp</dimen>
     <dimen name="f_main_card_padding">10dp</dimen>
+    <dimen name="f_main_content_font_title_size">20sp</dimen>
+    <dimen name="f_main_title_font_size">15sp</dimen>
+
+    <dimen name="recycler_autocomplete_card_padding">8dp</dimen>
+    <dimen name="recycler_autocomplete_pack_font_size">13sp</dimen>
+    <dimen name="recycler_autocomplete_btn_font_size">12sp</dimen>
+    <dimen name="recycler_autocomplete_text_padding">2dp</dimen>
 
 </resources>
