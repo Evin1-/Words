@@ -26,6 +26,7 @@ import mx.evin.apps.words.viewmodel.LoginVM;
 import mx.evin.apps.words.viewmodel.MainVM;
 import mx.evin.apps.words.viewmodel.ParseVM;
 import mx.evin.apps.words.viewmodel.StartupVM;
+import mx.evin.apps.words.viewmodel.utils.Constants;
 
 public class MainActivity extends AppCompatActivity {
     //TODO Set transparent background
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     //TODO Change layout on landscape
     //TODO Select techonology at first
     private static final String TAG_ = "MainActivityTAG_";
-    private static final String LAST_TERM_KEY_ = "last_term";
+    private static final String LAST_TERM_KEY_ = Constants.LAST_TERM_KEY;
     private ParseUser mUser;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.a_main_drawer);
         mNavigationView = (NavigationView) findViewById(R.id.a_main_nav);
         mMainFragment = (FrameLayout) findViewById(R.id.a_main_frame);
-        mSharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        mSharedPref = getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
 
         configureActionBar();
 

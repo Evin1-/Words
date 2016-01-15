@@ -19,7 +19,6 @@
     <string name="drawer_close">Closing</string>
     <string name="nav_cool">Cool stuff</string>
     <string name="nav_home">Home</string>
-    <string name="preference_file_key">mx.evin.apps.words</string>
 
     <string name="f_starting_welcome">Welcome to Words!</string>
     <string name="f_starting_get_started">Get started&#8230;</string>
