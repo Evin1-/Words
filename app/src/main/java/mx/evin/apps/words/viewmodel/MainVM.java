@@ -3,6 +3,7 @@ package mx.evin.apps.words.viewmodel;
 import android.util.Log;
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -37,6 +38,12 @@ public class MainVM {
                 if (e == null){
                     for (ParseObject term : objects) {
                         mTerms.add((Term) term);
+                        term.getParseObject("pack").fetchIfNeededInBackground(new GetCallback<ParseObject>() {
+                            @Override
+                            public void done(ParseObject object, ParseException e) {
+                                AddTermFragment.mAdapter.notifyDataSetChanged();
+                            }
+                        });
                     }
                     AddTermFragment.mTerms = mTerms;
                     AddTermFragment.mAdapter.notifyDataSetChanged();

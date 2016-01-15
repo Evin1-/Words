@@ -4,8 +4,6 @@
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- TODO Add package instead of ANDROID -->
-
     <LinearLayout
         android:padding="8dp"
         android:orientation="vertical"
@@ -21,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/txtNumber"
+                android:id="@+id/txtPack"
                 android:textAllCaps="true"
                 android:textStyle="bold"
                 android:textSize="13sp"

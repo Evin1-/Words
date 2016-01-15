@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mx.evin.apps.words.R;
+import mx.evin.apps.words.model.entities.Pack;
 import mx.evin.apps.words.model.entities.Term;
 
 /**
@@ -28,11 +29,13 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView txtTerm;
+        public TextView txtPack;
 
         public ViewHolder(final View itemView) {
             super(itemView);
 
             txtTerm = (TextView) itemView.findViewById(R.id.txtTerm);
+            txtPack = (TextView) itemView.findViewById(R.id.txtPack);
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -63,10 +66,20 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(TermAutoAdapter.ViewHolder viewHolder, int position) {
+        //TODO Do already fetched check with no try catch
         Term term = mFilteredTerms.get(position);
 
-        TextView textRelated = viewHolder.txtTerm;
-        textRelated.setText(term.getWords());
+        TextView textWords = viewHolder.txtTerm;
+        textWords.setText(term.getWords());
+
+        TextView textPack = viewHolder.txtPack;
+        Pack pack = term.getPack();
+
+        try {
+            textPack.setText(pack.getName());
+        } catch (IllegalStateException e) {
+            textPack.setText("");
+        }
     }
 
     @Override
