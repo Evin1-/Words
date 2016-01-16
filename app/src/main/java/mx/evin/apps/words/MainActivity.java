@@ -100,8 +100,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        Log.d(TAG_, "onNewIntent");
         removeUnusedFragments();
+        setMainFragment();
     }
 
     private void removeUnusedFragments() {
@@ -157,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setMainFragment() {
+        //TODO Update current fragment instead of creating a new one
         String last_term = mSharedPref.getString(LAST_TERM_KEY_, "--");
         if (last_term.equals("--")){
             Log.d(TAG_, "NONE");

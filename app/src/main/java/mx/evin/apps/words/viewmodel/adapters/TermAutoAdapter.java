@@ -46,13 +46,14 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
+                    //TODO Check if editor.apply finishes on time
                     EditText editText = (EditText) v.getRootView().findViewById(R.id.f_add_term_input_et);
                     if (editText != null){
-                        Log.d(TAG_, "Clicked: " + v);
                         mSharedPreferences = v.getContext().getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = mSharedPreferences.edit();
                         editor.putString(Constants.LAST_TERM_KEY, idTerm);
                         editor.apply();
+
                         Intent intent = new Intent(v.getContext(), MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         v.getContext().startActivity(intent);
