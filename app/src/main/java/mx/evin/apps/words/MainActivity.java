@@ -160,10 +160,9 @@ public class MainActivity extends AppCompatActivity {
         //TODO Update current fragment instead of creating a new one
         String last_term = mSharedPref.getString(LAST_TERM_KEY_, "--");
         if (last_term.equals("--")){
-            Log.d(TAG_, "NONE");
             getSupportFragmentManager().beginTransaction().replace(mMainFragment.getId(), new StartingFragment()).commit();
         }else {
-            Log.d(TAG_, "SOME");
+            MainVM.refreshCurrentTerm(last_term);
             getSupportFragmentManager().beginTransaction().replace(mMainFragment.getId(), new MainFragment()).commit();
         }
     }
