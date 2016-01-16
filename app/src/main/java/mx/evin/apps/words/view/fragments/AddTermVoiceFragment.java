@@ -71,7 +71,7 @@ public class AddTermVoiceFragment extends DialogFragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textView.setText("Speak now\u2026");
+                textView.setText(getString(R.string.f_add_term_speak_now));
                 log_stuff(v);
             }
         });
