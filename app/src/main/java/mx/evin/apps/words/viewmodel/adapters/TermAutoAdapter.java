@@ -26,6 +26,7 @@ import mx.evin.apps.words.viewmodel.utils.Constants;
  */
 public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHolder> implements Filterable{
     //TODO Check if well filtered when a lot of items
+    //TODO Refresh RecyclerViews when creating new AddTermFragments
 
     private static List<Term> mOriginalTerms;
     private static List<Term> mFilteredTerms;
@@ -47,17 +48,14 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
                 @Override
                 public void onClick(View v) {
                     //TODO Check if editor.apply finishes on time
-                    EditText editText = (EditText) v.getRootView().findViewById(R.id.f_add_term_input_et);
-                    if (editText != null){
-                        mSharedPreferences = v.getContext().getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = mSharedPreferences.edit();
-                        editor.putString(Constants.LAST_TERM_KEY, idTerm);
-                        editor.apply();
+                    mSharedPreferences = v.getContext().getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = mSharedPreferences.edit();
+                    editor.putString(Constants.LAST_TERM_KEY, idTerm);
+                    editor.apply();
 
-                        Intent intent = new Intent(v.getContext(), MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        v.getContext().startActivity(intent);
-                    }
+                    Intent intent = new Intent(v.getContext(), MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    v.getContext().startActivity(intent);
                 }
             });
         }

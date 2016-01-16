@@ -9,11 +9,9 @@ import android.speech.SpeechRecognizer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,8 +31,8 @@ import mx.evin.apps.words.viewmodel.adapters.TermAutoAdapter;
 public class AddTermVoiceFragment extends DialogFragment {
 
     private static final String TAG_ = "SpeechRecognitionStuff";
-    private SpeechRecognizer speechRecognizer;
-    private TextView textView;
+    private SpeechRecognizer mSpeechRecognizer;
+    private TextView mTextView;
 
     public static ArrayList<Term> mTerms;
     public static TermAutoAdapter mAdapter;
@@ -45,6 +43,7 @@ public class AddTermVoiceFragment extends DialogFragment {
     }
 
     public AddTermVoiceFragment() {
+
     }
 
     @Override
@@ -58,7 +57,7 @@ public class AddTermVoiceFragment extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         if (getView() != null){
-            textView = (TextView) getView().findViewById(R.id.txtVoice);
+            mTextView = (TextView) getView().findViewById(R.id.txtVoice);
 
             RecyclerView rvTerms = (RecyclerView) getView().findViewById(R.id.recAutoVoice);
             rvTerms.setAdapter(mAdapter);
@@ -68,36 +67,17 @@ public class AddTermVoiceFragment extends DialogFragment {
 
             FloatingActionButton floatingActionButton = (FloatingActionButton) getView().findViewById(R.id.fab1);
 
-            floatingActionButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.color_primary)));
+            floatingActionButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.color_primary)));
             floatingActionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    textView.setText(getString(R.string.f_add_term_speak_now));
+                    mTextView.setText(getString(R.string.f_add_term_speak_now));
                     log_stuff(v);
                 }
             });
 
-            TextView textView1 = (TextView) getView().findViewById(R.id.txtVoiceTemp);
-            textView1.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    Log.d(TAG_, s.toString());
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-
-                }
-            });
-
-            speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getContext());
-//            speechRecognizer.setRecognitionListener(new listener());
-            speechRecognizer.setRecognitionListener(new RecognitionListener() {
+            mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(getContext());
+            mSpeechRecognizer.setRecognitionListener(new RecognitionListener() {
                 @Override
                 public void onReadyForSpeech(Bundle params) {
 
@@ -131,12 +111,12 @@ public class AddTermVoiceFragment extends DialogFragment {
                 @Override
                 public void onResults(Bundle results) {
                     ArrayList data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                    if (data != null){
+                    if (data != null && data.size() > 0) {
                         String str_temp = data.get(0).toString();
-                        for (int i = 1; i < data.size() ; i++){
+                        for (int i = 1; i < data.size(); i++) {
                             str_temp = str_temp + "@" + data.get(i);
                         }
-                        textView.setText((data.get(0).toString()));
+                        mTextView.setText((data.get(0).toString()));
                     }
                 }
 
@@ -161,7 +141,7 @@ public class AddTermVoiceFragment extends DialogFragment {
         intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, "voice.recognition.test");
 
         intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 5);
-        speechRecognizer.startListening(intent);
+        mSpeechRecognizer.startListening(intent);
     }
 
     @Override

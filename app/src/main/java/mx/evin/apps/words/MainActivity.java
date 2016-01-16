@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void removeUnusedFragments() {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        AddTermFragment addTermFragment = (AddTermFragment) fragmentManager.findFragmentByTag(Constants.FRAGMENT_TAG_TYPE);
+        Fragment addTermFragment = fragmentManager.findFragmentByTag(Constants.FRAGMENT_TAG_TYPE);
 
         if (addTermFragment != null)
             fragmentManager.beginTransaction().remove(addTermFragment).commit();
