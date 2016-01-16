@@ -17,8 +17,6 @@ import java.util.List;
 import mx.evin.apps.words.R;
 import mx.evin.apps.words.model.entities.Term;
 import mx.evin.apps.words.view.fragments.AddTermFragment;
-import mx.evin.apps.words.view.fragments.MainFragment;
-import mx.evin.apps.words.viewmodel.utils.Constants;
 
 /**
  * Created by evin on 1/10/16.
