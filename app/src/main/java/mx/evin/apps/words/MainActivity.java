@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -20,6 +21,7 @@ import android.widget.FrameLayout;
 import com.parse.ParseUser;
 
 import mx.evin.apps.words.view.fragments.AddTermFragment;
+import mx.evin.apps.words.view.fragments.AddTermVoiceFragment;
 import mx.evin.apps.words.view.fragments.MainFragment;
 import mx.evin.apps.words.view.fragments.StartingFragment;
 import mx.evin.apps.words.viewmodel.LoginVM;
@@ -171,10 +173,18 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.a_main_search_type_btn).callOnClick();
     }
 
-    public void addTermType(){
+    public void addTermGeneric(Constants.TYPE_ADD type_add){
         FragmentManager fm = getSupportFragmentManager();
-        AddTermFragment addTermFragment = new AddTermFragment();
-        addTermFragment.show(fm, Constants.FRAGMENT_TAG_TYPE);
+        Fragment addTermFragment;
+        switch (type_add){
+            case SPOKEN:
+                addTermFragment = new AddTermVoiceFragment();
+                break;
+            default:
+                addTermFragment = new AddTermFragment();
+        }
+        fm.beginTransaction().add(addTermFragment, Constants.FRAGMENT_TAG_TYPE).commit();
+//        addTermFragment.show(fm, Constants.FRAGMENT_TAG_TYPE);
     }
 
     public void userReady() {
@@ -185,6 +195,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void add_term(View view) {
-        addTermType();
+        addTermGeneric(Constants.TYPE_ADD.WRITTEN);
+    }
+
+    public void add_term_voice(View view) {
+        addTermGeneric(Constants.TYPE_ADD.SPOKEN);
     }
 }
