@@ -30,6 +30,13 @@
         <meta-data
             android:name="com.parse.CLIENT_KEY"
             android:value="" />
+        <!-- Put Google API keys here-->
+        <meta-data
+            android:name="GOOGLE_API_KEY"
+            android:value="" />
+        <meta-data
+            android:name="GOOGLE_SEARCH_ID"
+            android:value="" />
     </application>
 
 </manifest>
