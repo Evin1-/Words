@@ -1,6 +1,7 @@
 package mx.evin.apps.words;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -96,6 +97,21 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.d(TAG_, "onNewIntent");
+        removeUnusedFragments();
+    }
+
+    private void removeUnusedFragments() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        AddTermFragment addTermFragment = (AddTermFragment) fragmentManager.findFragmentByTag(Constants.FRAGMENT_TAG_TYPE);
+
+        if (addTermFragment != null)
+            fragmentManager.beginTransaction().remove(addTermFragment).commit();
+    }
+
     private void configureActionBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -142,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setMainFragment() {
         String last_term = mSharedPref.getString(LAST_TERM_KEY_, "--");
-        if (!last_term.equals("--")){
+        if (last_term.equals("--")){
             Log.d(TAG_, "NONE");
             getSupportFragmentManager().beginTransaction().replace(mMainFragment.getId(), new StartingFragment()).commit();
         }else {
@@ -160,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
     public void addTermType(){
         FragmentManager fm = getSupportFragmentManager();
         AddTermFragment addTermFragment = new AddTermFragment();
-        addTermFragment.show(fm, "fragment_addTyped");
+        addTermFragment.show(fm, Constants.FRAGMENT_TAG_TYPE);
     }
 
     public void userReady() {

@@ -1,6 +1,5 @@
 package mx.evin.apps.words.view.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -50,11 +49,11 @@ public class AddTermFragment extends DialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mEditText = (EditText) view.findViewById(R.id.editInputTerm);
+        mEditText = (EditText) view.findViewById(R.id.f_add_term_input_et);
         mEditText.requestFocus();
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
-        RecyclerView rvTerms = (RecyclerView) view.findViewById(R.id.recAuto);
+        RecyclerView rvTerms = (RecyclerView) view.findViewById(R.id.f_add_term_terms_rv);
 
         rvTerms.setAdapter(mAdapter);
         rvTerms.setLayoutManager(new LinearLayoutManager(getContext()));

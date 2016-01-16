@@ -1,6 +1,8 @@
 package mx.evin.apps.words.viewmodel.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,9 +16,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import mx.evin.apps.words.MainActivity;
 import mx.evin.apps.words.R;
 import mx.evin.apps.words.model.entities.Pack;
 import mx.evin.apps.words.model.entities.Term;
+import mx.evin.apps.words.viewmodel.utils.Constants;
 
 /**
  * Created by evin on 12/19/15.
@@ -26,10 +30,12 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
     private static List<Term> mOriginalTerms;
     private static List<Term> mFilteredTerms;
     private static final String TAG_ = "TermAutoAdapterTAG_";
+    private static SharedPreferences mSharedPreferences;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView txtTerm;
         public TextView txtPack;
+        public String idTerm;
 
         public ViewHolder(final View itemView) {
             super(itemView);
@@ -40,9 +46,16 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    EditText editText = (EditText) v.getRootView().findViewById(R.id.editInputTerm);
+                    EditText editText = (EditText) v.getRootView().findViewById(R.id.f_add_term_input_et);
                     if (editText != null){
                         Log.d(TAG_, "Clicked: " + v);
+                        mSharedPreferences = v.getContext().getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = mSharedPreferences.edit();
+                        editor.putString(Constants.LAST_TERM_KEY, idTerm);
+                        editor.apply();
+                        Intent intent = new Intent(v.getContext(), MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        v.getContext().startActivity(intent);
                     }
                 }
             });
@@ -80,6 +93,8 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
         } catch (IllegalStateException e) {
             textPack.setText("");
         }
+
+        viewHolder.idTerm = term.getObjectId();
     }
 
     @Override
