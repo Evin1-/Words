@@ -39,12 +39,14 @@ public class MainVM {
     }
 
     private static void initializeTerms() {
+        AddTermFragment.mTerms = mTerms;
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Term");
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
                 if (e == null) {
                     for (ParseObject term : objects) {
+                        AddTermFragment.mAdapter.notifyDataSetChanged();
                         term.pinInBackground();
                         mTerms.add((Term) term);
                         term.getParseObject("pack").fetchIfNeededInBackground(new GetCallback<ParseObject>() {
@@ -55,7 +57,6 @@ public class MainVM {
                             }
                         });
                     }
-                    AddTermFragment.mTerms = mTerms;
                     AddTermFragment.mAdapter.notifyDataSetChanged();
                     Log.d(TAG_, Integer.toString(mTerms.size()));
                 } else {
@@ -70,10 +71,22 @@ public class MainVM {
     }
 
     public static void refreshMainFragment(Activity activity) {
-        //TODO Code else currentTerm not updated
+        //TODO Remove try/catch and use a better practice
         TextView textViewDoc = (TextView) activity.findViewById(R.id.f_main_doc_txt);
+        TextView textViewPack = (TextView) activity.findViewById(R.id.f_main_pack_txt);
+        TextView textViewTitle = (TextView) activity.findViewById(R.id.f_main_title_txt);
+        TextView textViewTechnology = (TextView) activity.findViewById(R.id.f_main_technology_txt);
 
         textViewDoc.setText(currentTerm.getDocs());
+        try {
+            textViewPack.setText(currentTerm.getPack().getName());
+        } catch (Exception e) {
+            textViewPack.setText("HelloWorld");
+        }
+        textViewTitle.setText(currentTerm.getWords());
+//        textViewTechnology.setText(currentTerm.getTechnology().getName());
+
+
     }
 
     public static void refreshCurrentTerm(final String last_term, final Context context) {
