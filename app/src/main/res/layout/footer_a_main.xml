@@ -63,7 +63,7 @@
                 android:layout_width="@dimen/a_main_icon_size"
                 android:layout_height="@dimen/a_main_icon_size"
                 android:adjustViewBounds="true"
-                android:contentDescription="@string/document_icon_description"
+                android:contentDescription="@string/google_icon_description"
                 android:padding="@dimen/a_main_icon_padding"
                 android:tint="@color/color_light_gray"
                 android:scaleType="fitCenter"

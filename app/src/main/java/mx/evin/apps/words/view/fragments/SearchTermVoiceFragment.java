@@ -77,7 +77,7 @@ public class SearchTermVoiceFragment extends DialogFragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTextView.setText(getString(R.string.f_add_term_speak_now));
+                mTextView.setText(getString(R.string.f_search_term_speak_now));
                 mVoiceRecognizer.listenNow(v);
             }
         });
@@ -90,7 +90,7 @@ public class SearchTermVoiceFragment extends DialogFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!s.toString().equals(getString(R.string.f_add_term_speak_now)))
+                if (!s.toString().equals(getString(R.string.f_search_term_speak_now)))
                     mAdapter.getFilter().filter(s.toString().toLowerCase());
             }
 

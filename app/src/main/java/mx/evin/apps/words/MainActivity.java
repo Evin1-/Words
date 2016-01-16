@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void removeUnusedFragments() {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment addTermFragment = fragmentManager.findFragmentByTag(Constants.FRAGMENT_TAG_TYPE);
+        Fragment addTermFragment = fragmentManager.findFragmentByTag(Constants.FRAGMENT_TAG);
 
         if (addTermFragment != null)
             fragmentManager.beginTransaction().remove(addTermFragment).commit();
@@ -185,8 +185,8 @@ public class MainActivity extends AppCompatActivity {
             default:
                 addTermFragment = new SearchTermFragment();
         }
-        fm.beginTransaction().add(addTermFragment, Constants.FRAGMENT_TAG_TYPE).commit();
-//        addTermFragment.show(fm, Constants.FRAGMENT_TAG_TYPE);
+        fm.beginTransaction().add(addTermFragment, Constants.FRAGMENT_TAG).commit();
+//        addTermFragment.show(fm, Constants.FRAGMENT_TAG);
     }
 
     public void userReady() {
