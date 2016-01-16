@@ -66,6 +66,7 @@ public class AddTermVoiceFragment extends DialogFragment {
         mVoiceRecognizer.prepare(mTextView);
 
         RecyclerView rvTerms = (RecyclerView) getView().findViewById(R.id.recAutoVoice);
+
         rvTerms.setAdapter(mAdapter);
         rvTerms.setLayoutManager(new LinearLayoutManager(getContext()));
         SpacesItemDecoration decoration = new SpacesItemDecoration(5);
@@ -90,13 +91,8 @@ public class AddTermVoiceFragment extends DialogFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().equals(getString(R.string.f_add_term_speak_now)))
-                    return;
-
-                Log.d(TAG_, s.toString());
-                for (String ss : mVoiceRecognizer.getSpeechResults()){
-                    Log.d(TAG_, ss.toString());
-                }
+                if (!s.toString().equals(getString(R.string.f_add_term_speak_now)))
+                    mAdapter.getFilter().filter(s.toString().toLowerCase());
             }
 
             @Override

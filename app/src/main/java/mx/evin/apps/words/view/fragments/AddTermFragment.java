@@ -67,8 +67,7 @@ public class AddTermFragment extends DialogFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String searchText = s.toString().toLowerCase();
-                mAdapter.getFilter().filter(searchText);
+                mAdapter.getFilter().filter(s.toString().toLowerCase());
             }
 
             @Override

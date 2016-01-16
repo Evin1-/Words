@@ -103,7 +103,7 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
     @Override
     public Filter getFilter() {
 
-        Filter filter = new Filter() {
+        return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 ArrayList<Term> results = new ArrayList<>();
@@ -126,7 +126,5 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
                 notifyDataSetChanged();
             }
         };
-
-        return filter;
     }
 }
