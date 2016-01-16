@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
         if (last_term.equals("--")){
             getSupportFragmentManager().beginTransaction().replace(mMainFragment.getId(), new StartingFragment()).commit();
         }else {
-            MainVM.refreshCurrentTerm(last_term);
+            MainVM.refreshCurrentTerm(last_term, this);
             getSupportFragmentManager().beginTransaction().replace(mMainFragment.getId(), new MainFragment()).commit();
         }
     }
