@@ -69,6 +69,7 @@ public class MainVM {
     }
 
     public static void refreshMainFragment(Activity activity) {
+        //TODO Update hierarchy, related terms and blablabal
         //TODO Remove try/catch and use a better practice
         TextView textViewDoc = (TextView) activity.findViewById(R.id.f_main_doc_txt);
         TextView textViewPack = (TextView) activity.findViewById(R.id.f_main_pack_txt);

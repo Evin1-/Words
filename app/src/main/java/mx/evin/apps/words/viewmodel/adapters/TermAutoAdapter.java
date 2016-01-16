@@ -25,6 +25,7 @@ import mx.evin.apps.words.viewmodel.utils.Constants;
  * Created by evin on 12/19/15.
  */
 public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHolder> implements Filterable{
+    //TODO Check if well filtered when a lot of items
 
     private static List<Term> mOriginalTerms;
     private static List<Term> mFilteredTerms;
