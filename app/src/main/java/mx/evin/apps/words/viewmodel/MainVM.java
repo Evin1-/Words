@@ -16,8 +16,8 @@ import java.util.List;
 
 import mx.evin.apps.words.R;
 import mx.evin.apps.words.model.entities.Term;
-import mx.evin.apps.words.view.fragments.AddTermFragment;
-import mx.evin.apps.words.view.fragments.AddTermVoiceFragment;
+import mx.evin.apps.words.view.fragments.SearchTermFragment;
+import mx.evin.apps.words.view.fragments.SearchTermVoiceFragment;
 
 /**
  * Created by evin on 1/10/16.
@@ -38,8 +38,8 @@ public class MainVM {
     }
 
     private static void initializeTerms() {
-        AddTermFragment.mTerms = mTerms;
-        AddTermVoiceFragment.mTerms = mTerms;
+        SearchTermFragment.mTerms = mTerms;
+        SearchTermVoiceFragment.mTerms = mTerms;
 
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Term");
 
@@ -48,21 +48,21 @@ public class MainVM {
             public void done(List<ParseObject> objects, ParseException e) {
                 if (e == null) {
                     for (ParseObject term : objects) {
-                        AddTermFragment.mAdapter.notifyDataSetChanged();
-                        AddTermVoiceFragment.mAdapter.notifyDataSetChanged();
+                        SearchTermFragment.mAdapter.notifyDataSetChanged();
+                        SearchTermVoiceFragment.mAdapter.notifyDataSetChanged();
                         term.pinInBackground();
                         mTerms.add((Term) term);
                         term.getParseObject("pack").fetchIfNeededInBackground(new GetCallback<ParseObject>() {
                             @Override
                             public void done(ParseObject object, ParseException e) {
                                 object.pinInBackground();
-                                AddTermFragment.mAdapter.notifyDataSetChanged();
-                                AddTermVoiceFragment.mAdapter.notifyDataSetChanged();
+                                SearchTermFragment.mAdapter.notifyDataSetChanged();
+                                SearchTermVoiceFragment.mAdapter.notifyDataSetChanged();
                             }
                         });
                     }
-                    AddTermFragment.mAdapter.notifyDataSetChanged();
-                    AddTermVoiceFragment.mAdapter.notifyDataSetChanged();
+                    SearchTermFragment.mAdapter.notifyDataSetChanged();
+                    SearchTermVoiceFragment.mAdapter.notifyDataSetChanged();
 //                    Log.d(TAG_, Integer.toString(mTerms.size()));
                 } else {
                     Log.d(TAG_, "Error retrieving terms + " + e.toString());

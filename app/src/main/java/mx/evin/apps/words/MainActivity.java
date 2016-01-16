@@ -20,8 +20,8 @@ import android.widget.FrameLayout;
 
 import com.parse.ParseUser;
 
-import mx.evin.apps.words.view.fragments.AddTermFragment;
-import mx.evin.apps.words.view.fragments.AddTermVoiceFragment;
+import mx.evin.apps.words.view.fragments.SearchTermFragment;
+import mx.evin.apps.words.view.fragments.SearchTermVoiceFragment;
 import mx.evin.apps.words.view.fragments.MainFragment;
 import mx.evin.apps.words.view.fragments.StartingFragment;
 import mx.evin.apps.words.viewmodel.LoginVM;
@@ -180,10 +180,10 @@ public class MainActivity extends AppCompatActivity {
         Fragment addTermFragment;
         switch (type_add){
             case SPOKEN:
-                addTermFragment = new AddTermVoiceFragment();
+                addTermFragment = new SearchTermVoiceFragment();
                 break;
             default:
-                addTermFragment = new AddTermFragment();
+                addTermFragment = new SearchTermFragment();
         }
         fm.beginTransaction().add(addTermFragment, Constants.FRAGMENT_TAG_TYPE).commit();
 //        addTermFragment.show(fm, Constants.FRAGMENT_TAG_TYPE);

@@ -1,20 +1,16 @@
 package mx.evin.apps.words.view.fragments;
 
-import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.view.WindowManager;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 
@@ -23,17 +19,13 @@ import mx.evin.apps.words.model.entities.Term;
 import mx.evin.apps.words.view.decorations.SpacesItemDecoration;
 import mx.evin.apps.words.viewmodel.MainVM;
 import mx.evin.apps.words.viewmodel.adapters.TermAutoAdapter;
-import mx.evin.apps.words.viewmodel.utils.VoiceRecognizer;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link DialogFragment} subclass.
  */
-public class AddTermVoiceFragment extends DialogFragment {
+public class SearchTermFragment extends DialogFragment {
 
-    private static final String TAG_ = "SpeechRecognitionStuff";
-    private TextView mTextView;
-    private VoiceRecognizer mVoiceRecognizer;
-
+    private EditText mEditText;
     public static ArrayList<Term> mTerms;
     public static TermAutoAdapter mAdapter;
 
@@ -42,48 +34,32 @@ public class AddTermVoiceFragment extends DialogFragment {
         mAdapter = new TermAutoAdapter(mTerms);
     }
 
-    public AddTermVoiceFragment() {
+    public SearchTermFragment() {
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        mVoiceRecognizer = new VoiceRecognizer(getContext());
-
-        return inflater.inflate(R.layout.fragment_add_term_voice, container, false);
+        return inflater.inflate(R.layout.fragment_add_term, container);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (getView() == null)
-            return;
+        mEditText = (EditText) view.findViewById(R.id.f_add_term_input_et);
+        mEditText.requestFocus();
+        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
-        mTextView = (TextView) getView().findViewById(R.id.txtVoice);
-        mVoiceRecognizer.prepare(mTextView);
-
-        RecyclerView rvTerms = (RecyclerView) getView().findViewById(R.id.recAutoVoice);
+        RecyclerView rvTerms = (RecyclerView) view.findViewById(R.id.f_add_term_terms_rv);
 
         rvTerms.setAdapter(mAdapter);
         rvTerms.setLayoutManager(new LinearLayoutManager(getContext()));
         SpacesItemDecoration decoration = new SpacesItemDecoration(5);
         rvTerms.addItemDecoration(decoration);
 
-        FloatingActionButton floatingActionButton = (FloatingActionButton) getView().findViewById(R.id.fab1);
-
-        floatingActionButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.color_primary)));
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mTextView.setText(getString(R.string.f_add_term_speak_now));
-                mVoiceRecognizer.listenNow(v);
-            }
-        });
-
-        mTextView.addTextChangedListener(new TextWatcher() {
+        mEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -91,8 +67,7 @@ public class AddTermVoiceFragment extends DialogFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!s.toString().equals(getString(R.string.f_add_term_speak_now)))
-                    mAdapter.getFilter().filter(s.toString().toLowerCase());
+                mAdapter.getFilter().filter(s.toString().toLowerCase());
             }
 
             @Override
@@ -100,7 +75,6 @@ public class AddTermVoiceFragment extends DialogFragment {
 
             }
         });
-
     }
 
     @Override
