@@ -61,8 +61,7 @@ public class AddTermVoiceFragment extends DialogFragment {
         textView = (TextView) getView().findViewById(R.id.txtVoice);
 
         RecyclerView rvTerms = (RecyclerView) getView().findViewById(R.id.recAutoVoice);
-        TermAutoAdapter adapter = new TermAutoAdapter(mTerms);
-        rvTerms.setAdapter(adapter);
+        rvTerms.setAdapter(mAdapter);
         rvTerms.setLayoutManager(new LinearLayoutManager(getContext()));
         SpacesItemDecoration decoration = new SpacesItemDecoration(5);
         rvTerms.addItemDecoration(decoration);

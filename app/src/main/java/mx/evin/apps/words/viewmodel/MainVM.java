@@ -17,6 +17,7 @@ import java.util.List;
 import mx.evin.apps.words.R;
 import mx.evin.apps.words.model.entities.Term;
 import mx.evin.apps.words.view.fragments.AddTermFragment;
+import mx.evin.apps.words.view.fragments.AddTermVoiceFragment;
 
 /**
  * Created by evin on 1/10/16.
@@ -38,13 +39,17 @@ public class MainVM {
 
     private static void initializeTerms() {
         AddTermFragment.mTerms = mTerms;
+        AddTermVoiceFragment.mTerms = mTerms;
+
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Term");
+
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
                 if (e == null) {
                     for (ParseObject term : objects) {
                         AddTermFragment.mAdapter.notifyDataSetChanged();
+                        AddTermVoiceFragment.mAdapter.notifyDataSetChanged();
                         term.pinInBackground();
                         mTerms.add((Term) term);
                         term.getParseObject("pack").fetchIfNeededInBackground(new GetCallback<ParseObject>() {
@@ -52,11 +57,13 @@ public class MainVM {
                             public void done(ParseObject object, ParseException e) {
                                 object.pinInBackground();
                                 AddTermFragment.mAdapter.notifyDataSetChanged();
+                                AddTermVoiceFragment.mAdapter.notifyDataSetChanged();
                             }
                         });
                     }
                     AddTermFragment.mAdapter.notifyDataSetChanged();
-                    Log.d(TAG_, Integer.toString(mTerms.size()));
+                    AddTermVoiceFragment.mAdapter.notifyDataSetChanged();
+//                    Log.d(TAG_, Integer.toString(mTerms.size()));
                 } else {
                     Log.d(TAG_, "Error retrieving terms + " + e.toString());
                 }
