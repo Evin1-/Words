@@ -21,6 +21,7 @@ import android.widget.FrameLayout;
 import com.parse.ParseUser;
 
 import mx.evin.apps.words.view.fragments.SearchTermFragment;
+import mx.evin.apps.words.view.fragments.SearchTermGoogleFragment;
 import mx.evin.apps.words.view.fragments.SearchTermVoiceFragment;
 import mx.evin.apps.words.view.fragments.MainFragment;
 import mx.evin.apps.words.view.fragments.StartingFragment;
@@ -172,7 +173,8 @@ public class MainActivity extends AppCompatActivity {
 //        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.a_main_drawer);
 //        drawerLayout.openDrawer(GravityCompat.START);
 //        findViewById(R.id.a_main_search_type_btn).callOnClick();
-        findViewById(R.id.a_main_search_talk_icon).callOnClick();
+//        findViewById(R.id.a_main_search_talk_icon).callOnClick();
+        findViewById(R.id.a_main_search_google_icon).callOnClick();
     }
 
     public void addTermGeneric(Constants.TYPE_ADD type_add){
@@ -181,6 +183,9 @@ public class MainActivity extends AppCompatActivity {
         switch (type_add){
             case SPOKEN:
                 addTermFragment = new SearchTermVoiceFragment();
+                break;
+            case GOOGLED:
+                addTermFragment = new SearchTermGoogleFragment();
                 break;
             default:
                 addTermFragment = new SearchTermFragment();
@@ -196,11 +201,15 @@ public class MainActivity extends AppCompatActivity {
 //        StartupVM.firstTimeSetup();
     }
 
-    public void add_term(View view) {
+    public void search_term(View view) {
         addTermGeneric(Constants.TYPE_ADD.WRITTEN);
     }
 
-    public void add_term_voice(View view) {
+    public void search_term_voice(View view) {
         addTermGeneric(Constants.TYPE_ADD.SPOKEN);
+    }
+
+    public void search_term_google(View view) {
+        addTermGeneric(Constants.TYPE_ADD.GOOGLED);
     }
 }

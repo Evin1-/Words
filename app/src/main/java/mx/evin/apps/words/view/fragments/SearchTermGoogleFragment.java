@@ -2,6 +2,7 @@ package mx.evin.apps.words.view.fragments;
 
 
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,7 @@ import mx.evin.apps.words.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SearchTermGoogleFragment extends Fragment {
+public class SearchTermGoogleFragment extends DialogFragment {
 
 
     public SearchTermGoogleFragment() {
