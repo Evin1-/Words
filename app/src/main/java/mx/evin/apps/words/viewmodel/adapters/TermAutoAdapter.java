@@ -19,6 +19,7 @@ import mx.evin.apps.words.R;
 import mx.evin.apps.words.model.entities.Pack;
 import mx.evin.apps.words.model.entities.Term;
 import mx.evin.apps.words.viewmodel.utils.Constants;
+import mx.evin.apps.words.viewmodel.utils.FilterHelper;
 
 /**
  * Created by evin on 12/19/15.
@@ -106,22 +107,18 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                ArrayList<Term> results = new ArrayList<>();
-
-                for (Term term : mOriginalTerms){
-                    if (term.getWords().toLowerCase().contains(constraint)){
-                        results.add(term);
-                    }
-                }
-
                 FilterResults filterResults = new FilterResults();
-                filterResults.values = results;
+
+                FilterHelper filterHelper = new FilterHelper(constraint.toString(), mOriginalTerms);
+                filterResults.values = filterHelper.quickFilter();
 
                 return filterResults;
             }
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
+                //TODO Recheck this warning?
+
                 mFilteredTerms = (List<Term>) results.values;
                 notifyDataSetChanged();
             }
