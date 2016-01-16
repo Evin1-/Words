@@ -2,6 +2,7 @@ package mx.evin.apps.words.view.fragments;
 
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
@@ -55,7 +56,7 @@ public class AddTermVoiceFragment extends DialogFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         textView = (TextView) getView().findViewById(R.id.txtVoice);
@@ -67,6 +68,8 @@ public class AddTermVoiceFragment extends DialogFragment {
         rvTerms.addItemDecoration(decoration);
 
         FloatingActionButton floatingActionButton = (FloatingActionButton) getView().findViewById(R.id.fab1);
+
+        floatingActionButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.color_primary)));
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,17 +87,6 @@ public class AddTermVoiceFragment extends DialogFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-//                if (!s.toString().equals("Press the button\u2026") && s.length() > 0){
-//                    List<Term> new_terms = Term.getSmartFavList(s.toString(), 5);
-//                    if (new_terms.size() == 1){
-//                        presenter.add_word(new_terms.get(0).getWords(), null);
-//                    }
-//                    rvTerms.setAdapter(new TermAutoAdapter(new_terms));
-//                }else{
-//                    rvTerms.setAdapter(adapter);
-//                }
-
                 Log.d(TAG_, s.toString());
             }
 
@@ -122,54 +114,60 @@ public class AddTermVoiceFragment extends DialogFragment {
     }
 
 
-    class listener implements RecognitionListener {
+    class listener implements RecognitionListener{
+        @Override
         public void onReadyForSpeech(Bundle params) {
 
         }
 
+        @Override
         public void onBeginningOfSpeech() {
 
         }
 
+        @Override
         public void onRmsChanged(float rmsdB) {
 
         }
 
+        @Override
         public void onBufferReceived(byte[] buffer) {
 
         }
 
+        @Override
         public void onEndOfSpeech() {
 
         }
 
+        @Override
         public void onError(int error) {
 
         }
 
+        @Override
         public void onResults(Bundle results) {
             ArrayList data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-            String str_temp = data.get(0).toString();
-            for (int i = 1; i < data.size() ; i++){
-                str_temp = str_temp + "@" + (String) data.get(i);
+            if (data != null){
+                String str_temp = data.get(0).toString();
+                for (int i = 1; i < data.size() ; i++){
+                    str_temp = str_temp + "@" + data.get(i);
+                }
+                textView.setText((data.get(0).toString()));
             }
-            textView.setText(capitalize(data.get(0).toString()));
-            TextView textViewTemp = (TextView) getView().findViewById(R.id.txtVoiceTemp);
-            textViewTemp.setText(str_temp);
         }
 
+        @Override
         public void onPartialResults(Bundle partialResults) {
 
         }
 
+        @Override
         public void onEvent(int eventType, Bundle params) {
 
         }
-
-        private String capitalize(final String line) {
-            return Character.toUpperCase(line.charAt(0)) + line.substring(1);
-        }
     }
+
 
     @Override
     public void onPause() {

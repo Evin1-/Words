@@ -46,7 +46,7 @@ public class AddTermFragment extends DialogFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         mEditText = (EditText) view.findViewById(R.id.f_add_term_input_et);
