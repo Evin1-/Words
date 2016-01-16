@@ -11,7 +11,6 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import mx.evin.apps.words.MainActivity;
@@ -110,7 +109,7 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
                 FilterResults filterResults = new FilterResults();
 
                 FilterHelper filterHelper = new FilterHelper(constraint.toString(), mOriginalTerms);
-                filterResults.values = filterHelper.quickFilter();
+                filterResults.values = filterHelper.magicFilter();
 
                 return filterResults;
             }
