@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     //TODO Sharing and opening on push notification
     //TODO Change layout on landscape
     //TODO Select technology at first
+    //TODO Make it offline
     private static final String TAG_ = "MainActivityTAG_";
     private static final String LAST_TERM_KEY_ = Constants.LAST_TERM_KEY;
     private ParseUser mUser;
