@@ -30,4 +30,5 @@
     <string name="f_search_term_speak_press">Press the button&#8230;</string>
     <string name="f_search_term_google_btn">Search</string>
     <string name="recycler_item_add_btn">Add</string>
+    <string name="recycler_item_go_btn">Go</string>
 </resources>
