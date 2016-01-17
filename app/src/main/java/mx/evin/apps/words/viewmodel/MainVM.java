@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mx.evin.apps.words.R;
-import mx.evin.apps.words.model.entities.Term;
+import mx.evin.apps.words.model.entities.parse.Term;
 import mx.evin.apps.words.view.fragments.SearchTermFragment;
 import mx.evin.apps.words.view.fragments.SearchTermVoiceFragment;
 

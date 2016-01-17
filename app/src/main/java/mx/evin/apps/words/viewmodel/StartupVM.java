@@ -4,9 +4,9 @@ import com.parse.ParseUser;
 
 import java.util.HashMap;
 
-import mx.evin.apps.words.model.entities.Pack;
-import mx.evin.apps.words.model.entities.Technology;
-import mx.evin.apps.words.model.entities.Term;
+import mx.evin.apps.words.model.entities.parse.Pack;
+import mx.evin.apps.words.model.entities.parse.Technology;
+import mx.evin.apps.words.model.entities.parse.Term;
 import mx.evin.apps.words.model.queries.Lookups;
 import mx.evin.apps.words.model.scripts.RowCreator;
 

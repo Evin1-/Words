@@ -1,4 +1,4 @@
-package mx.evin.apps.words.model.entities;
+package mx.evin.apps.words.model.entities.parse;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;

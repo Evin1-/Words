@@ -4,9 +4,9 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-import mx.evin.apps.words.model.entities.Pack;
-import mx.evin.apps.words.model.entities.Technology;
-import mx.evin.apps.words.model.entities.Term;
+import mx.evin.apps.words.model.entities.parse.Pack;
+import mx.evin.apps.words.model.entities.parse.Technology;
+import mx.evin.apps.words.model.entities.parse.Term;
 
 /**
  * Created by evin on 1/8/16.

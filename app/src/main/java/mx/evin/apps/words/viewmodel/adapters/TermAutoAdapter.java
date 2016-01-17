@@ -15,8 +15,8 @@ import java.util.List;
 
 import mx.evin.apps.words.MainActivity;
 import mx.evin.apps.words.R;
-import mx.evin.apps.words.model.entities.Pack;
-import mx.evin.apps.words.model.entities.Term;
+import mx.evin.apps.words.model.entities.parse.Pack;
+import mx.evin.apps.words.model.entities.parse.Term;
 import mx.evin.apps.words.viewmodel.utils.Constants;
 import mx.evin.apps.words.viewmodel.utils.FilterHelper;
 

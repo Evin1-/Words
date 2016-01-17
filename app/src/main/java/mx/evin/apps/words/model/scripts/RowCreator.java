@@ -11,15 +11,15 @@ import com.parse.ParseUser;
 import java.util.HashMap;
 import java.util.Map;
 
-import mx.evin.apps.words.model.entities.Img;
-import mx.evin.apps.words.model.entities.Pack;
-import mx.evin.apps.words.model.entities.Technology;
-import mx.evin.apps.words.model.entities.Term;
-import mx.evin.apps.words.model.entities.TermHierarchy;
-import mx.evin.apps.words.model.entities.TermImplementation;
-import mx.evin.apps.words.model.entities.TermTerm;
-import mx.evin.apps.words.model.entities.UserTechnology;
-import mx.evin.apps.words.model.entities.UserTerm;
+import mx.evin.apps.words.model.entities.parse.Img;
+import mx.evin.apps.words.model.entities.parse.Pack;
+import mx.evin.apps.words.model.entities.parse.Technology;
+import mx.evin.apps.words.model.entities.parse.Term;
+import mx.evin.apps.words.model.entities.parse.TermHierarchy;
+import mx.evin.apps.words.model.entities.parse.TermImplementation;
+import mx.evin.apps.words.model.entities.parse.TermTerm;
+import mx.evin.apps.words.model.entities.parse.UserTechnology;
+import mx.evin.apps.words.model.entities.parse.UserTerm;
 
 /**
  * Created by evin on 1/8/16.

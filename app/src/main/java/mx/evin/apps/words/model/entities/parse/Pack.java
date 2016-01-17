@@ -1,15 +1,15 @@
-package mx.evin.apps.words.model.entities;
+package mx.evin.apps.words.model.entities.parse;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
 /**
- * Created by evin on 1/7/16.
+ * Created by evin on 1/8/16.
  */
-@ParseClassName("Technology")
-public class Technology extends ParseObject {
+@ParseClassName("Pack")
+public class Pack extends ParseObject{
 
-    public Technology() {
+    public Pack() {
     }
 
     public String getName(){

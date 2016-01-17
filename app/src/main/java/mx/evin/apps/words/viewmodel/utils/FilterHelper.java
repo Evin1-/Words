@@ -3,7 +3,7 @@ package mx.evin.apps.words.viewmodel.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import mx.evin.apps.words.model.entities.Term;
+import mx.evin.apps.words.model.entities.parse.Term;
 
 /**
  * Created by evin on 1/16/16.

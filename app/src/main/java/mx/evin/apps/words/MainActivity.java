@@ -3,6 +3,8 @@ package mx.evin.apps.words;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -20,10 +22,10 @@ import android.widget.FrameLayout;
 
 import com.parse.ParseUser;
 
+import mx.evin.apps.words.view.fragments.MainFragment;
 import mx.evin.apps.words.view.fragments.SearchTermFragment;
 import mx.evin.apps.words.view.fragments.SearchTermGoogleFragment;
 import mx.evin.apps.words.view.fragments.SearchTermVoiceFragment;
-import mx.evin.apps.words.view.fragments.MainFragment;
 import mx.evin.apps.words.view.fragments.StartingFragment;
 import mx.evin.apps.words.viewmodel.LoginVM;
 import mx.evin.apps.words.viewmodel.MainVM;
@@ -40,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     //TODO Make it offline
     private static final String TAG_ = "MainActivityTAG_";
     private static final String LAST_TERM_KEY_ = Constants.LAST_TERM_KEY;
+    private static String GOOGLE_API_KEY;
+    private static String GOOGLE_CUSTOM_SEARCH_KEY;
+
     private ParseUser mUser;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
@@ -56,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         mNavigationView = (NavigationView) findViewById(R.id.a_main_nav);
         mMainFragment = (FrameLayout) findViewById(R.id.a_main_frame);
         mSharedPref = getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+
+        retrieveGoogleKeys();
 
         configureActionBar();
 
@@ -177,6 +184,19 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.a_main_search_google_icon).callOnClick();
     }
 
+    private void retrieveGoogleKeys(){
+        try {
+            ApplicationInfo ai = getPackageManager().getApplicationInfo(this.getPackageName(), PackageManager.GET_META_DATA);
+            Bundle bundle = ai.metaData;
+            GOOGLE_API_KEY = bundle.getString(Constants.GOOGLE_API_KEY_TAG);
+            GOOGLE_CUSTOM_SEARCH_KEY = bundle.getString(Constants.GOOGLE_CUSTOM_SEARCH_KEY_TAG);
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG_, "Failed to load meta-data, NameNotFound: " + e.getMessage());
+        } catch (NullPointerException e) {
+            Log.e(TAG_, "Failed to load meta-data, NullPointer: " + e.getMessage());
+        }
+    }
+
     public void addTermGeneric(Constants.TYPE_ADD type_add){
         FragmentManager fm = getSupportFragmentManager();
         Fragment addTermFragment;
@@ -185,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                 addTermFragment = new SearchTermVoiceFragment();
                 break;
             case GOOGLED:
-                addTermFragment = new SearchTermGoogleFragment();
+                addTermFragment = SearchTermGoogleFragment.newInstance(GOOGLE_API_KEY, GOOGLE_CUSTOM_SEARCH_KEY);
                 break;
             default:
                 addTermFragment = new SearchTermFragment();
