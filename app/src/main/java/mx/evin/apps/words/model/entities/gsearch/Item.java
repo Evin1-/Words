@@ -1,10 +1,13 @@
 
 package mx.evin.apps.words.model.entities.gsearch;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Item {
+public class Item implements Parcelable {
 
     @SerializedName("kind")
     @Expose
@@ -41,7 +44,7 @@ public class Item {
     private Pagemap pagemap;
 
     /**
-     * 
+     *
      * @return
      *     The kind
      */
@@ -50,7 +53,7 @@ public class Item {
     }
 
     /**
-     * 
+     *
      * @param kind
      *     The kind
      */
@@ -59,7 +62,7 @@ public class Item {
     }
 
     /**
-     * 
+     *
      * @return
      *     The title
      */
@@ -68,7 +71,7 @@ public class Item {
     }
 
     /**
-     * 
+     *
      * @param title
      *     The title
      */
@@ -77,7 +80,7 @@ public class Item {
     }
 
     /**
-     * 
+     *
      * @return
      *     The htmlTitle
      */
@@ -86,7 +89,7 @@ public class Item {
     }
 
     /**
-     * 
+     *
      * @param htmlTitle
      *     The htmlTitle
      */
@@ -95,7 +98,7 @@ public class Item {
     }
 
     /**
-     * 
+     *
      * @return
      *     The link
      */
@@ -104,7 +107,7 @@ public class Item {
     }
 
     /**
-     * 
+     *
      * @param link
      *     The link
      */
@@ -113,7 +116,7 @@ public class Item {
     }
 
     /**
-     * 
+     *
      * @return
      *     The displayLink
      */
@@ -122,7 +125,7 @@ public class Item {
     }
 
     /**
-     * 
+     *
      * @param displayLink
      *     The displayLink
      */
@@ -131,7 +134,7 @@ public class Item {
     }
 
     /**
-     * 
+     *
      * @return
      *     The snippet
      */
@@ -140,7 +143,7 @@ public class Item {
     }
 
     /**
-     * 
+     *
      * @param snippet
      *     The snippet
      */
@@ -149,7 +152,7 @@ public class Item {
     }
 
     /**
-     * 
+     *
      * @return
      *     The htmlSnippet
      */
@@ -158,7 +161,7 @@ public class Item {
     }
 
     /**
-     * 
+     *
      * @param htmlSnippet
      *     The htmlSnippet
      */
@@ -167,7 +170,7 @@ public class Item {
     }
 
     /**
-     * 
+     *
      * @return
      *     The cacheId
      */
@@ -176,7 +179,7 @@ public class Item {
     }
 
     /**
-     * 
+     *
      * @param cacheId
      *     The cacheId
      */
@@ -185,7 +188,7 @@ public class Item {
     }
 
     /**
-     * 
+     *
      * @return
      *     The formattedUrl
      */
@@ -194,7 +197,7 @@ public class Item {
     }
 
     /**
-     * 
+     *
      * @param formattedUrl
      *     The formattedUrl
      */
@@ -203,7 +206,7 @@ public class Item {
     }
 
     /**
-     * 
+     *
      * @return
      *     The htmlFormattedUrl
      */
@@ -212,7 +215,7 @@ public class Item {
     }
 
     /**
-     * 
+     *
      * @param htmlFormattedUrl
      *     The htmlFormattedUrl
      */
@@ -221,7 +224,7 @@ public class Item {
     }
 
     /**
-     * 
+     *
      * @return
      *     The pagemap
      */
@@ -230,7 +233,7 @@ public class Item {
     }
 
     /**
-     * 
+     *
      * @param pagemap
      *     The pagemap
      */
@@ -238,4 +241,51 @@ public class Item {
         this.pagemap = pagemap;
     }
 
+
+    protected Item(Parcel in) {
+        kind = in.readString();
+        title = in.readString();
+        htmlTitle = in.readString();
+        link = in.readString();
+        displayLink = in.readString();
+        snippet = in.readString();
+        htmlSnippet = in.readString();
+        cacheId = in.readString();
+        formattedUrl = in.readString();
+        htmlFormattedUrl = in.readString();
+        pagemap = (Pagemap) in.readValue(Pagemap.class.getClassLoader());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(kind);
+        dest.writeString(title);
+        dest.writeString(htmlTitle);
+        dest.writeString(link);
+        dest.writeString(displayLink);
+        dest.writeString(snippet);
+        dest.writeString(htmlSnippet);
+        dest.writeString(cacheId);
+        dest.writeString(formattedUrl);
+        dest.writeString(htmlFormattedUrl);
+        dest.writeValue(pagemap);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Item> CREATOR = new Parcelable.Creator<Item>() {
+        @Override
+        public Item createFromParcel(Parcel in) {
+            return new Item(in);
+        }
+
+        @Override
+        public Item[] newArray(int size) {
+            return new Item[size];
+        }
+    };
 }

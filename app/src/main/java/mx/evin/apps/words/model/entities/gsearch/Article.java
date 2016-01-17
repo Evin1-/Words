@@ -1,10 +1,13 @@
 
 package mx.evin.apps.words.model.entities.gsearch;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Article {
+public class Article implements Parcelable {
 
     @SerializedName("name")
     @Expose
@@ -14,7 +17,7 @@ public class Article {
     private String articlebody;
 
     /**
-     * 
+     *
      * @return
      *     The name
      */
@@ -23,7 +26,7 @@ public class Article {
     }
 
     /**
-     * 
+     *
      * @param name
      *     The name
      */
@@ -32,7 +35,7 @@ public class Article {
     }
 
     /**
-     * 
+     *
      * @return
      *     The articlebody
      */
@@ -41,7 +44,7 @@ public class Article {
     }
 
     /**
-     * 
+     *
      * @param articlebody
      *     The articlebody
      */
@@ -49,4 +52,33 @@ public class Article {
         this.articlebody = articlebody;
     }
 
+
+    protected Article(Parcel in) {
+        name = in.readString();
+        articlebody = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(articlebody);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Article> CREATOR = new Parcelable.Creator<Article>() {
+        @Override
+        public Article createFromParcel(Parcel in) {
+            return new Article(in);
+        }
+
+        @Override
+        public Article[] newArray(int size) {
+            return new Article[size];
+        }
+    };
 }

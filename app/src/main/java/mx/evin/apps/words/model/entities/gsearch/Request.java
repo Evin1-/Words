@@ -1,10 +1,13 @@
 
 package mx.evin.apps.words.model.entities.gsearch;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Request {
+public class Request implements Parcelable {
 
     @SerializedName("title")
     @Expose
@@ -35,7 +38,7 @@ public class Request {
     private String cx;
 
     /**
-     * 
+     *
      * @return
      *     The title
      */
@@ -44,7 +47,7 @@ public class Request {
     }
 
     /**
-     * 
+     *
      * @param title
      *     The title
      */
@@ -53,7 +56,7 @@ public class Request {
     }
 
     /**
-     * 
+     *
      * @return
      *     The totalResults
      */
@@ -62,7 +65,7 @@ public class Request {
     }
 
     /**
-     * 
+     *
      * @param totalResults
      *     The totalResults
      */
@@ -71,7 +74,7 @@ public class Request {
     }
 
     /**
-     * 
+     *
      * @return
      *     The searchTerms
      */
@@ -80,7 +83,7 @@ public class Request {
     }
 
     /**
-     * 
+     *
      * @param searchTerms
      *     The searchTerms
      */
@@ -89,7 +92,7 @@ public class Request {
     }
 
     /**
-     * 
+     *
      * @return
      *     The count
      */
@@ -98,7 +101,7 @@ public class Request {
     }
 
     /**
-     * 
+     *
      * @param count
      *     The count
      */
@@ -107,7 +110,7 @@ public class Request {
     }
 
     /**
-     * 
+     *
      * @return
      *     The startIndex
      */
@@ -116,7 +119,7 @@ public class Request {
     }
 
     /**
-     * 
+     *
      * @param startIndex
      *     The startIndex
      */
@@ -125,7 +128,7 @@ public class Request {
     }
 
     /**
-     * 
+     *
      * @return
      *     The inputEncoding
      */
@@ -134,7 +137,7 @@ public class Request {
     }
 
     /**
-     * 
+     *
      * @param inputEncoding
      *     The inputEncoding
      */
@@ -143,7 +146,7 @@ public class Request {
     }
 
     /**
-     * 
+     *
      * @return
      *     The outputEncoding
      */
@@ -152,7 +155,7 @@ public class Request {
     }
 
     /**
-     * 
+     *
      * @param outputEncoding
      *     The outputEncoding
      */
@@ -161,7 +164,7 @@ public class Request {
     }
 
     /**
-     * 
+     *
      * @return
      *     The safe
      */
@@ -170,7 +173,7 @@ public class Request {
     }
 
     /**
-     * 
+     *
      * @param safe
      *     The safe
      */
@@ -179,7 +182,7 @@ public class Request {
     }
 
     /**
-     * 
+     *
      * @return
      *     The cx
      */
@@ -188,7 +191,7 @@ public class Request {
     }
 
     /**
-     * 
+     *
      * @param cx
      *     The cx
      */
@@ -196,4 +199,57 @@ public class Request {
         this.cx = cx;
     }
 
+
+    protected Request(Parcel in) {
+        title = in.readString();
+        totalResults = in.readString();
+        searchTerms = in.readString();
+        count = in.readByte() == 0x00 ? null : in.readInt();
+        startIndex = in.readByte() == 0x00 ? null : in.readInt();
+        inputEncoding = in.readString();
+        outputEncoding = in.readString();
+        safe = in.readString();
+        cx = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(totalResults);
+        dest.writeString(searchTerms);
+        if (count == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeInt(count);
+        }
+        if (startIndex == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeInt(startIndex);
+        }
+        dest.writeString(inputEncoding);
+        dest.writeString(outputEncoding);
+        dest.writeString(safe);
+        dest.writeString(cx);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Request> CREATOR = new Parcelable.Creator<Request>() {
+        @Override
+        public Request createFromParcel(Parcel in) {
+            return new Request(in);
+        }
+
+        @Override
+        public Request[] newArray(int size) {
+            return new Request[size];
+        }
+    };
 }

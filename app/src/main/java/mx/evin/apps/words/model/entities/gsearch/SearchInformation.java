@@ -1,10 +1,13 @@
 
 package mx.evin.apps.words.model.entities.gsearch;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SearchInformation {
+public class SearchInformation implements Parcelable {
 
     @SerializedName("searchTime")
     @Expose
@@ -20,7 +23,7 @@ public class SearchInformation {
     private String formattedTotalResults;
 
     /**
-     * 
+     *
      * @return
      *     The searchTime
      */
@@ -29,7 +32,7 @@ public class SearchInformation {
     }
 
     /**
-     * 
+     *
      * @param searchTime
      *     The searchTime
      */
@@ -38,7 +41,7 @@ public class SearchInformation {
     }
 
     /**
-     * 
+     *
      * @return
      *     The formattedSearchTime
      */
@@ -47,7 +50,7 @@ public class SearchInformation {
     }
 
     /**
-     * 
+     *
      * @param formattedSearchTime
      *     The formattedSearchTime
      */
@@ -56,7 +59,7 @@ public class SearchInformation {
     }
 
     /**
-     * 
+     *
      * @return
      *     The totalResults
      */
@@ -65,7 +68,7 @@ public class SearchInformation {
     }
 
     /**
-     * 
+     *
      * @param totalResults
      *     The totalResults
      */
@@ -74,7 +77,7 @@ public class SearchInformation {
     }
 
     /**
-     * 
+     *
      * @return
      *     The formattedTotalResults
      */
@@ -83,7 +86,7 @@ public class SearchInformation {
     }
 
     /**
-     * 
+     *
      * @param formattedTotalResults
      *     The formattedTotalResults
      */
@@ -91,4 +94,42 @@ public class SearchInformation {
         this.formattedTotalResults = formattedTotalResults;
     }
 
+
+    protected SearchInformation(Parcel in) {
+        searchTime = in.readByte() == 0x00 ? null : in.readDouble();
+        formattedSearchTime = in.readString();
+        totalResults = in.readString();
+        formattedTotalResults = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (searchTime == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeDouble(searchTime);
+        }
+        dest.writeString(formattedSearchTime);
+        dest.writeString(totalResults);
+        dest.writeString(formattedTotalResults);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<SearchInformation> CREATOR = new Parcelable.Creator<SearchInformation>() {
+        @Override
+        public SearchInformation createFromParcel(Parcel in) {
+            return new SearchInformation(in);
+        }
+
+        @Override
+        public SearchInformation[] newArray(int size) {
+            return new SearchInformation[size];
+        }
+    };
 }

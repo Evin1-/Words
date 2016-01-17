@@ -1,13 +1,16 @@
 
 package mx.evin.apps.words.model.entities.gsearch;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomSearch {
+public class CustomSearch implements Parcelable {
 
     @SerializedName("kind")
     @Expose
@@ -29,7 +32,7 @@ public class CustomSearch {
     private List<Item> items = new ArrayList<Item>();
 
     /**
-     * 
+     *
      * @return
      *     The kind
      */
@@ -38,7 +41,7 @@ public class CustomSearch {
     }
 
     /**
-     * 
+     *
      * @param kind
      *     The kind
      */
@@ -47,7 +50,7 @@ public class CustomSearch {
     }
 
     /**
-     * 
+     *
      * @return
      *     The url
      */
@@ -56,7 +59,7 @@ public class CustomSearch {
     }
 
     /**
-     * 
+     *
      * @param url
      *     The url
      */
@@ -65,7 +68,7 @@ public class CustomSearch {
     }
 
     /**
-     * 
+     *
      * @return
      *     The queries
      */
@@ -74,7 +77,7 @@ public class CustomSearch {
     }
 
     /**
-     * 
+     *
      * @param queries
      *     The queries
      */
@@ -83,7 +86,7 @@ public class CustomSearch {
     }
 
     /**
-     * 
+     *
      * @return
      *     The context
      */
@@ -92,7 +95,7 @@ public class CustomSearch {
     }
 
     /**
-     * 
+     *
      * @param context
      *     The context
      */
@@ -101,7 +104,7 @@ public class CustomSearch {
     }
 
     /**
-     * 
+     *
      * @return
      *     The searchInformation
      */
@@ -110,7 +113,7 @@ public class CustomSearch {
     }
 
     /**
-     * 
+     *
      * @param searchInformation
      *     The searchInformation
      */
@@ -119,7 +122,7 @@ public class CustomSearch {
     }
 
     /**
-     * 
+     *
      * @return
      *     The items
      */
@@ -128,7 +131,7 @@ public class CustomSearch {
     }
 
     /**
-     * 
+     *
      * @param items
      *     The items
      */
@@ -136,4 +139,51 @@ public class CustomSearch {
         this.items = items;
     }
 
+
+    protected CustomSearch(Parcel in) {
+        kind = in.readString();
+        url = (Url) in.readValue(Url.class.getClassLoader());
+        queries = (Queries) in.readValue(Queries.class.getClassLoader());
+        context = (Context) in.readValue(Context.class.getClassLoader());
+        searchInformation = (SearchInformation) in.readValue(SearchInformation.class.getClassLoader());
+        if (in.readByte() == 0x01) {
+            items = new ArrayList<Item>();
+            in.readList(items, Item.class.getClassLoader());
+        } else {
+            items = null;
+        }
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(kind);
+        dest.writeValue(url);
+        dest.writeValue(queries);
+        dest.writeValue(context);
+        dest.writeValue(searchInformation);
+        if (items == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeList(items);
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<CustomSearch> CREATOR = new Parcelable.Creator<CustomSearch>() {
+        @Override
+        public CustomSearch createFromParcel(Parcel in) {
+            return new CustomSearch(in);
+        }
+
+        @Override
+        public CustomSearch[] newArray(int size) {
+            return new CustomSearch[size];
+        }
+    };
 }
