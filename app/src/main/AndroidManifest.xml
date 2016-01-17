@@ -27,8 +27,11 @@
         <activity
             android:name=".WebActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait">
-
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
 
         <!-- Put parse keys here -->
