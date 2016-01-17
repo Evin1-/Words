@@ -50,7 +50,7 @@ public class CustomSearchAsyncTask extends AsyncTask<String, Item, Void>{
         final String google_custom_search_key = params[2];
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+        logging.setLevel(HttpLoggingInterceptor.Level.NONE);
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(logging)
                 .build();
