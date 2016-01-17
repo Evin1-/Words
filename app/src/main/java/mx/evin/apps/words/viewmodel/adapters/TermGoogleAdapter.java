@@ -13,7 +13,6 @@ import java.util.List;
 import mx.evin.apps.words.R;
 import mx.evin.apps.words.model.entities.gsearch.Article;
 import mx.evin.apps.words.model.entities.gsearch.Item;
-import mx.evin.apps.words.model.entities.parse.Pack;
 
 /**
  * Created by evin on 12/19/15.
@@ -68,19 +67,31 @@ public class TermGoogleAdapter extends RecyclerView.Adapter<TermGoogleAdapter.Vi
 
     @Override
     public void onBindViewHolder(TermGoogleAdapter.ViewHolder viewHolder, int position) {
-        Item term = mItems.get(position);
-        List<Article> article = term.getPagemap().getArticle();
+        Item item = mItems.get(position);
+        List<Article> article = item.getPagemap().getArticle();
+
+        TextView textWords = viewHolder.txtTitle;
+        TextView textPack = viewHolder.txtDescription;
+        TextView textURL = viewHolder.txtURL;
 
         if (article.size() > 0){
-            TextView textWords = viewHolder.txtTitle;
-            textWords.setText(article.get(0).getName());
+            String name = article.get(0).getName();
+            if (name == null || name.length() < 1)
+                textWords.setText(item.getTitle());
+            else
+                textWords.setText(name);
 
-            TextView textPack = viewHolder.txtDescription;
-            textPack.setText(article.get(0).getArticlebody());
+            String articleBody = article.get(0).getArticlebody();
+            if (articleBody == null || articleBody.length() < 1)
+                textPack.setText(item.getSnippet());
+            else
+                textPack.setText(articleBody);
+        }else {
+            textWords.setText(item.getTitle());
+            textPack.setText(item.getSnippet());
         }
 
-        TextView textURL = viewHolder.txtURL;
-        textURL.setText(term.getLink());
+        textURL.setText(item.getLink());
 
     }
 

@@ -3,7 +3,6 @@ package mx.evin.apps.words.viewmodel.asynctasks;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import mx.evin.apps.words.model.entities.gsearch.Article;
 import mx.evin.apps.words.model.entities.gsearch.CustomSearch;
 import mx.evin.apps.words.model.entities.gsearch.Item;
 import mx.evin.apps.words.view.fragments.SearchTermGoogleFragment;
@@ -20,6 +19,7 @@ import retrofit2.http.Query;
  */
 public class CustomSearchAsyncTask extends AsyncTask<String, Item, Void>{
     //TODO Remove http listener
+    //TODO What happens if no results, or above limit?
 
     private static final String TAG_ = "CustomSearchATTAG_";
 
@@ -69,10 +69,6 @@ public class CustomSearchAsyncTask extends AsyncTask<String, Item, Void>{
             CustomSearch customSearch = searchCall.execute().body();
             for (Item item : customSearch.getItems()){
                 publishProgress(item);
-                for (Article article : item.getPagemap().getArticle()){
-                    Log.d(TAG_, article.getName());
-                    Log.d(TAG_, article.getArticlebody());
-                }
             }
 //            customSearch.getItems()
 //            Log.e(TAG_, String.valueOf(customSearch));

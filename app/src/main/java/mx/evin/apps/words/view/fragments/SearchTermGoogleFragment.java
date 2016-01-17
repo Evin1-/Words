@@ -18,10 +18,7 @@ import java.util.ArrayList;
 import mx.evin.apps.words.R;
 import mx.evin.apps.words.model.entities.gsearch.Item;
 import mx.evin.apps.words.view.decorations.SpacesItemDecoration;
-import mx.evin.apps.words.viewmodel.MainVM;
 import mx.evin.apps.words.viewmodel.adapters.TermGoogleAdapter;
-import mx.evin.apps.words.viewmodel.asynctasks.CustomSearchAsyncTask;
-import mx.evin.apps.words.viewmodel.utils.Constants;
 
 /**
  * A simple {@link Fragment} subclass.
