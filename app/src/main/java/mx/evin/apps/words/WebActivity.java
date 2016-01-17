@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import mx.evin.apps.words.model.entities.gsearch.Item;
+import mx.evin.apps.words.viewmodel.utils.Constants;
+
 public class WebActivity extends AppCompatActivity {
     //TODO Put drawer logic in a single file (VM)
     //TODO Put info in single layout and not app_bar_web app_bar_main
@@ -17,6 +20,10 @@ public class WebActivity extends AppCompatActivity {
         WebView myWebView = (WebView) findViewById(R.id.a_web_wv);
         WebSettings webSettings = myWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        myWebView.loadUrl("http://developer.android.com/index.html");
+
+        Item item = getIntent().getParcelableExtra(Constants.ITEM_WEB_KEY);
+
+        if (item != null)
+            myWebView.loadUrl(item.getLink());
     }
 }

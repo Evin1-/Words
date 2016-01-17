@@ -9,6 +9,7 @@ public class Constants {
     public static final String FRAGMENT_TAG = "fragment_add";
     public static final String GOOGLE_API_KEY_TAG = "GOOGLE_API_KEY";
     public static final String GOOGLE_CUSTOM_SEARCH_KEY_TAG = "GOOGLE_CUSTOM_SEARCH";
+    public static final String ITEM_WEB_KEY = "item_to_web_view";
 
     public enum TYPE_ADD {
         WRITTEN,
