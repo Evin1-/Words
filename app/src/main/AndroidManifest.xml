@@ -37,17 +37,17 @@
         <!-- Put parse keys here -->
         <meta-data
             android:name="com.parse.APPLICATION_ID"
-            android:value="" />
+            android:value="uUeudU3d2i2hQAJWV4P6Rtko0tPyc2xuHGVTgicS" />
         <meta-data
             android:name="com.parse.CLIENT_KEY"
-            android:value="" />
+            android:value="GaagGIBIN5z7ahmrIUMIN1XO6mR4tINmz3dDiT6D" />
         <!-- Put Google API keys here -->
         <meta-data
             android:name="GOOGLE_API_KEY"
-            android:value="" />
+            android:value="AIzaSyC1Cl3WWfc0r2k_Tkssqfzc-a7hOb_f2fw" />
         <meta-data
             android:name="GOOGLE_CUSTOM_SEARCH"
-            android:value="" />
+            android:value="009147545966550753187:syzbvp48ata" />
 
     </application>
 
