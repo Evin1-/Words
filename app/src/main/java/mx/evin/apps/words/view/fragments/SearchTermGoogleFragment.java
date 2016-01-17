@@ -27,6 +27,8 @@ public class SearchTermGoogleFragment extends DialogFragment {
     //TODO Remove comments and extra logs
     //TODO Set onRetainInstance to wait for AsyncTask
     //TODO Create newInstance
+    //TODO Use Custom Google Tabs
+
     private static final String TAG_ = "TermGoogleFragmentTAG_";
     public static TermGoogleAdapter mAdapter;
     public static ArrayList<Item> mItems;

@@ -17,6 +17,7 @@ public class WebActivity extends AppCompatActivity {
 
     private static final String TAG_ = "MainActivityTAG_";
     private WebView myWebView;
+    private Item mItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +25,10 @@ public class WebActivity extends AppCompatActivity {
         setContentView(R.layout.activity_web);
 
         myWebView = (WebView) findViewById(R.id.a_web_wv);
+        mItem = getIntent().getParcelableExtra(Constants.ITEM_WEB_KEY);
 
-        configureWebView();
         configureActionBar();
+        configureWebView();
     }
 
     @Override
@@ -41,17 +43,19 @@ public class WebActivity extends AppCompatActivity {
         myWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                updateTitleBar(view.getTitle(), url);
                 view.loadUrl(url);
                 return false;
             }
         });
 
-        Item item = getIntent().getParcelableExtra(Constants.ITEM_WEB_KEY);
-
-        if (item != null)
-            myWebView.loadUrl(item.getLink());
-        else
+        if (mItem != null){
+            myWebView.loadUrl(mItem.getLink());
+            updateTitleBar(mItem.getTitle(), mItem.getFormattedUrl());
+        }else {
             myWebView.loadUrl(Constants.DEFAULT_WEBSITE_URL);
+            updateTitleBar(getString(R.string.a_web_default_website_title), Constants.DEFAULT_WEBSITE_URL);
+        }
     }
 
     private void configureActionBar() {
@@ -62,6 +66,15 @@ public class WebActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
+        }
+    }
+
+    private void updateTitleBar(String title, String url){
+        ActionBar actionBar = getSupportActionBar();
+
+        if (actionBar != null){
+            actionBar.setTitle(title);
+            actionBar.setSubtitle(url);
         }
     }
 
