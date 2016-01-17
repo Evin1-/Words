@@ -1,4 +1,5 @@
 <!-- TODO Fix dimen -->
+<!-- TODO Fix view layout design -->
 <!-- fragment_edit_name.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"

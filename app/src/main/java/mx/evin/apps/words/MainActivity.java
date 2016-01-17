@@ -235,7 +235,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void start_custom_google_search(View view) {
-        SearchTermGoogleFragment.mItems.clear();
-        new CustomSearchAsyncTask().execute(SearchTermGoogleFragment.searchTerm, GOOGLE_API_KEY, GOOGLE_CUSTOM_SEARCH_KEY);
+        String searchTerm = SearchTermGoogleFragment.searchTerm;
+        if (searchTerm.length() > 0){
+            SearchTermGoogleFragment.mItems.clear();
+            new CustomSearchAsyncTask().execute(SearchTermGoogleFragment.searchTerm, GOOGLE_API_KEY, GOOGLE_CUSTOM_SEARCH_KEY);
+        }
     }
 }

@@ -50,6 +50,7 @@ public class SearchTermGoogleFragment extends DialogFragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        //TODO Set error message on empty string
         super.onViewCreated(view, savedInstanceState);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.f_search_google_items_rv);

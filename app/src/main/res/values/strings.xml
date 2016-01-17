@@ -28,6 +28,6 @@
 
     <string name="f_search_term_speak_now">Speak now&#8230;</string>
     <string name="f_search_term_speak_press">Press the button&#8230;</string>
-    <string name="f_search_term_google_btn">Search&#8230;</string>
+    <string name="f_search_term_google_btn">Search</string>
     <string name="recycler_item_add_btn">Add</string>
 </resources>
