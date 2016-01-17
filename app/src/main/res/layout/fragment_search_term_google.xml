@@ -16,8 +16,8 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:hint="@string/a_main_search_term"
-            android:id="@+id/f_add_term_input_et"
+            android:hint="@string/f_search_term_google_hint"
+            android:id="@+id/f_search_term_google_input_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -27,11 +27,12 @@
 
     <Button
         android:text="@string/f_search_term_google_btn"
+        android:onClick="start_custom_google_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/f_add_term_terms_rv"
+        android:id="@+id/f_search_google_items_rv"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >

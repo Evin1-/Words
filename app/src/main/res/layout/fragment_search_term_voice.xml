@@ -2,6 +2,7 @@
 <!-- TODO Fix dimens -->
 <!-- TODO Set dimens depending on screen -->
 <!-- TODO Add cancel button -->
+<!-- TODO Replace add for search in ids -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/edit_name"
     android:padding="50dp"

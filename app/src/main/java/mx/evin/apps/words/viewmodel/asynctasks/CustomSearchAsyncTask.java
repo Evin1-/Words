@@ -6,6 +6,7 @@ import android.util.Log;
 import mx.evin.apps.words.model.entities.gsearch.Article;
 import mx.evin.apps.words.model.entities.gsearch.CustomSearch;
 import mx.evin.apps.words.model.entities.gsearch.Item;
+import mx.evin.apps.words.view.fragments.SearchTermGoogleFragment;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -17,7 +18,8 @@ import retrofit2.http.Query;
 /**
  * Created by evin on 1/16/16.
  */
-public class CustomSearchAsyncTask extends AsyncTask<String, CustomSearch, Void>{
+public class CustomSearchAsyncTask extends AsyncTask<String, Item, Void>{
+    //TODO Remove http listener
 
     private static final String TAG_ = "CustomSearchATTAG_";
 
@@ -27,8 +29,12 @@ public class CustomSearchAsyncTask extends AsyncTask<String, CustomSearch, Void>
     }
 
     @Override
-    protected void onProgressUpdate(CustomSearch... values) {
+    protected void onProgressUpdate(Item... values) {
         super.onProgressUpdate(values);
+        if (values.length > 0){
+            SearchTermGoogleFragment.mItems.add(values[0]);
+            SearchTermGoogleFragment.mAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -62,6 +68,7 @@ public class CustomSearchAsyncTask extends AsyncTask<String, CustomSearch, Void>
         try{
             CustomSearch customSearch = searchCall.execute().body();
             for (Item item : customSearch.getItems()){
+                publishProgress(item);
                 for (Article article : item.getPagemap().getArticle()){
                     Log.d(TAG_, article.getName());
                     Log.d(TAG_, article.getArticlebody());

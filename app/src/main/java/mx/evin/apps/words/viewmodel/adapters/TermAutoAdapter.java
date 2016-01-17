@@ -40,13 +40,12 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
         public ViewHolder(final View itemView) {
             super(itemView);
 
-            txtTerm = (TextView) itemView.findViewById(R.id.txtTerm);
-            txtPack = (TextView) itemView.findViewById(R.id.txtPack);
+            txtTerm = (TextView) itemView.findViewById(R.id.recycler_autocomplete_term_txt);
+            txtPack = (TextView) itemView.findViewById(R.id.recycler_autocomplete_pack_txt);
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    //TODO Check if editor.apply finishes on time
                     mSharedPreferences = v.getContext().getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = mSharedPreferences.edit();
                     editor.putString(Constants.LAST_TERM_KEY, idTerm);

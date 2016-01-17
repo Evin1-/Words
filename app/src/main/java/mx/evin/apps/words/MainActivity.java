@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.parse.ParseUser;
 
@@ -30,6 +31,7 @@ import mx.evin.apps.words.view.fragments.StartingFragment;
 import mx.evin.apps.words.viewmodel.LoginVM;
 import mx.evin.apps.words.viewmodel.MainVM;
 import mx.evin.apps.words.viewmodel.ParseVM;
+import mx.evin.apps.words.viewmodel.asynctasks.CustomSearchAsyncTask;
 import mx.evin.apps.words.viewmodel.utils.Constants;
 
 public class MainActivity extends AppCompatActivity {
@@ -205,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
                 addTermFragment = new SearchTermVoiceFragment();
                 break;
             case GOOGLED:
-                addTermFragment = SearchTermGoogleFragment.newInstance(GOOGLE_API_KEY, GOOGLE_CUSTOM_SEARCH_KEY);
+                addTermFragment = new SearchTermGoogleFragment();
                 break;
             default:
                 addTermFragment = new SearchTermFragment();
@@ -231,5 +233,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void search_term_google(View view) {
         addTermGeneric(Constants.TYPE_ADD.GOOGLED);
+    }
+
+    public void start_custom_google_search(View view) {
+        new CustomSearchAsyncTask().execute(SearchTermGoogleFragment.searchTerm, GOOGLE_API_KEY, GOOGLE_CUSTOM_SEARCH_KEY);
     }
 }

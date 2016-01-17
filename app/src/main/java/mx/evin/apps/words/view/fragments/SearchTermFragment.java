@@ -48,7 +48,7 @@ public class SearchTermFragment extends DialogFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mEditText = (EditText) view.findViewById(R.id.f_add_term_input_et);
+        mEditText = (EditText) view.findViewById(R.id.f_search_term_input_et);
         mEditText.requestFocus();
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
