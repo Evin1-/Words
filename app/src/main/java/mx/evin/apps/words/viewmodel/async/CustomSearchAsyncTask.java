@@ -1,4 +1,4 @@
-package mx.evin.apps.words.viewmodel.asynctasks;
+package mx.evin.apps.words.viewmodel.async;
 
 import android.os.AsyncTask;
 import android.util.Log;
