@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void userReady() {
-        StartupVM.firstTimeSetup();
+//        StartupVM.firstTimeSetup();
     }
 
     public void search_term(View view) {
