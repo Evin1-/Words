@@ -3,12 +3,14 @@
 <!-- fragment_edit_name.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/f_search_google_linear"
     android:padding="50dp"
     android:minHeight="600dp"
     android:layout_height="600dp"
     android:layout_width="wrap_content"
     android:layout_gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:focusableInTouchMode="true">
 
 
     <android.support.design.widget.TextInputLayout
@@ -27,6 +29,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
+        android:id="@+id/f_search_term_google_search_btn"
         android:text="@string/f_search_term_google_btn"
         android:onClick="start_custom_google_search"
         android:layout_width="match_parent"
