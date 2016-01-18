@@ -67,8 +67,10 @@ public class CustomSearchAsyncTask extends AsyncTask<String, Item, Void>{
 
         try{
             CustomSearch customSearch = searchCall.execute().body();
-            for (Item item : customSearch.getItems()){
-                publishProgress(item);
+            if (customSearch != null){
+                for (Item item : customSearch.getItems()){
+                    publishProgress(item);
+                }
             }
 //            customSearch.getItems()
 //            Log.e(TAG_, String.valueOf(customSearch));
@@ -80,7 +82,9 @@ public class CustomSearchAsyncTask extends AsyncTask<String, Item, Void>{
     }
 
     public interface GoogleSearch {
-        @GET("/customsearch/v1")
-        Call<CustomSearch> getCustomSearch(@Query("q") String query, @Query("cx") String custom_search_key, @Query("key") String google_api_key);
+        @GET("/customsearch/v1?hl=en")
+        Call<CustomSearch> getCustomSearch(@Query("q") String query,
+                                           @Query("cx") String custom_search_key,
+                                           @Query("key") String google_api_key);
     }
 }
