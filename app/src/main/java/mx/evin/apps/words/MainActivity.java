@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     //TODO Work with drawer layout options
     //TODO Create login screen
     //TODO Add push notifications magic
+    //TODO Add analytics
+    //TODO Add crashalytics
 
     private static final String TAG_ = "MainActivityTAG_";
     private static final String LAST_TERM_KEY_ = Constants.LAST_TERM_KEY;
