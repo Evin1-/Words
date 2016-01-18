@@ -107,7 +107,7 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults filterResults = new FilterResults();
 
-                FilterHelper filterHelper = new FilterHelper(constraint.toString(), mOriginalTerms);
+                FilterHelper filterHelper = new FilterHelper(constraint.toString().trim().toLowerCase(), mOriginalTerms);
                 filterResults.values = filterHelper.magicFilter();
 
                 return filterResults;
