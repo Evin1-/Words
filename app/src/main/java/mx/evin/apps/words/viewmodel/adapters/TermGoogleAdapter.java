@@ -78,7 +78,7 @@ public class TermGoogleAdapter extends RecyclerView.Adapter<TermGoogleAdapter.Vi
         TextView textPack = viewHolder.txtDescription;
         TextView textURL = viewHolder.txtURL;
 
-        if (article.size() > 0){
+        if (article != null && article.size() > 0){
             String name = article.get(0).getName();
             if (name == null || name.length() < 1)
                 textWords.setText(item.getTitle());
