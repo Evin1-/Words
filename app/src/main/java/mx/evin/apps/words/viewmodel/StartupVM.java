@@ -68,7 +68,7 @@ public class StartupVM {
         android_content = Lookups.getPack("android.support.v7.widget");
 
         terms.put("Object", (Term) RowCreator.getCreateTerm("Object", android, java_lang, "",
-                "https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html"));
+                "http://developer.android.com/reference/java/lang/Object.html"));
 
         terms.put("View", (Term) RowCreator.getCreateTerm("View", android, android_view, "",
                 "http://developer.android.com/reference/android/view/View.html"));
