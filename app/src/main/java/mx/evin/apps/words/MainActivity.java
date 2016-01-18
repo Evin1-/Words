@@ -30,6 +30,7 @@ import mx.evin.apps.words.view.fragments.StartingFragment;
 import mx.evin.apps.words.viewmodel.LoginVM;
 import mx.evin.apps.words.viewmodel.MainVM;
 import mx.evin.apps.words.viewmodel.ParseVM;
+import mx.evin.apps.words.viewmodel.StartupVM;
 import mx.evin.apps.words.viewmodel.async.CustomSearchAsyncTask;
 import mx.evin.apps.words.viewmodel.utils.Constants;
 
@@ -232,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void userReady() {
-//        StartupVM.firstTimeSetup();
+        StartupVM.firstTimeSetup();
     }
 
     public void search_term(View view) {

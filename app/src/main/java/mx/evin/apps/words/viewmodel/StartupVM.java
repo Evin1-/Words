@@ -14,6 +14,7 @@ import mx.evin.apps.words.model.scripts.RowCreator;
  * Created by evin on 1/8/16.
  */
 public class StartupVM {
+    //TODO Remove this from project
     private static ParseUser mUser;
     private static HashMap<String, Term> terms;
 
@@ -67,31 +68,31 @@ public class StartupVM {
         android_widget = Lookups.getPack("android.widget");
         android_content = Lookups.getPack("android.support.v7.widget");
 
-        terms.put("Object", (Term) RowCreator.getCreateTerm("Object", android, java_lang, "",
+        terms.put("Object", (Term) RowCreator.getCreateTerm("Object", android, java_lang, "1", "2",
                 "http://developer.android.com/reference/java/lang/Object.html"));
 
-        terms.put("View", (Term) RowCreator.getCreateTerm("View", android, android_view, "",
+        terms.put("View", (Term) RowCreator.getCreateTerm("View", android, android_view, "1", "2",
                 "http://developer.android.com/reference/android/view/View.html"));
 
-        terms.put("ViewGroup", (Term) RowCreator.getCreateTerm("ViewGroup", android, android_view, "",
+        terms.put("ViewGroup", (Term) RowCreator.getCreateTerm("ViewGroup", android, android_view, "1", "2",
                 "http://developer.android.com/reference/android/view/ViewGroup.html"));
 
-        terms.put("RecyclerView", (Term) RowCreator.getCreateTerm("RecyclerView", android, v7_widget, "",
+        terms.put("RecyclerView", (Term) RowCreator.getCreateTerm("RecyclerView", android, v7_widget, "1", "2",
                 "http://developer.android.com/reference/android/support/v7/widget/RecyclerView.html"));
 
-        terms.put("FrameLayout", (Term) RowCreator.getCreateTerm("FrameLayout", android, android_widget, "",
+        terms.put("FrameLayout", (Term) RowCreator.getCreateTerm("FrameLayout", android, android_widget, "1", "2",
                 "http://developer.android.com/reference/android/widget/FrameLayout.html"));
 
-        terms.put("LinearLayout", (Term) RowCreator.getCreateTerm("LinearLayout", android, android_widget, "",
+        terms.put("LinearLayout", (Term) RowCreator.getCreateTerm("LinearLayout", android, android_widget, "1", "2",
                 "http://developer.android.com/reference/android/widget/LinearLayout.html"));
 
-        terms.put("RelativeLayout", (Term) RowCreator.getCreateTerm("RelativeLayout", android, android_widget, "",
+        terms.put("RelativeLayout", (Term) RowCreator.getCreateTerm("RelativeLayout", android, android_widget, "1", "2",
                 "http://developer.android.com/reference/android/widget/RelativeLayout.html"));
 
-        terms.put("Context", (Term) RowCreator.getCreateTerm("Context", android, android_content, "",
+        terms.put("Context", (Term) RowCreator.getCreateTerm("Context", android, android_content, "1", "2",
                 "http://developer.android.com/reference/android/content/Context.html"));
 
-        terms.put("ContextWrapper", (Term) RowCreator.getCreateTerm("ContextWrapper", android, android_content, "",
+        terms.put("ContextWrapper", (Term) RowCreator.getCreateTerm("ContextWrapper", android, android_content, "1", "2",
                 "http://developer.android.com/reference/android/content/ContextWrapper.html"));
 
     }

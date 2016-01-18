@@ -71,16 +71,17 @@ public class RowCreator {
         return getCreateGeneric("Pack", settings, pack, async);
     }
 
-    public static ParseObject getCreateTerm(String words, Technology technology, Pack pack, String docs, String url) {
-        return getCreateTerm(words, technology, pack, docs, url, false);
+    public static ParseObject getCreateTerm(String words, Technology technology, Pack pack, String docs, String hierarchy, String url) {
+        return getCreateTerm(words, technology, pack, docs, hierarchy, url, false);
     }
 
-    public static ParseObject getCreateTerm(String words, Technology technology, Pack pack, String docs, String url, boolean async) {
+    public static ParseObject getCreateTerm(String words, Technology technology, Pack pack, String docs, String hierarchy, String url, boolean async) {
         Term term = new Term();
         term.setWords(words);
         term.setTechnology(technology);
         term.setPack(pack);
         term.setDocs(docs);
+        term.setHierarchy(hierarchy);
         term.setUrl(url);
 
         HashMap<String, Object> settings = new HashMap<>();

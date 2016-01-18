@@ -45,6 +45,14 @@ public class Term extends ParseObject {
         put("docs", docs);
     }
 
+    public String getHierarchy(){
+        return getString("hierarchy");
+    }
+
+    public void setHierarchy(String hierarchy){
+        put("hierarchy", hierarchy);
+    }
+
     public String getUrl(){
         return getString("url");
     }
