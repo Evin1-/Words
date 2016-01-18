@@ -14,6 +14,7 @@ import mx.evin.apps.words.viewmodel.utils.Constants;
 public class WebActivity extends AppCompatActivity {
     //TODO Put drawer logic in a single file (VM)
     //TODO Put info in single layout and not app_bar_web app_bar_main
+    //TODO remove mItem and work only with urls
 
     private static final String TAG_ = "MainActivityTAG_";
     private WebView myWebView;

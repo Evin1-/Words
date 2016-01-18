@@ -2,15 +2,19 @@ package mx.evin.apps.words.viewmodel;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.text.Html;
 import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.text.style.URLSpan;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
@@ -35,7 +39,7 @@ import mx.evin.apps.words.viewmodel.utils.MyTagHandler;
 public class MainVM {
     //TODO Offline mode first
     //TODO Check that 2 offline calls are not at the same time
-    private static final String TAG_ = "ParseVMTAG_";
+    private static final String TAG_ = "MainVMTAG_";
     public static ArrayList<Term> mTerms;
     public static Term currentTerm;
 
@@ -56,27 +60,27 @@ public class MainVM {
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
-            if (e == null) {
-                for (ParseObject term : objects) {
+                if (e == null) {
+                    for (ParseObject term : objects) {
+                        SearchTermFragment.mAdapter.notifyDataSetChanged();
+                        SearchTermVoiceFragment.mAdapter.notifyDataSetChanged();
+                        term.pinInBackground();
+                        mTerms.add((Term) term);
+                        term.getParseObject("pack").fetchIfNeededInBackground(new GetCallback<ParseObject>() {
+                            @Override
+                            public void done(ParseObject object, ParseException e) {
+                                object.pinInBackground();
+                                SearchTermFragment.mAdapter.notifyDataSetChanged();
+                                SearchTermVoiceFragment.mAdapter.notifyDataSetChanged();
+                            }
+                        });
+                    }
                     SearchTermFragment.mAdapter.notifyDataSetChanged();
                     SearchTermVoiceFragment.mAdapter.notifyDataSetChanged();
-                    term.pinInBackground();
-                    mTerms.add((Term) term);
-                    term.getParseObject("pack").fetchIfNeededInBackground(new GetCallback<ParseObject>() {
-                        @Override
-                        public void done(ParseObject object, ParseException e) {
-                            object.pinInBackground();
-                            SearchTermFragment.mAdapter.notifyDataSetChanged();
-                            SearchTermVoiceFragment.mAdapter.notifyDataSetChanged();
-                        }
-                    });
-                }
-                SearchTermFragment.mAdapter.notifyDataSetChanged();
-                SearchTermVoiceFragment.mAdapter.notifyDataSetChanged();
 //                    Log.d(TAG_, Integer.toString(mTerms.size()));
-            } else {
-                Log.d(TAG_, "Error retrieving terms + " + e.toString());
-            }
+                } else {
+                    Log.d(TAG_, "Error retrieving terms + " + e.toString());
+                }
             }
         });
     }
@@ -97,52 +101,65 @@ public class MainVM {
         if (actionBar != null)
             actionBar.setSubtitle(MainActivity.mTechnology + " | " + currentTerm.getWords());
 
-        textViewDoc.setText(createHTMLText());
-//        textViewDoc.setMovementMethod(LinkMovementMethod.getInstance());
-//        textViewDoc.setMove
+        textViewDoc.setText(setTextViewHTML(currentTerm.getDocs()));
+        textViewDoc.setLinksClickable(true);
+        textViewDoc.setMovementMethod(LinkMovementMethod.getInstance());
 
-//        textViewDoc.setText(Html.fromHtml(currentTerm.getDocs()));
         try {
             textViewPack.setText(currentTerm.getPack().getName());
         } catch (Exception e) {
-            textViewPack.setText(activity.getString(R.string.f_placeholder));
+            textViewPack.setText(activity.getString(R.string.f__package_placeholder));
         }
         textViewTitle.setText(currentTerm.getWords());
 
     }
 
-    private static Spanned createHTMLText() {
-        Spannable spannable = (Spannable) Html.fromHtml(currentTerm.getDocs(), null, new MyTagHandler());
-        for (URLSpan u: spannable.getSpans(0, spannable.length(), URLSpan.class)) {
-            spannable.setSpan(new UnderlineSpan() {
-                public void updateDrawState(TextPaint tp) {
-                    tp.setUnderlineText(false);
-                }
-            }, spannable.getSpanStart(u), spannable.getSpanEnd(u), 0);
+    protected static Spanned setTextViewHTML(String html) {
+        CharSequence sequence = Html.fromHtml(html, null, new MyTagHandler());
+        SpannableStringBuilder strBuilder = new SpannableStringBuilder(sequence);
+        URLSpan[] urls = strBuilder.getSpans(0, sequence.length(), URLSpan.class);
+        for (URLSpan span : urls) {
+            makeLinkClickable(strBuilder, span);
         }
-        return spannable;
+        return strBuilder;
+    }
+
+    protected static void makeLinkClickable(final SpannableStringBuilder strBuilder, final URLSpan span) {
+        final int start = strBuilder.getSpanStart(span);
+        final int end = strBuilder.getSpanEnd(span);
+        int flags = strBuilder.getSpanFlags(span);
+        ClickableSpan clickable = new ClickableSpan() {
+            public void onClick(View view) {
+                char[] aux = new char[end - start];
+                strBuilder.getChars(start, end, aux, 0);
+                Log.d(TAG_, new String(aux));
+                Log.d(TAG_, span.getURL());
+            }
+        };
+        strBuilder.setSpan(clickable, start, end, flags);
+        strBuilder.removeSpan(span);
     }
 
     public static void refreshCurrentTerm(final String last_term, final Context context) {
         ParseObject query = ParseObject.createWithoutData("Term", last_term);
         query.fetchFromLocalDatastoreInBackground(new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
-            if (e == null) {
-                currentTerm = (Term) object;
-                refreshMainFragment((Activity) context);
-            } else {
-                ParseQuery<ParseObject> query = ParseQuery.getQuery("Term");
-                query.getInBackground(last_term, new GetCallback<ParseObject>() {
-                    public void done(ParseObject object, ParseException e) {
-                    if (e == null) {
-                        object.pinInBackground();
-                        currentTerm = (Term) object;
-                        refreshMainFragment((Activity) context);
-                    }
-                    }
-                });
+                if (e == null) {
+                    currentTerm = (Term) object;
+                    refreshMainFragment((Activity) context);
+                } else {
+                    ParseQuery<ParseObject> query = ParseQuery.getQuery("Term");
+                    query.getInBackground(last_term, new GetCallback<ParseObject>() {
+                        public void done(ParseObject object, ParseException e) {
+                            if (e == null) {
+                                object.pinInBackground();
+                                currentTerm = (Term) object;
+                                refreshMainFragment((Activity) context);
+                            }
+                        }
+                    });
 
-            }
+                }
             }
         });
     }
