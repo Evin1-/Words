@@ -56,7 +56,7 @@ public class MainVM {
         SearchTermFragment.mTerms = mTerms;
         SearchTermVoiceFragment.mTerms = mTerms;
 
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Term");
+        ParseQuery<ParseObject> query = new ParseQuery<>("Term");
 
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -97,6 +97,7 @@ public class MainVM {
         TextView textViewPack = (TextView) activity.findViewById(R.id.f_main_pack_txt);
         TextView textViewTitle = (TextView) activity.findViewById(R.id.f_main_title_txt);
         TextView textViewHierarchy = (TextView) activity.findViewById(R.id.f_main_hierarchy_txt);
+        TextView textURL = (TextView) activity.findViewById(R.id.f_main_url_txt);
 
         MainActivity mainActivity = (MainActivity) activity;
         ActionBar actionBar = mainActivity.getSupportActionBar();
@@ -106,7 +107,6 @@ public class MainVM {
         textViewDoc.setText(setTextViewHTML(currentTerm.getDocs(), Constants.TYPE_HTML.BODY));
         textViewDoc.setLinksClickable(true);
         textViewDoc.setMovementMethod(LinkMovementMethod.getInstance());
-//        textViewDoc.setText(Html.fromHtml(currentTerm.getDocs()));
 
         textViewHierarchy.setText(setTextViewHTML(currentTerm.getHierarchy(), Constants.TYPE_HTML.HIERARCHY));
         textViewHierarchy.setLinksClickable(true);
@@ -117,7 +117,9 @@ public class MainVM {
         } catch (Exception e) {
             textViewPack.setText(activity.getString(R.string.f__package_placeholder));
         }
+
         textViewTitle.setText(currentTerm.getWords());
+        textURL.setText(currentTerm.getUrl());
 
     }
 
@@ -137,10 +139,7 @@ public class MainVM {
         }
 
         if (type_html == Constants.TYPE_HTML.HIERARCHY){
-            html = html.replace("</tr>\n" +
-                    "    \n" +
-                    "\n" +
-                    "    <tr>", "<br>");
+            html = html.replace("</tr>\n    \n\n    <tr>", "<br>");
         }
 
         return Html.fromHtml(html, null, new MyTagHandler());

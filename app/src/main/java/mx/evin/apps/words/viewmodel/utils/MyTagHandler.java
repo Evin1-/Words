@@ -5,7 +5,10 @@ import org.xml.sax.XMLReader;
 import android.text.Editable;
 import android.text.Html;
 
-
+/**
+ * StackOverflow
+ * http://stackoverflow.com/a/9649408/2503185
+ */
 public class MyTagHandler implements Html.TagHandler {
     boolean first = true;
 
