@@ -2,6 +2,7 @@ package mx.evin.apps.words.viewmodel;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.Html;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -83,7 +84,7 @@ public class MainVM {
         TextView textViewTitle = (TextView) activity.findViewById(R.id.f_main_title_txt);
         TextView textViewTechnology = (TextView) activity.findViewById(R.id.f_main_technology_txt);
 
-        textViewDoc.setText(currentTerm.getDocs());
+        textViewDoc.setText(Html.fromHtml(currentTerm.getDocs()));
         try {
             textViewPack.setText(currentTerm.getPack().getName());
         } catch (Exception e) {
