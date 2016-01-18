@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     //TODO Change layout on landscape
     //TODO Select technology at first
     //TODO Make it offline
+    //TODO Work with drawer layout options
+
     private static final String TAG_ = "MainActivityTAG_";
     private static final String LAST_TERM_KEY_ = Constants.LAST_TERM_KEY;
     private static String GOOGLE_API_KEY;
@@ -235,6 +237,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void start_custom_google_search(View view) {
+        //TODO Remove focus from EditText
         String searchTerm = SearchTermGoogleFragment.searchTerm;
         if (searchTerm.length() > 0){
             SearchTermGoogleFragment.mItems.clear();

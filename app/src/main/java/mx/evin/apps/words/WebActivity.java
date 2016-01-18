@@ -51,7 +51,7 @@ public class WebActivity extends AppCompatActivity {
 
         if (mItem != null){
             myWebView.loadUrl(mItem.getLink());
-            updateTitleBar(mItem.getTitle(), mItem.getFormattedUrl());
+            updateTitleBar(mItem.getTitle(), mItem.getLink());
         }else {
             myWebView.loadUrl(Constants.DEFAULT_WEBSITE_URL);
             updateTitleBar(getString(R.string.a_web_default_website_title), Constants.DEFAULT_WEBSITE_URL);
