@@ -4,6 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.ActionBar;
 import android.text.Html;
+import android.text.Spannable;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.URLSpan;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -91,7 +97,10 @@ public class MainVM {
         if (actionBar != null)
             actionBar.setSubtitle(MainActivity.mTechnology + " | " + currentTerm.getWords());
 
-        textViewDoc.setText(Html.fromHtml(currentTerm.getDocs(), null, new MyTagHandler()));
+        textViewDoc.setText(createHTMLText());
+//        textViewDoc.setMovementMethod(LinkMovementMethod.getInstance());
+//        textViewDoc.setMove
+
 //        textViewDoc.setText(Html.fromHtml(currentTerm.getDocs()));
         try {
             textViewPack.setText(currentTerm.getPack().getName());
@@ -100,6 +109,18 @@ public class MainVM {
         }
         textViewTitle.setText(currentTerm.getWords());
 
+    }
+
+    private static Spanned createHTMLText() {
+        Spannable spannable = (Spannable) Html.fromHtml(currentTerm.getDocs(), null, new MyTagHandler());
+        for (URLSpan u: spannable.getSpans(0, spannable.length(), URLSpan.class)) {
+            spannable.setSpan(new UnderlineSpan() {
+                public void updateDrawState(TextPaint tp) {
+                    tp.setUnderlineText(false);
+                }
+            }, spannable.getSpanStart(u), spannable.getSpanEnd(u), 0);
+        }
+        return spannable;
     }
 
     public static void refreshCurrentTerm(final String last_term, final Context context) {
