@@ -25,12 +25,13 @@
                 android:id="@+id/recycler_autocomplete_pack_txt"
                 android:textAllCaps="true"
                 android:textStyle="bold"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:textSize="@dimen/recycler_item_pack_font_size"
-                android:textColor="@android:color/black"
                 android:layout_gravity="start"
                 android:gravity="start"
                 android:padding="@dimen/recycler_item_text_padding"
-                android:layout_weight="1"
+                android:layout_weight="5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
 
