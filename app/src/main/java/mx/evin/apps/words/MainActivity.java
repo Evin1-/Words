@@ -30,7 +30,6 @@ import mx.evin.apps.words.view.fragments.StartingFragment;
 import mx.evin.apps.words.viewmodel.LoginVM;
 import mx.evin.apps.words.viewmodel.MainVM;
 import mx.evin.apps.words.viewmodel.ParseVM;
-import mx.evin.apps.words.viewmodel.StartupVM;
 import mx.evin.apps.words.viewmodel.async.CustomSearchAsyncTask;
 import mx.evin.apps.words.viewmodel.utils.Constants;
 
@@ -54,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
     private static String GOOGLE_API_KEY;
     private static String GOOGLE_CUSTOM_SEARCH_KEY;
 
-    private ParseUser mUser;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -224,9 +222,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void userReady() {
-        mUser = ParseUser.getCurrentUser();
-//        Log.d(TAG_, mUser.getUsername());
-
 //        StartupVM.firstTimeSetup();
     }
 
