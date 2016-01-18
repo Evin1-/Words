@@ -6,6 +6,7 @@
 
     <FrameLayout
         android:id="@+id/a_main_frame"
+        android:layout_marginBottom="@dimen/a_main_footer_size"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

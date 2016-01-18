@@ -5,6 +5,7 @@
 
     <dimen name="a_main_cardview_elevation">10dp</dimen>
     <dimen name="a_main_icon_size">48dp</dimen>
+    <dimen name="a_main_footer_size">40dp</dimen>
     <dimen name="a_main_recyclerview_margin_bottom">50dp</dimen>
     <dimen name="a_main_icon_padding">13dp</dimen>
 

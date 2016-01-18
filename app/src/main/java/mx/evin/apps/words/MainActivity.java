@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String LAST_TERM_KEY_ = Constants.LAST_TERM_KEY;
     private static String GOOGLE_API_KEY;
     private static String GOOGLE_CUSTOM_SEARCH_KEY;
+    public static String mTechnology;
 
-    private String mTechnology;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
