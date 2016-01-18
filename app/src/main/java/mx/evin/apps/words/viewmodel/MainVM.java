@@ -87,7 +87,7 @@ public class MainVM {
         try {
             textViewPack.setText(currentTerm.getPack().getName());
         } catch (Exception e) {
-            textViewPack.setText("HelloWorld");
+            textViewPack.setText(activity.getString(R.string.f_placeholder));
         }
         textViewTitle.setText(currentTerm.getWords());
 //        textViewTechnology.setText(currentTerm.getTechnology().getName());
@@ -100,13 +100,11 @@ public class MainVM {
         query.fetchFromLocalDatastoreInBackground(new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
-                    // object will be your game score
                     currentTerm = (Term) object;
                     refreshMainFragment((Activity) context);
-                    Log.d(TAG_, "GOOD TERM " + object.toString());
+//                    Log.d(TAG_, "GOOD TERM " + object.toString());
                 } else {
-                    // something went wrong
-                    Log.d(TAG_, "BAD TERM " + e.toString());
+//                    Log.d(TAG_, "BAD TERM " + e.toString());
                     ParseQuery<ParseObject> query = ParseQuery.getQuery("Term");
                     query.getInBackground(last_term, new GetCallback<ParseObject>() {
                         public void done(ParseObject object, ParseException e) {
@@ -114,11 +112,9 @@ public class MainVM {
                                 object.pinInBackground();
                                 currentTerm = (Term) object;
                                 refreshMainFragment((Activity) context);
-                                Log.d(TAG_, "GOOD TERM " + object.toString());
-                                // object will be your game score
+//                                Log.d(TAG_, "GOOD TERM " + object.toString());
                             } else {
-                                Log.d(TAG_, "BAD TERM " + e.toString());
-                                // something went wrong
+//                                Log.d(TAG_, "BAD TERM " + e.toString());
                             }
                         }
                     });

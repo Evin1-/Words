@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     //TODO Select technology at first
     //TODO Make it offline
     //TODO Work with drawer layout options
+    //TODO Create login screen
+    //TODO Add push notifications magic
 
     private static final String TAG_ = "MainActivityTAG_";
     private static final String LAST_TERM_KEY_ = Constants.LAST_TERM_KEY;
@@ -219,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void userReady() {
         mUser = ParseUser.getCurrentUser();
-        Log.d(TAG_, mUser.getUsername());
+//        Log.d(TAG_, mUser.getUsername());
 
 //        StartupVM.firstTimeSetup();
     }
