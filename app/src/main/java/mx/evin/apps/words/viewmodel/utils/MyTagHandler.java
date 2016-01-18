@@ -8,36 +8,23 @@ import android.text.Html;
 
 public class MyTagHandler implements Html.TagHandler {
     boolean first = true;
-    String parent = null;
-    int index = 1;
 
     @Override
     public void handleTag(boolean opening, String tag, Editable output, XMLReader xmlReader) {
 
-        if (tag.equals("ul")) {
-            parent = "ul";
-        } else {
-            if (tag.equals("ol")) {
-                parent = "ol";
-            }
-        }
-
+        // TODO Auto-generated method stub
         if (tag.equals("li")) {
-            if (parent.equals("ul")) {
-                if (first) {
-                    output.append("\n- ");
-                    first = false;
-                } else {
-                    first = true;
-                }
+            char lastChar = 0;
+            if (output.length() > 0)
+                lastChar = output.charAt(output.length() - 1);
+            if (first) {
+                if (lastChar == '\n')
+                    output.append("- ");
+                else
+                    output.append("\n-");
+                first = false;
             } else {
-                if (first) {
-                    output.append("\n" + index + ". ");
-                    first = false;
-                    index++;
-                } else {
-                    first = true;
-                }
+                first = true;
             }
         }
     }
