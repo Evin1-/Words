@@ -31,6 +31,7 @@ import mx.evin.apps.words.R;
 import mx.evin.apps.words.model.entities.parse.Term;
 import mx.evin.apps.words.view.fragments.SearchTermFragment;
 import mx.evin.apps.words.view.fragments.SearchTermVoiceFragment;
+import mx.evin.apps.words.viewmodel.utils.Constants;
 import mx.evin.apps.words.viewmodel.utils.MyTagHandler;
 
 /**
@@ -102,11 +103,12 @@ public class MainVM {
         if (actionBar != null)
             actionBar.setSubtitle(MainActivity.mTechnology + " | " + currentTerm.getWords());
 
-        textViewDoc.setText(setTextViewHTML(currentTerm.getDocs()));
+        textViewDoc.setText(setTextViewHTML(currentTerm.getDocs(), Constants.TYPE_HTML.BODY));
         textViewDoc.setLinksClickable(true);
         textViewDoc.setMovementMethod(LinkMovementMethod.getInstance());
+//        textViewDoc.setText(Html.fromHtml(currentTerm.getDocs()));
 
-        textViewHierarchy.setText(setTextViewHTML(currentTerm.getHierarchy()));
+        textViewHierarchy.setText(setTextViewHTML(currentTerm.getHierarchy(), Constants.TYPE_HTML.HIERARCHY));
         textViewHierarchy.setLinksClickable(true);
         textViewHierarchy.setMovementMethod(LinkMovementMethod.getInstance());
 
@@ -119,14 +121,29 @@ public class MainVM {
 
     }
 
-    protected static Spanned setTextViewHTML(String html) {
-        CharSequence sequence = Html.fromHtml(html, null, new MyTagHandler());
+    protected static Spanned setTextViewHTML(String html, Constants.TYPE_HTML type_html) {
+        CharSequence sequence = preFormatHTML(html, type_html);
         SpannableStringBuilder strBuilder = new SpannableStringBuilder(sequence);
         URLSpan[] urls = strBuilder.getSpans(0, sequence.length(), URLSpan.class);
         for (URLSpan span : urls) {
             makeLinkClickable(strBuilder, span);
         }
         return strBuilder;
+    }
+
+    private static CharSequence preFormatHTML(String html, Constants.TYPE_HTML type_html) {
+        if (html == null || html.length() < 1){
+            return "";
+        }
+
+        if (type_html == Constants.TYPE_HTML.HIERARCHY){
+            html = html.replace("</tr>\n" +
+                    "    \n" +
+                    "\n" +
+                    "    <tr>", "<br>");
+        }
+
+        return Html.fromHtml(html, null, new MyTagHandler());
     }
 
     protected static void makeLinkClickable(final SpannableStringBuilder strBuilder, final URLSpan span) {

@@ -19,4 +19,9 @@ public class Constants {
         SPOKEN,
         GOOGLED
     }
+
+    public enum TYPE_HTML {
+        BODY,
+        HIERARCHY
+    }
 }
