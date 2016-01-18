@@ -18,7 +18,6 @@ public class WebActivity extends AppCompatActivity {
 
     private static final String TAG_ = "MainActivityTAG_";
     private WebView myWebView;
-    private Item mItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +25,12 @@ public class WebActivity extends AppCompatActivity {
         setContentView(R.layout.activity_web);
 
         myWebView = (WebView) findViewById(R.id.a_web_wv);
-        mItem = getIntent().getParcelableExtra(Constants.ITEM_WEB_KEY);
+//        mItem = getIntent().getParcelableExtra(Constants.ITEM_WEB_KEY);
+        String receivedTitle = getIntent().getStringExtra(Constants.TITLE_WEB_KEY);
+        String receivedURL = getIntent().getStringExtra(Constants.URL_WEB_KEY);
 
         configureActionBar();
-        configureWebView();
+        configureWebView(receivedTitle, receivedURL);
     }
 
     @Override
@@ -38,7 +39,7 @@ public class WebActivity extends AppCompatActivity {
         return true;
     }
 
-    private void configureWebView() {
+    private void configureWebView(String title, String url) {
         WebSettings webSettings = myWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         myWebView.setWebViewClient(new WebViewClient() {
@@ -55,9 +56,9 @@ public class WebActivity extends AppCompatActivity {
             }
         });
 
-        if (mItem != null) {
-            myWebView.loadUrl(mItem.getLink());
-            updateTitleBar(mItem.getTitle(), mItem.getLink());
+        if (title != null && url != null) {
+            myWebView.loadUrl(url);
+            updateTitleBar(title, url);
         }else {
             myWebView.loadUrl(Constants.DEFAULT_WEBSITE_URL);
             updateTitleBar(getString(R.string.a_web_default_website_title), Constants.DEFAULT_WEBSITE_URL);

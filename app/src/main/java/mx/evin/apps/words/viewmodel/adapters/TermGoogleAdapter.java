@@ -45,7 +45,8 @@ public class TermGoogleAdapter extends RecyclerView.Adapter<TermGoogleAdapter.Vi
                     Intent intent = new Intent(v.getContext(), WebActivity.class);
 
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    intent.putExtra(Constants.ITEM_WEB_KEY, item);
+                    intent.putExtra(Constants.TITLE_WEB_KEY, item.getTitle());
+                    intent.putExtra(Constants.URL_WEB_KEY, item.getLink());
 
                     v.getContext().startActivity(intent);
 
