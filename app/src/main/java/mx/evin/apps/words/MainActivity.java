@@ -30,6 +30,7 @@ import mx.evin.apps.words.view.fragments.StartingFragment;
 import mx.evin.apps.words.viewmodel.LoginVM;
 import mx.evin.apps.words.viewmodel.MainVM;
 import mx.evin.apps.words.viewmodel.ParseVM;
+import mx.evin.apps.words.viewmodel.StartupVM;
 import mx.evin.apps.words.viewmodel.async.CustomSearchAsyncTask;
 import mx.evin.apps.words.viewmodel.utils.Constants;
 
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     //TODO Add push notifications magic
     //TODO Add analytics
     //TODO Add crashalytics
+    //TODO Search by package
 
     private static final String TAG_ = "MainActivityTAG_";
     private static final String LAST_TERM_KEY_ = Constants.LAST_TERM_KEY;
@@ -186,9 +188,9 @@ public class MainActivity extends AppCompatActivity {
     private void easyLife() {
 //        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.a_main_drawer);
 //        drawerLayout.openDrawer(GravityCompat.START);
-//        findViewById(R.id.a_main_search_type_btn).callOnClick();
+        findViewById(R.id.a_main_search_type_btn).callOnClick();
 //        findViewById(R.id.a_main_search_talk_icon).callOnClick();
-        findViewById(R.id.a_main_search_google_icon).callOnClick();
+//        findViewById(R.id.a_main_search_google_icon).callOnClick();
     }
 
     private void retrieveGoogleKeys(){

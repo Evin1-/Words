@@ -52,45 +52,48 @@ public class StartupVM {
         RowCreator.getCreatePack("java.lang");
         RowCreator.getCreatePack("android.view");
         RowCreator.getCreatePack("android.support.v7.widget");
+        RowCreator.getCreatePack("android.widget");
+        RowCreator.getCreatePack("android.content");
     }
 
     public static void createTerms(){
         Technology android;
-        Pack java_lang, android_view, v7_widget;
+        Pack java_lang, android_view, v7_widget, android_widget, android_content;
 
         android = Lookups.getTechnology("Android");
         java_lang = Lookups.getPack("java.lang");
         android_view = Lookups.getPack("android.view");
         v7_widget = Lookups.getPack("android.support.v7.widget");
+        android_widget = Lookups.getPack("android.widget");
+        android_content = Lookups.getPack("android.support.v7.widget");
 
-        terms.put("Object", (Term) RowCreator.getCreateTerm("Object", android, java_lang,
-                "Class Object is the root of the class hierarchy. Every class has Object as a superclass. " +
-                        "All objects, including arrays, implement the methods of this class.",
+        terms.put("Object", (Term) RowCreator.getCreateTerm("Object", android, java_lang, "",
                 "https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html"));
 
-        terms.put("View", (Term) RowCreator.getCreateTerm("View", android, android_view,
-                "This class represents the basic building block for user interface components. " +
-                        "A View occupies a rectangular area on the screen and is responsible for drawing and event handling. " +
-                        "View is the base class for widgets, which are used to create interactive UI components (buttons, text fields, etc.). " +
-                        "The ViewGroup subclass is the base class for layouts, which are invisible containers that hold other Views (or other ViewGroups) and define their layout properties.",
+        terms.put("View", (Term) RowCreator.getCreateTerm("View", android, android_view, "",
                 "http://developer.android.com/reference/android/view/View.html"));
 
-        terms.put("ViewGroup", (Term) RowCreator.getCreateTerm("ViewGroup", android, android_view,
-                "A ViewGroup is a special view that can contain other views (called children.) " +
-                        "The view group is the base class for layouts and views containers. " +
-                        "This class also defines the ViewGroup.LayoutParams class which serves as the base class for layouts parameters.",
+        terms.put("ViewGroup", (Term) RowCreator.getCreateTerm("ViewGroup", android, android_view, "",
                 "http://developer.android.com/reference/android/view/ViewGroup.html"));
 
-        terms.put("RecyclerView", (Term) RowCreator.getCreateTerm("RecyclerView", android, v7_widget,
-                "A flexible view for providing a limited window into a large data set. \n" +
-                        "-Adapter: A subclass of RecyclerView.Adapter responsible for providing views that represent items in a data set.\n" +
-                        "-Position: The position of a data item within an Adapter.\n" +
-                        "-Index: The index of an attached child view as used in a call to getChildAt(int). Contrast with Position.\n" +
-                        "-Binding: The process of preparing a child view to display data corresponding to a position within the adapter.\n" +
-                        "-Recycle (view): A view previously used to display data for a specific adapter position may be placed in a cache for later reuse to display the same type of data again later. This can drastically improve performance by skipping initial layout inflation or construction.\n" +
-                        "-Scrap (view): A child view that has entered into a temporarily detached state during layout. Scrap views may be reused without becoming fully detached from the parent RecyclerView, either unmodified if no rebinding is required or modified by the adapter if the view was considered dirty.\n" +
-                        "-Dirty (view): A child view that must be rebound by the adapter before being displayed.",
+        terms.put("RecyclerView", (Term) RowCreator.getCreateTerm("RecyclerView", android, v7_widget, "",
                 "http://developer.android.com/reference/android/support/v7/widget/RecyclerView.html"));
+
+        terms.put("FrameLayout", (Term) RowCreator.getCreateTerm("FrameLayout", android, android_widget, "",
+                "http://developer.android.com/reference/android/widget/FrameLayout.html"));
+
+        terms.put("LinearLayout", (Term) RowCreator.getCreateTerm("LinearLayout", android, android_widget, "",
+                "http://developer.android.com/reference/android/widget/LinearLayout.html"));
+
+        terms.put("RelativeLayout", (Term) RowCreator.getCreateTerm("RelativeLayout", android, android_widget, "",
+                "http://developer.android.com/reference/android/widget/RelativeLayout.html"));
+
+        terms.put("Context", (Term) RowCreator.getCreateTerm("Context", android, android_content, "",
+                "http://developer.android.com/reference/android/content/Context.html"));
+
+        terms.put("ContextWrapper", (Term) RowCreator.getCreateTerm("ContextWrapper", android, android_content, "",
+                "http://developer.android.com/reference/android/content/ContextWrapper.html"));
+
     }
 
     public static void createTermTerms(){
