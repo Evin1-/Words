@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import org.apache.commons.lang3.text.WordUtils;
+
 import java.util.ArrayList;
 
 /**
@@ -67,8 +69,10 @@ public class VoiceRecognizer {
             @Override
             public void onResults(Bundle results) {
                 speechResults = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                if (speechResults != null && speechResults.size() > 0)
-                    textView.setText(speechResults.get(0));
+                if (speechResults != null && speechResults.size() > 0){
+                    String result = speechResults.get(0);
+                    textView.setText(WordUtils.capitalize(result));
+                }
             }
 
             @Override
