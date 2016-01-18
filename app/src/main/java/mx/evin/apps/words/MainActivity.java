@@ -185,8 +185,8 @@ public class MainActivity extends AppCompatActivity {
 //        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.a_main_drawer);
 //        drawerLayout.openDrawer(GravityCompat.START);
 //        findViewById(R.id.a_main_search_type_btn).callOnClick();
-        findViewById(R.id.a_main_search_talk_icon).callOnClick();
-//        findViewById(R.id.ar_main_search_google_icon).callOnClick();
+//        findViewById(R.id.a_main_search_talk_icon).callOnClick();
+        findViewById(R.id.a_main_search_google_icon).callOnClick();
     }
 
     private void retrieveGoogleKeys(){
