@@ -42,14 +42,19 @@ public class WebActivity extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         myWebView.setWebViewClient(new WebViewClient() {
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
                 updateTitleBar(view.getTitle(), url);
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
                 return false;
             }
         });
 
-        if (mItem != null){
+        if (mItem != null) {
             myWebView.loadUrl(mItem.getLink());
             updateTitleBar(mItem.getTitle(), mItem.getLink());
         }else {
@@ -73,8 +78,10 @@ public class WebActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
 
         if (actionBar != null){
-            actionBar.setTitle(title);
-            actionBar.setSubtitle(url);
+            if (title.length() > 0)
+                actionBar.setTitle(title);
+            if (url.length() > 0)
+                actionBar.setSubtitle(url);
         }
     }
 
