@@ -16,7 +16,7 @@
     <dimen name="f_starting_title_size">20sp</dimen>
     <dimen name="f_main_separator_height">5dp</dimen>
     <dimen name="f_main_card_padding">10dp</dimen>
-    <dimen name="f_main_content_font_title_size">20sp</dimen>
+    <dimen name="f_main_content_font_title_size">23sp</dimen>
     <dimen name="f_main_title_font_size">15sp</dimen>
 
     <dimen name="recycler_item_card_padding">8dp</dimen>
