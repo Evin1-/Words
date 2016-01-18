@@ -41,7 +41,6 @@ public class SearchTermFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mTerms.clear();
         return inflater.inflate(R.layout.fragment_search_term, container);
     }
 

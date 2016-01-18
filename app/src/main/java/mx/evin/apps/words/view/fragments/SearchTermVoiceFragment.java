@@ -50,7 +50,6 @@ public class SearchTermVoiceFragment extends DialogFragment {
                              Bundle savedInstanceState) {
 
         mVoiceRecognizer = new VoiceRecognizer(getContext());
-        mTerms.clear();
         return inflater.inflate(R.layout.fragment_search_term_voice, container, false);
     }
 

@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     //TODO Add analytics
     //TODO Add crashalytics
     //TODO Search by package
+    //TODO Check double item bug in mItems
 
     private static final String TAG_ = "MainActivityTAG_";
     private static final String LAST_TERM_KEY_ = Constants.LAST_TERM_KEY;

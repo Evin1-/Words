@@ -95,6 +95,7 @@ public class MainVM {
         TextView textViewDoc = (TextView) activity.findViewById(R.id.f_main_doc_txt);
         TextView textViewPack = (TextView) activity.findViewById(R.id.f_main_pack_txt);
         TextView textViewTitle = (TextView) activity.findViewById(R.id.f_main_title_txt);
+        TextView textViewHierarchy = (TextView) activity.findViewById(R.id.f_main_hierarchy_txt);
 
         MainActivity mainActivity = (MainActivity) activity;
         ActionBar actionBar = mainActivity.getSupportActionBar();
@@ -104,6 +105,10 @@ public class MainVM {
         textViewDoc.setText(setTextViewHTML(currentTerm.getDocs()));
         textViewDoc.setLinksClickable(true);
         textViewDoc.setMovementMethod(LinkMovementMethod.getInstance());
+
+        textViewHierarchy.setText(setTextViewHTML(currentTerm.getHierarchy()));
+        textViewHierarchy.setLinksClickable(true);
+        textViewHierarchy.setMovementMethod(LinkMovementMethod.getInstance());
 
         try {
             textViewPack.setText(currentTerm.getPack().getName());
