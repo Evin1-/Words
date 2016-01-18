@@ -53,11 +53,13 @@ public class MainActivity extends AppCompatActivity {
     private static String GOOGLE_API_KEY;
     private static String GOOGLE_CUSTOM_SEARCH_KEY;
 
+    private String mTechnology;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private FrameLayout mMainFragment;
     private SharedPreferences mSharedPref;
+    private ActionBar mActionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +69,13 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.a_main_drawer);
         mNavigationView = (NavigationView) findViewById(R.id.a_main_nav);
         mMainFragment = (FrameLayout) findViewById(R.id.a_main_frame);
+
         mSharedPref = getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        mTechnology = Constants.DEFAULT_TECHNOLOGY;
 
         retrieveGoogleKeys();
-
         configureActionBar();
+        setTechnology();
 
         ParseVM.parseStart(this);
         LoginVM.loginSequence(this);
@@ -128,14 +132,20 @@ public class MainActivity extends AppCompatActivity {
             fragmentManager.beginTransaction().remove(addTermFragment).commit();
     }
 
+    private void setTechnology() {
+//        mActionBar.s
+        mTechnology = mSharedPref.getString(Constants.TECHNOLOGY_USED_TAG, Constants.DEFAULT_TECHNOLOGY);
+        mActionBar.setSubtitle(mTechnology);
+    }
+
     private void configureActionBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.a_main_toolbar);
         setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
+        mActionBar = getSupportActionBar();
 
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeButtonEnabled(true);
+        if (mActionBar != null) {
+            mActionBar.setDisplayHomeAsUpEnabled(true);
+            mActionBar.setHomeButtonEnabled(true);
         }
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {

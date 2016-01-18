@@ -11,6 +11,8 @@ public class Constants {
     public static final String GOOGLE_CUSTOM_SEARCH_KEY_TAG = "GOOGLE_CUSTOM_SEARCH";
     public static final String ITEM_WEB_KEY = "item_to_web_view";
     public static final String DEFAULT_WEBSITE_URL = "http://developer.android.com/index.html";
+    public static final String TECHNOLOGY_USED_TAG = "technology_tag";
+    public static final String DEFAULT_TECHNOLOGY = "Android";
 
     public enum TYPE_ADD {
         WRITTEN,
