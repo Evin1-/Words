@@ -21,6 +21,7 @@ import mx.evin.apps.words.R;
 import mx.evin.apps.words.model.entities.parse.Term;
 import mx.evin.apps.words.view.fragments.SearchTermFragment;
 import mx.evin.apps.words.view.fragments.SearchTermVoiceFragment;
+import mx.evin.apps.words.viewmodel.utils.MyTagHandler;
 
 /**
  * Created by evin on 1/10/16.
@@ -90,7 +91,8 @@ public class MainVM {
         if (actionBar != null)
             actionBar.setSubtitle(MainActivity.mTechnology + " | " + currentTerm.getWords());
 
-        textViewDoc.setText(Html.fromHtml(currentTerm.getDocs()));
+        textViewDoc.setText(Html.fromHtml(currentTerm.getDocs(), null, new MyTagHandler()));
+//        textViewDoc.setText(Html.fromHtml(currentTerm.getDocs()));
         try {
             textViewPack.setText(currentTerm.getPack().getName());
         } catch (Exception e) {
