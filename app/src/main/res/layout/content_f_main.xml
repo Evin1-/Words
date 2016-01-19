@@ -81,6 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
+                    android:onClick="start_web_activity"
                     android:text="@string/f_main_more"
                     android:textAllCaps="true"
                     android:textColor="@color/color_accent"

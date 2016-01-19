@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     //TODO Add crashalytics
     //TODO Search by package
     //TODO Check double item bug in mItems
+    //TODO Add back button
 
     private static final String TAG_ = "MainActivityTAG_";
     private static final String LAST_TERM_KEY_ = Constants.LAST_TERM_KEY;
@@ -255,5 +256,12 @@ public class MainActivity extends AppCompatActivity {
             SearchTermGoogleFragment.mItems.clear();
             new CustomSearchAsyncTask().execute(SearchTermGoogleFragment.searchTerm, GOOGLE_API_KEY, GOOGLE_CUSTOM_SEARCH_KEY);
         }
+    }
+
+    public void start_web_activity(View view) {
+        Intent intent = new Intent(this, WebActivity.class);
+        intent.putExtra(Constants.TITLE_WEB_KEY, MainVM.mCurrentTerm.getWords());
+        intent.putExtra(Constants.URL_WEB_KEY, MainVM.mCurrentTerm.getUrl());
+        startActivity(intent);
     }
 }
