@@ -97,8 +97,8 @@ public class MainActivity extends AppCompatActivity {
 
         setMainFragment();
 
-        //TODO Remove in production
-        easyLife();
+//        //TODO Remove in production
+//        easyLife();
 
     }
 
@@ -340,7 +340,6 @@ public class MainActivity extends AppCompatActivity {
                 addTermFragment = new SearchTermFragment();
         }
         fm.beginTransaction().add(addTermFragment, Constants.FRAGMENT_TAG).commit();
-//        addTermFragment.show(fm, Constants.FRAGMENT_TAG);
     }
 
     public void userReady() {

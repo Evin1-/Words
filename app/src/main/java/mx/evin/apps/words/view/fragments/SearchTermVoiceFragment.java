@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import mx.evin.apps.words.R;
 import mx.evin.apps.words.model.entities.parse.Term;
 import mx.evin.apps.words.view.decorations.SpacesItemDecoration;
-import mx.evin.apps.words.viewmodel.MainVM;
 import mx.evin.apps.words.viewmodel.adapters.TermAutoAdapter;
 import mx.evin.apps.words.viewmodel.utils.VoiceRecognizer;
 
