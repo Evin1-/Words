@@ -46,11 +46,13 @@ public class MainVM {
     //TODO Check that 2 offline calls are not at the same time
     private static final String TAG_ = "MainVMTAG_";
     public static ArrayList<Term> mTerms;
+    public static ArrayList<Term> termsHistory;
     public static Term mCurrentTerm;
     public static Context mCurrentContext;
 
     static {
         mTerms = new ArrayList<>();
+        termsHistory = new ArrayList<>();
     }
 
     public static void initializeMain() {
@@ -58,21 +60,21 @@ public class MainVM {
     }
 
     private static void initializeTerms() {
-        SearchTermFragment.mTerms = mTerms;
-        SearchTermVoiceFragment.mTerms = mTerms;
-
         ParseQuery<ParseObject> query = new ParseQuery<>("Term");
 
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
                 if (e == null) {
-                    for (ParseObject term : objects) {
+                    for (ParseObject object : objects) {
+                        Term term = (Term) object;
+                        SearchTermFragment.mTerms.add(term);
+                        SearchTermVoiceFragment.mTerms.add(term);
                         SearchTermFragment.mAdapter.notifyDataSetChanged();
                         SearchTermVoiceFragment.mAdapter.notifyDataSetChanged();
-                        term.pinInBackground();
-                        mTerms.add((Term) term);
-                        term.getParseObject("pack").fetchIfNeededInBackground(new GetCallback<ParseObject>() {
+                        object.pinInBackground();
+                        mTerms.add(term);
+                        object.getParseObject("pack").fetchIfNeededInBackground(new GetCallback<ParseObject>() {
                             @Override
                             public void done(ParseObject object, ParseException e) {
                                 object.pinInBackground();
@@ -104,6 +106,7 @@ public class MainVM {
 
         refreshRelatedTerms();
         refreshImages();
+        refreshHistory();
 
         MainActivity mainActivity = (MainActivity) activity;
         ActionBar actionBar = mainActivity.getSupportActionBar();
@@ -133,6 +136,10 @@ public class MainVM {
         textViewTitle.setText(mCurrentTerm.getWords());
         textURL.setText(mCurrentTerm.getUrl());
 
+    }
+
+    private static void refreshHistory() {
+        termsHistory.add(mCurrentTerm);
     }
 
     protected static Spanned setTextViewHTML(String html, Constants.TYPE_HTML type_html) {
