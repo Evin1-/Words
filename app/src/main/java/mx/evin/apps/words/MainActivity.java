@@ -23,6 +23,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -189,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
                         setHistoryFragment();
                         break;
                     case R.id.nav_images:
-                        setVisibilityRecycler();
+                        setVisibilityImageRecycler();
                         break;
                     case R.id.nav_about:
                         showAbout();
@@ -210,6 +211,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void setHistoryFragment() {
         String last_term = mSharedPref.getString(LAST_TERM_KEY_, "--");
+
+        updateDrawerChecks(Constants.DRAWER_CHECK.HISTORY);
+
         if (last_term.equals("--")){
             getSupportFragmentManager().beginTransaction().replace(mMainFrame.getId(), new StartingFragment()).commit();
         }else {
@@ -258,7 +262,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().add(new AboutFragment(), Constants.ABOUT_FRAGMENT_TAG).commit();
     }
 
-    private void setVisibilityRecycler() {
+    private void setVisibilityImageRecycler() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.f_main_images_rv);
         MenuItem imageToggle = mNavigationView.getMenu().findItem(R.id.nav_images);
         if (recyclerView != null){
@@ -275,12 +279,30 @@ public class MainActivity extends AppCompatActivity {
     private void setMainFragment() {
         //TODO Update current fragment instead of creating a new one
         String last_term = mSharedPref.getString(LAST_TERM_KEY_, "--");
+
+        updateDrawerChecks(Constants.DRAWER_CHECK.HOME);
+
         if (last_term.equals("--")){
             getSupportFragmentManager().beginTransaction().replace(mMainFrame.getId(), new StartingFragment()).commit();
         }else {
             MainVM.refreshCurrentTermById(last_term, this);
             getSupportFragmentManager().beginTransaction().replace(mMainFrame.getId(), new MainFragment()).commit();
         }
+    }
+
+    private void updateDrawerChecks(Constants.DRAWER_CHECK drawerCheck) {
+        Menu menu = mNavigationView.getMenu();
+        MenuItem menuItem;
+
+        switch (drawerCheck){
+            case HISTORY:
+                menuItem = menu.findItem(R.id.nav_history);
+                break;
+            default:
+                menuItem = menu.findItem(R.id.nav_home);
+        }
+
+        menuItem.setChecked(true);
     }
 
     private void easyLife() {

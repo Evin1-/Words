@@ -26,4 +26,9 @@ public class Constants {
         BODY,
         HIERARCHY
     }
+
+    public enum DRAWER_CHECK{
+        HOME,
+        HISTORY
+    }
 }
