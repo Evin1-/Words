@@ -28,6 +28,7 @@ import java.util.List;
 import mx.evin.apps.words.MainActivity;
 import mx.evin.apps.words.R;
 import mx.evin.apps.words.WebActivity;
+import mx.evin.apps.words.model.entities.parse.Pack;
 import mx.evin.apps.words.model.entities.parse.Term;
 import mx.evin.apps.words.view.fragments.SearchTermFragment;
 import mx.evin.apps.words.view.fragments.SearchTermVoiceFragment;
@@ -79,7 +80,6 @@ public class MainVM {
                     }
                     SearchTermFragment.mAdapter.notifyDataSetChanged();
                     SearchTermVoiceFragment.mAdapter.notifyDataSetChanged();
-//                    Log.d(TAG_, Integer.toString(mTerms.size()));
                 } else {
                     Log.d(TAG_, "Error retrieving terms + " + e.toString());
                 }
@@ -91,11 +91,11 @@ public class MainVM {
         return mTerms;
     }
 
-    public static void refreshMainFragment(Activity activity) {
+    public static void refreshMainFragment(final Activity activity) {
         //TODO Update hierarchy, related terms and blablabal
         //TODO Remove try/catch and use a better practice
         TextView textViewDoc = (TextView) activity.findViewById(R.id.f_main_doc_txt);
-        TextView textViewPack = (TextView) activity.findViewById(R.id.f_main_pack_txt);
+        final TextView textViewPack = (TextView) activity.findViewById(R.id.f_main_pack_txt);
         TextView textViewTitle = (TextView) activity.findViewById(R.id.f_main_title_txt);
         TextView textViewHierarchy = (TextView) activity.findViewById(R.id.f_main_hierarchy_txt);
         TextView textURL = (TextView) activity.findViewById(R.id.f_main_url_txt);
@@ -113,11 +113,17 @@ public class MainVM {
         textViewHierarchy.setLinksClickable(true);
         textViewHierarchy.setMovementMethod(LinkMovementMethod.getInstance());
 
-        try {
-            textViewPack.setText(mCurrentTerm.getPack().getName());
-        } catch (Exception e) {
-            textViewPack.setText(activity.getString(R.string.f__package_placeholder));
-        }
+        mCurrentTerm.getPack().fetchIfNeededInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                if (e == null){
+                    Pack pack = ((Pack) object);
+                    textViewPack.setText(pack.getName());
+                }else {
+                    textViewPack.setText(activity.getString(R.string.f__package_placeholder));
+                }
+            }
+        });
 
         textViewTitle.setText(mCurrentTerm.getWords());
         textURL.setText(mCurrentTerm.getUrl());
@@ -180,7 +186,6 @@ public class MainVM {
                             }
                         }
                     });
-
                 }
             }
         });
@@ -228,7 +233,6 @@ public class MainVM {
                             }
                         }
                     });
-
                 }
             }
         });

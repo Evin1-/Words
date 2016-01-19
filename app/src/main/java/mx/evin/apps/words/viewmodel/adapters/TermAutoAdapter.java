@@ -11,6 +11,10 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+
 import java.util.List;
 
 import mx.evin.apps.words.MainActivity;
@@ -82,14 +86,18 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
         TextView textWords = viewHolder.txtTerm;
         textWords.setText(term.getWords());
 
-        TextView textPack = viewHolder.txtPack;
-        Pack pack = term.getPack();
-
-        try {
-            textPack.setText(pack.getName());
-        } catch (IllegalStateException e) {
-            textPack.setText("");
-        }
+        final TextView textPack = viewHolder.txtPack;
+        term.getPack().fetchIfNeededInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                if (e == null){
+                    Pack pack = (Pack) object;
+                    textPack.setText(pack.getName());
+                }else {
+                    textPack.setText("");
+                }
+            }
+        });
 
         viewHolder.idTerm = term.getObjectId();
     }
