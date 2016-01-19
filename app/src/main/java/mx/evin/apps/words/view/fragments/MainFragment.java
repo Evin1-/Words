@@ -5,22 +5,18 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import mx.evin.apps.words.R;
+import mx.evin.apps.words.model.entities.parse.Img;
 import mx.evin.apps.words.model.entities.parse.Term;
 import mx.evin.apps.words.view.decorations.HorizontalSpacesItemDecoration;
-import mx.evin.apps.words.view.decorations.SpacesItemDecoration;
-import mx.evin.apps.words.viewmodel.MainVM;
+import mx.evin.apps.words.viewmodel.adapters.ImagesTermsAdapter;
 import mx.evin.apps.words.viewmodel.adapters.RelatedTermsAdapter;
-import mx.evin.apps.words.viewmodel.adapters.TermAutoAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,10 +27,15 @@ public class MainFragment extends Fragment {
     public static final String TAG_ = "MainFragmentTAG_";
     public static ArrayList<Term> mTerms;
     public static RelatedTermsAdapter mRelatedTermsAdapter;
+    public static ArrayList<Img> mImgs;
+    public static ImagesTermsAdapter mImagesTermsAdapter;
 
     static {
         mTerms = new ArrayList<>();
         mRelatedTermsAdapter = new RelatedTermsAdapter(mTerms);
+        
+        mImgs = new ArrayList<>();
+        mImagesTermsAdapter = new ImagesTermsAdapter(mImgs);
     }
 
     public MainFragment() {
@@ -50,10 +51,17 @@ public class MainFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.f_main_related_rv);
-        recyclerView.setAdapter(mRelatedTermsAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        
+        RecyclerView relatedRecyclerView = (RecyclerView) view.findViewById(R.id.f_main_related_rv);
+        RecyclerView imagesRecyclerView = (RecyclerView) view.findViewById(R.id.f_main_images_rv);
         HorizontalSpacesItemDecoration spacesItemDecoration = new HorizontalSpacesItemDecoration(7);
-        recyclerView.addItemDecoration(spacesItemDecoration);
+
+        relatedRecyclerView.setAdapter(mRelatedTermsAdapter);
+        relatedRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        relatedRecyclerView.addItemDecoration(spacesItemDecoration);
+
+        imagesRecyclerView.setAdapter(mImagesTermsAdapter);
+        imagesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        imagesRecyclerView.addItemDecoration(spacesItemDecoration);
     }
 }

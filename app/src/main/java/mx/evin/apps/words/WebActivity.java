@@ -8,7 +8,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import mx.evin.apps.words.model.entities.gsearch.Item;
 import mx.evin.apps.words.viewmodel.utils.Constants;
 
 public class WebActivity extends AppCompatActivity {

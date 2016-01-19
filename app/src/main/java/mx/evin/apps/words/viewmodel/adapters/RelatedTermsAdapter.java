@@ -4,11 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
 import android.widget.TextView;
 
 import com.parse.GetCallback;
@@ -22,7 +20,6 @@ import mx.evin.apps.words.R;
 import mx.evin.apps.words.model.entities.parse.Pack;
 import mx.evin.apps.words.model.entities.parse.Term;
 import mx.evin.apps.words.viewmodel.utils.Constants;
-import mx.evin.apps.words.viewmodel.utils.FilterHelper;
 
 /**
  * Created by evin on 1/18/16.

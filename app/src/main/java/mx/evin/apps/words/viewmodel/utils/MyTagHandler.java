@@ -1,9 +1,9 @@
 package mx.evin.apps.words.viewmodel.utils;
 
-import org.xml.sax.XMLReader;
-
 import android.text.Editable;
 import android.text.Html;
+
+import org.xml.sax.XMLReader;
 
 /**
  * StackOverflow

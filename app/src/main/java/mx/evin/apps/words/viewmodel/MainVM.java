@@ -28,6 +28,7 @@ import java.util.List;
 import mx.evin.apps.words.MainActivity;
 import mx.evin.apps.words.R;
 import mx.evin.apps.words.WebActivity;
+import mx.evin.apps.words.model.entities.parse.Img;
 import mx.evin.apps.words.model.entities.parse.Pack;
 import mx.evin.apps.words.model.entities.parse.Term;
 import mx.evin.apps.words.model.entities.parse.TermTerm;
@@ -102,6 +103,7 @@ public class MainVM {
         TextView textURL = (TextView) activity.findViewById(R.id.f_main_url_txt);
 
         refreshRelatedTerms();
+        refreshImages();
 
         MainActivity mainActivity = (MainActivity) activity;
         ActionBar actionBar = mainActivity.getSupportActionBar();
@@ -226,6 +228,27 @@ public class MainVM {
                 }
             }
         });
+    }
+
+    private static void refreshImages() {
+
+        MainFragment.mImgs.clear();
+
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Img");
+        query.whereEqualTo("term", mCurrentTerm);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                for (ParseObject object : objects){
+                    object.pinInBackground();
+                    Img image = (Img) object;
+                    MainFragment.mImgs.add(image);
+                    MainFragment.mImagesTermsAdapter.notifyDataSetChanged();
+                    Log.d(TAG_, image.getTitle() + " " + image.getUrl());
+                }
+            }
+        });
+
     }
 
     public static void refreshCurrentTermById(final String lastTermId, final Context context) {
