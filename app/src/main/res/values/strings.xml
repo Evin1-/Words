@@ -39,10 +39,10 @@
     <string name="f_search_term_google_btn">Search</string>
     <string name="f_search_term_google_hint">Search a term with Google&#8230;</string>
 
-    <string name="recycler_item_add_btn">Add</string>
+    <string name="recycler_item_add_btn">Magic</string>
     <string name="recycler_item_go_btn">Go</string>
     <string name="f_about_author">Project created by Edwin Hernandez</string>
-    <string name="f_about_company">Mobile Apps Compnay</string>
+    <string name="f_about_company">Mobile Apps Company</string>
     <string name="f_about_date">January 2016</string>
     <string name="a_main_dialog_confirm_exit">Are you sure you want to exit the application?</string>
     <string name="a_main_dialog_thanks">Thank you for not leaving us. We love you!</string>
