@@ -52,7 +52,7 @@ public class MainFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.f_main_related_rv);
         recyclerView.setAdapter(mRelatedTermsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        HorizontalSpacesItemDecoration spacesItemDecoration = new HorizontalSpacesItemDecoration(5);
+        HorizontalSpacesItemDecoration spacesItemDecoration = new HorizontalSpacesItemDecoration(7);
         recyclerView.addItemDecoration(spacesItemDecoration);
     }
 }

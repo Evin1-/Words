@@ -183,22 +183,22 @@ public class MainVM {
         parseQueries.add(query2);
 
         ParseQuery<ParseObject> orQuery = ParseQuery.or(parseQueries);
-
         orQuery.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
                 if (e == null) {
                     for (ParseObject parseObject : objects) {
+                        parseObject.pinInBackground();
                         TermTerm termTerm = (TermTerm) parseObject;
                         termTerm.getTerm1().fetchIfNeededInBackground(new GetCallback<ParseObject>() {
                             @Override
                             public void done(ParseObject object, ParseException e) {
                                 if (e == null) {
+                                    object.pinInBackground();
                                     Term term = (Term) object;
                                     if (!term.getWords().equals(mCurrentTerm.getWords())) {
                                         MainFragment.mTerms.add(term);
                                         MainFragment.mRelatedTermsAdapter.notifyDataSetChanged();
-                                        Log.d(TAG_, MainFragment.mTerms.size() + "");
                                     }
                                 } else {
                                     Log.e(TAG_, e.toString());
@@ -209,11 +209,11 @@ public class MainVM {
                             @Override
                             public void done(ParseObject object, ParseException e) {
                                 if (e == null) {
+                                    object.pinInBackground();
                                     Term term = (Term) object;
                                     if (!term.getWords().equals(mCurrentTerm.getWords())) {
                                         MainFragment.mTerms.add(term);
                                         MainFragment.mRelatedTermsAdapter.notifyDataSetChanged();
-                                        Log.d(TAG_, MainFragment.mTerms.size() + "");
                                     }
                                 } else {
                                     Log.e(TAG_, e.toString());

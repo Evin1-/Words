@@ -11,6 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.TextView;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+
 import java.util.List;
 
 import mx.evin.apps.words.MainActivity;
@@ -76,19 +80,22 @@ public class RelatedTermsAdapter extends RecyclerView.Adapter<RelatedTermsAdapte
     public void onBindViewHolder(RelatedTermsAdapter.ViewHolder viewHolder, int position) {
         //TODO Do already fetched check with no try catch
         Term term = mOriginalTerms.get(position);
-        Log.d(TAG_, position + " " + term.getWords());
 
         TextView textWords = viewHolder.txtTerm;
         textWords.setText(term.getWords());
 
-        TextView textPack = viewHolder.txtPack;
-        Pack pack = term.getPack();
-
-        try {
-            textPack.setText(pack.getName());
-        } catch (IllegalStateException e) {
-            textPack.setText("");
-        }
+        final TextView textPack = viewHolder.txtPack;
+        term.getPack().fetchIfNeededInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                if (e == null){
+                    Pack pack = (Pack) object;
+                    textPack.setText(pack.getName());
+                }else {
+                    textPack.setText("");
+                }
+            }
+        });
 
         viewHolder.idTerm = term.getObjectId();
     }
