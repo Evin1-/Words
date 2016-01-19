@@ -3,6 +3,7 @@ package mx.evin.apps.words.viewmodel;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
@@ -107,6 +108,7 @@ public class MainVM {
         refreshRelatedTerms();
         refreshImages();
         refreshHistory();
+        refreshShared();
 
         MainActivity mainActivity = (MainActivity) activity;
         ActionBar actionBar = mainActivity.getSupportActionBar();
@@ -136,6 +138,13 @@ public class MainVM {
         textViewTitle.setText(mCurrentTerm.getWords());
         textURL.setText(mCurrentTerm.getUrl());
 
+    }
+
+    private static void refreshShared() {
+        SharedPreferences sharedPreferences = mCurrentContext.getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Constants.LAST_TERM_KEY, mCurrentTerm.getObjectId());
+        editor.apply();
     }
 
     private static void refreshHistory() {
