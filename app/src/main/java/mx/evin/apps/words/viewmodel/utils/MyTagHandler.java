@@ -24,7 +24,7 @@ public class MyTagHandler implements Html.TagHandler {
                 if (lastChar == '\n')
                     output.append("- ");
                 else
-                    output.append("\n-");
+                    output.append("\n- ");
                 first = false;
             } else {
                 first = true;

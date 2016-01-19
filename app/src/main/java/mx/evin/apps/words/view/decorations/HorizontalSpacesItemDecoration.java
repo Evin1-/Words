@@ -16,11 +16,11 @@ public class HorizontalSpacesItemDecoration extends RecyclerView.ItemDecoration 
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        outRect.right = mSpace;
         outRect.bottom = mSpace;
         outRect.top = mSpace;
 
-        if (parent.getChildAdapterPosition(view) < 1)
+        if (parent.getChildAdapterPosition(view) != 0)
             outRect.left = mSpace;
+//            outRect.right = mSpace;
     }
 }

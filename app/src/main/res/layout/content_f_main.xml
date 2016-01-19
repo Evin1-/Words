@@ -93,22 +93,12 @@
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@android:color/transparent" />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/f_main_related_rv"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="70dp">
 
     </android.support.v7.widget.RecyclerView>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@android:color/transparent" />
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"

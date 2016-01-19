@@ -6,21 +6,23 @@
 
     <LinearLayout
         android:orientation="vertical"
+        android:padding="@dimen/f_main_related_card_padding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/recycler_related_title_txt"
+            android:textColor="@color/color_primary"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:ellipsize="end"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/recycler_related_pack_txt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="Hello wrold"
+            android:textStyle="bold"
+            android:textSize="@dimen/f_main_pack_font_size"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
