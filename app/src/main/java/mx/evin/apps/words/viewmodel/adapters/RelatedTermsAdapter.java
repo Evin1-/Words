@@ -1,0 +1,100 @@
+package mx.evin.apps.words.viewmodel.adapters;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.TextView;
+
+import java.util.List;
+
+import mx.evin.apps.words.MainActivity;
+import mx.evin.apps.words.R;
+import mx.evin.apps.words.model.entities.parse.Pack;
+import mx.evin.apps.words.model.entities.parse.Term;
+import mx.evin.apps.words.viewmodel.utils.Constants;
+import mx.evin.apps.words.viewmodel.utils.FilterHelper;
+
+/**
+ * Created by evin on 1/18/16.
+ */
+public class RelatedTermsAdapter extends RecyclerView.Adapter<RelatedTermsAdapter.ViewHolder>{
+    //TODO Check if well filtered when a lot of items
+    //TODO Refresh RecyclerViews when creating new AddTermFragments
+
+    private static List<Term> mOriginalTerms;
+    private static final String TAG_ = "RelatedTermsAdapterTAG_";
+    private static SharedPreferences mSharedPreferences;
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView txtTerm;
+        public TextView txtPack;
+        public String idTerm;
+
+        public ViewHolder(final View itemView) {
+            super(itemView);
+
+            txtTerm = (TextView) itemView.findViewById(R.id.recycler_related_title_txt);
+            txtPack = (TextView) itemView.findViewById(R.id.recycler_related_pack_txt);
+
+            itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    mSharedPreferences = v.getContext().getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = mSharedPreferences.edit();
+                    editor.putString(Constants.LAST_TERM_KEY, idTerm);
+                    editor.apply();
+
+                    Intent intent = new Intent(v.getContext(), MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    v.getContext().startActivity(intent);
+                }
+            });
+        }
+    }
+
+    public RelatedTermsAdapter(List<Term> terms) {
+        mOriginalTerms = terms;
+    }
+
+    @Override
+    public RelatedTermsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+
+        View termView = inflater.inflate(R.layout.recycler_related_term, parent, false);
+
+        return new ViewHolder(termView);
+    }
+
+    @Override
+    public void onBindViewHolder(RelatedTermsAdapter.ViewHolder viewHolder, int position) {
+        //TODO Do already fetched check with no try catch
+        Term term = mOriginalTerms.get(position);
+        Log.d(TAG_, position + " " + term.getWords());
+
+        TextView textWords = viewHolder.txtTerm;
+        textWords.setText(term.getWords());
+
+        TextView textPack = viewHolder.txtPack;
+        Pack pack = term.getPack();
+
+        try {
+            textPack.setText(pack.getName());
+        } catch (IllegalStateException e) {
+            textPack.setText("");
+        }
+
+        viewHolder.idTerm = term.getObjectId();
+    }
+
+    @Override
+    public int getItemCount() {
+        return mOriginalTerms.size();
+    }
+}

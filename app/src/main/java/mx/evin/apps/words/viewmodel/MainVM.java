@@ -30,6 +30,8 @@ import mx.evin.apps.words.R;
 import mx.evin.apps.words.WebActivity;
 import mx.evin.apps.words.model.entities.parse.Pack;
 import mx.evin.apps.words.model.entities.parse.Term;
+import mx.evin.apps.words.model.entities.parse.TermTerm;
+import mx.evin.apps.words.view.fragments.MainFragment;
 import mx.evin.apps.words.view.fragments.SearchTermFragment;
 import mx.evin.apps.words.view.fragments.SearchTermVoiceFragment;
 import mx.evin.apps.words.viewmodel.utils.Constants;
@@ -93,12 +95,13 @@ public class MainVM {
 
     public static void refreshMainFragment(final Activity activity) {
         //TODO Update hierarchy, related terms and blablabal
-        //TODO Remove try/catch and use a better practice
         TextView textViewDoc = (TextView) activity.findViewById(R.id.f_main_doc_txt);
         final TextView textViewPack = (TextView) activity.findViewById(R.id.f_main_pack_txt);
         TextView textViewTitle = (TextView) activity.findViewById(R.id.f_main_title_txt);
         TextView textViewHierarchy = (TextView) activity.findViewById(R.id.f_main_hierarchy_txt);
         TextView textURL = (TextView) activity.findViewById(R.id.f_main_url_txt);
+
+        refreshRelatedTerms();
 
         MainActivity mainActivity = (MainActivity) activity;
         ActionBar actionBar = mainActivity.getSupportActionBar();
@@ -165,6 +168,64 @@ public class MainVM {
         };
         strBuilder.setSpan(clickable, start, end, flags);
         strBuilder.removeSpan(span);
+    }
+
+    private static void refreshRelatedTerms() {
+        ParseQuery<ParseObject> query1 = new ParseQuery<>("TermTerm");
+        ArrayList<ParseQuery<ParseObject>> parseQueries = new ArrayList<>();
+        ParseQuery<ParseObject> query2 = new ParseQuery<>("TermTerm");
+
+        MainFragment.mTerms.clear();
+
+        query1.whereEqualTo("term1", mCurrentTerm);
+        query2.whereEqualTo("term2", mCurrentTerm);
+        parseQueries.add(query1);
+        parseQueries.add(query2);
+
+        ParseQuery<ParseObject> orQuery = ParseQuery.or(parseQueries);
+
+        orQuery.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if (e == null) {
+                    for (ParseObject parseObject : objects) {
+                        TermTerm termTerm = (TermTerm) parseObject;
+                        termTerm.getTerm1().fetchIfNeededInBackground(new GetCallback<ParseObject>() {
+                            @Override
+                            public void done(ParseObject object, ParseException e) {
+                                if (e == null) {
+                                    Term term = (Term) object;
+                                    if (!term.getWords().equals(mCurrentTerm.getWords())) {
+                                        MainFragment.mTerms.add(term);
+                                        MainFragment.mRelatedTermsAdapter.notifyDataSetChanged();
+                                        Log.d(TAG_, MainFragment.mTerms.size() + "");
+                                    }
+                                } else {
+                                    Log.e(TAG_, e.toString());
+                                }
+                            }
+                        });
+                        termTerm.getTerm2().fetchIfNeededInBackground(new GetCallback<ParseObject>() {
+                            @Override
+                            public void done(ParseObject object, ParseException e) {
+                                if (e == null) {
+                                    Term term = (Term) object;
+                                    if (!term.getWords().equals(mCurrentTerm.getWords())) {
+                                        MainFragment.mTerms.add(term);
+                                        MainFragment.mRelatedTermsAdapter.notifyDataSetChanged();
+                                        Log.d(TAG_, MainFragment.mTerms.size() + "");
+                                    }
+                                } else {
+                                    Log.e(TAG_, e.toString());
+                                }
+                            }
+                        });
+                    }
+                } else {
+                    Log.e(TAG_, e.toString());
+                }
+            }
+        });
     }
 
     public static void refreshCurrentTermById(final String lastTermId, final Context context) {
