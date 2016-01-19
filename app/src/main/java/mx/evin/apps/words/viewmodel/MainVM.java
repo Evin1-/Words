@@ -139,7 +139,14 @@ public class MainVM {
     }
 
     private static void refreshHistory() {
-        termsHistory.add(mCurrentTerm);
+        if (termsHistory != null && termsHistory.size() > 0){
+            if (termsHistory.get(termsHistory.size() - 1).equals(mCurrentTerm)){
+                return;
+            }
+        }
+        if (termsHistory != null){
+            termsHistory.add(mCurrentTerm);
+        }
     }
 
     protected static Spanned setTextViewHTML(String html, Constants.TYPE_HTML type_html) {
