@@ -154,8 +154,6 @@ public class MainVM {
             public void onClick(View view) {
                 char[] aux = new char[end - start];
                 strBuilder.getChars(start, end, aux, 0);
-                Log.d(TAG_, new String(aux));
-                Log.d(TAG_, span.getURL());
                 refreshCurrentTermByName(new String(aux), mCurrentContext, span.getURL());
             }
         };
