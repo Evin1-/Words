@@ -14,6 +14,7 @@ public class Constants {
     public static final String DEFAULT_WEBSITE_URL = "http://developer.android.com/index.html";
     public static final String TECHNOLOGY_USED_TAG = "technology_tag";
     public static final String DEFAULT_TECHNOLOGY = "Android";
+    public static final String ABOUT_FRAGMENT_TAG = "about_fragment";
 
     public enum TYPE_ADD {
         WRITTEN,

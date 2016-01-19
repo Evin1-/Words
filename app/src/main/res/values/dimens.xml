@@ -26,5 +26,7 @@
     <dimen name="recycler_item_btn_font_size">12sp</dimen>
     <dimen name="recycler_item_text_padding">2dp</dimen>
     <dimen name="f_main_related_recycler_height">65dp</dimen>
+    <dimen name="f_about_title_font_size">15sp</dimen>
+    <dimen name="f_about_padding">20dp</dimen>
 
 </resources>

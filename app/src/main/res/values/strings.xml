@@ -41,4 +41,7 @@
 
     <string name="recycler_item_add_btn">Add</string>
     <string name="recycler_item_go_btn">Go</string>
+    <string name="f_about_author">Project created by Edwin Hernandez</string>
+    <string name="f_about_company">Mobile Apps Compnay</string>
+    <string name="f_about_date">January 2016</string>
 </resources>

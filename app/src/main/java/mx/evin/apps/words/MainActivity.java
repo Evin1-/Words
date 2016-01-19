@@ -24,6 +24,7 @@ import android.widget.ScrollView;
 
 import com.parse.ParseUser;
 
+import mx.evin.apps.words.view.fragments.AboutFragment;
 import mx.evin.apps.words.view.fragments.MainFragment;
 import mx.evin.apps.words.view.fragments.SearchTermFragment;
 import mx.evin.apps.words.view.fragments.SearchTermGoogleFragment;
@@ -176,14 +177,14 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.nav_technology:
-                        Log.d(TAG_, "Technology");
                         break;
                     case R.id.nav_history:
-                        Log.d(TAG_, "History");
                         break;
                     case R.id.nav_images:
-                        Log.d(TAG_, "Images");
                         setVisibilityRecycler();
+                        break;
+                    case R.id.nav_about:
+                        showAbout();
                         break;
                 }
 
@@ -191,6 +192,11 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    private void showAbout() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().add(new AboutFragment(), Constants.ABOUT_FRAGMENT_TAG).commit();
     }
 
     private void setVisibilityRecycler() {
