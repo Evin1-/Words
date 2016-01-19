@@ -77,9 +77,6 @@ public class StartupVM {
         terms.put("ViewGroup", (Term) RowCreator.getCreateTerm("ViewGroup", android, android_view, "1", "2",
                 "http://developer.android.com/reference/android/view/ViewGroup.html"));
 
-        terms.put("RecyclerView", (Term) RowCreator.getCreateTerm("RecyclerView", android, v7_widget, "1", "2",
-                "http://developer.android.com/reference/android/support/v7/widget/RecyclerView.html"));
-
         terms.put("FrameLayout", (Term) RowCreator.getCreateTerm("FrameLayout", android, android_widget, "1", "2",
                 "http://developer.android.com/reference/android/widget/FrameLayout.html"));
 
@@ -95,14 +92,36 @@ public class StartupVM {
         terms.put("ContextWrapper", (Term) RowCreator.getCreateTerm("ContextWrapper", android, android_content, "1", "2",
                 "http://developer.android.com/reference/android/content/ContextWrapper.html"));
 
+        terms.put("RecyclerView", (Term) RowCreator.getCreateTerm("RecyclerView", android, v7_widget, "1", "2",
+                "http://developer.android.com/reference/android/support/v7/widget/RecyclerView.html"));
+
+        terms.put("ListView", (Term) RowCreator.getCreateTerm("ListView", android, android_widget, "1", "2",
+                "http://developer.android.com/reference/android/widget/ListView.html"));
+
+        terms.put("CardView", (Term) RowCreator.getCreateTerm("CardView", android, v7_widget, "1", "2",
+                "http://developer.android.com/reference/android/support/v7/widget/CardView.html"));
+
+        terms.put("Adapter", (Term) RowCreator.getCreateTerm("Adapter", android, android_widget, "1", "2",
+                "http://developer.android.com/reference/android/widget/Adapter.html"));
+
     }
 
     public static void createTermTerms(){
-        Term term1 = terms.get("Object");
-        Term term2 = terms.get("View");
-        Term term3 = terms.get("ViewGroup");
-
-        RowCreator.getCreateTermTerm(term1, term2, 3);
+        RowCreator.getCreateTermTerm(terms.get("Object"), terms.get("View"), 3);
+        RowCreator.getCreateTermTerm(terms.get("Object"), terms.get("Context"), 3);
+        RowCreator.getCreateTermTerm(terms.get("View"), terms.get("ViewGroup"), 3);
+        RowCreator.getCreateTermTerm(terms.get("ViewGroup"), terms.get("FrameLayout"), 3);
+        RowCreator.getCreateTermTerm(terms.get("ViewGroup"), terms.get("LinearLayout"), 3);
+        RowCreator.getCreateTermTerm(terms.get("ViewGroup"), terms.get("RelativeLayout"), 3);
+        RowCreator.getCreateTermTerm(terms.get("ViewGroup"), terms.get("RecyclerView"), 3);
+        RowCreator.getCreateTermTerm(terms.get("FrameLayout"), terms.get("LinearLayout"), 3);
+        RowCreator.getCreateTermTerm(terms.get("FrameLayout"), terms.get("RelativeLayout"), 3);
+        RowCreator.getCreateTermTerm(terms.get("LinearLayout"), terms.get("RelativeLayout"), 3);
+        RowCreator.getCreateTermTerm(terms.get("Context"), terms.get("ContextWrapper"), 3);
+        RowCreator.getCreateTermTerm(terms.get("RecyclerView"), terms.get("ListView"), 3);
+        RowCreator.getCreateTermTerm(terms.get("RecyclerView"), terms.get("CardView"), 3);
+        RowCreator.getCreateTermTerm(terms.get("RecyclerView"), terms.get("Adapter"), 3);
+        RowCreator.getCreateTermTerm(terms.get("ListView"), terms.get("Adapter"), 3);
     }
 
     public static void createUserTerms(){

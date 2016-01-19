@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     //TODO Search by package
     //TODO Check double item bug in mItems
     //TODO Add back button
+    //TODO Set max lines Docs textview and details view
+    //TODO Service that updates db
 
     private static final String TAG_ = "MainActivityTAG_";
     private static final String LAST_TERM_KEY_ = Constants.LAST_TERM_KEY;
@@ -87,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
         //TODO Remove in production
         easyLife();
+
     }
 
     @Override
