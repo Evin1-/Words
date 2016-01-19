@@ -2,17 +2,14 @@ package mx.evin.apps.words.viewmodel;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.text.Html;
-import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.URLSpan;
-import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -23,11 +20,14 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import mx.evin.apps.words.MainActivity;
 import mx.evin.apps.words.R;
+import mx.evin.apps.words.WebActivity;
 import mx.evin.apps.words.model.entities.parse.Term;
 import mx.evin.apps.words.view.fragments.SearchTermFragment;
 import mx.evin.apps.words.view.fragments.SearchTermVoiceFragment;
@@ -42,7 +42,8 @@ public class MainVM {
     //TODO Check that 2 offline calls are not at the same time
     private static final String TAG_ = "MainVMTAG_";
     public static ArrayList<Term> mTerms;
-    public static Term currentTerm;
+    public static Term mCurrentTerm;
+    public static Context mCurrentContext;
 
     static {
         mTerms = new ArrayList<>();
@@ -102,24 +103,24 @@ public class MainVM {
         MainActivity mainActivity = (MainActivity) activity;
         ActionBar actionBar = mainActivity.getSupportActionBar();
         if (actionBar != null)
-            actionBar.setSubtitle(MainActivity.mTechnology + " | " + currentTerm.getWords());
+            actionBar.setSubtitle(MainActivity.mTechnology + " | " + mCurrentTerm.getWords());
 
-        textViewDoc.setText(setTextViewHTML(currentTerm.getDocs(), Constants.TYPE_HTML.BODY));
+        textViewDoc.setText(setTextViewHTML(mCurrentTerm.getDocs(), Constants.TYPE_HTML.BODY));
         textViewDoc.setLinksClickable(true);
         textViewDoc.setMovementMethod(LinkMovementMethod.getInstance());
 
-        textViewHierarchy.setText(setTextViewHTML(currentTerm.getHierarchy(), Constants.TYPE_HTML.HIERARCHY));
+        textViewHierarchy.setText(setTextViewHTML(mCurrentTerm.getHierarchy(), Constants.TYPE_HTML.HIERARCHY));
         textViewHierarchy.setLinksClickable(true);
         textViewHierarchy.setMovementMethod(LinkMovementMethod.getInstance());
 
         try {
-            textViewPack.setText(currentTerm.getPack().getName());
+            textViewPack.setText(mCurrentTerm.getPack().getName());
         } catch (Exception e) {
             textViewPack.setText(activity.getString(R.string.f__package_placeholder));
         }
 
-        textViewTitle.setText(currentTerm.getWords());
-        textURL.setText(currentTerm.getUrl());
+        textViewTitle.setText(mCurrentTerm.getWords());
+        textURL.setText(mCurrentTerm.getUrl());
 
     }
 
@@ -155,27 +156,72 @@ public class MainVM {
                 strBuilder.getChars(start, end, aux, 0);
                 Log.d(TAG_, new String(aux));
                 Log.d(TAG_, span.getURL());
+                refreshCurrentTermByName(new String(aux), mCurrentContext, span.getURL());
             }
         };
         strBuilder.setSpan(clickable, start, end, flags);
         strBuilder.removeSpan(span);
     }
 
-    public static void refreshCurrentTerm(final String last_term, final Context context) {
-        ParseObject query = ParseObject.createWithoutData("Term", last_term);
+    public static void refreshCurrentTermById(final String lastTermId, final Context context) {
+        mCurrentContext = context;
+        ParseObject query = ParseObject.createWithoutData("Term", lastTermId);
         query.fetchFromLocalDatastoreInBackground(new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
-                    currentTerm = (Term) object;
-                    refreshMainFragment((Activity) context);
+                    mCurrentTerm = (Term) object;
+                    refreshMainFragment((Activity) mCurrentContext);
                 } else {
                     ParseQuery<ParseObject> query = ParseQuery.getQuery("Term");
-                    query.getInBackground(last_term, new GetCallback<ParseObject>() {
+                    query.getInBackground(lastTermId, new GetCallback<ParseObject>() {
                         public void done(ParseObject object, ParseException e) {
                             if (e == null) {
                                 object.pinInBackground();
-                                currentTerm = (Term) object;
-                                refreshMainFragment((Activity) context);
+                                mCurrentTerm = (Term) object;
+                                refreshMainFragment((Activity) mCurrentContext);
+                            }
+                        }
+                    });
+
+                }
+            }
+        });
+    }
+
+    public static void refreshCurrentTermByName(final String lastTermWords, final Context context, final String url) {
+        //TODO What if it finds 2 objects
+        mCurrentContext = context;
+        ParseQuery<ParseObject> query = new ParseQuery<>("Term");
+        query.fromLocalDatastore();
+        query.whereEqualTo("words", lastTermWords);
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                if (e == null ){
+                    mCurrentTerm = (Term) object;
+                    refreshMainFragment((Activity) mCurrentContext);
+                } else {
+                    ParseQuery<ParseObject> query = new ParseQuery<>("Term");
+                    query.whereEqualTo("words", lastTermWords);
+                    query.getFirstInBackground(new GetCallback<ParseObject>() {
+                        @Override
+                        public void done(ParseObject object, ParseException e) {
+                            if (e == null){
+                                object.pinInBackground();
+                                mCurrentTerm = (Term) object;
+                                refreshMainFragment((Activity) mCurrentContext);
+                            } else {
+                                try {
+                                    URL auxURL = new URL(mCurrentTerm.getUrl());
+                                    String buildURL = auxURL.getProtocol() + "://" + auxURL.getHost() + "/" + url;
+
+                                    Intent intent = new Intent(mCurrentContext, WebActivity.class);
+                                    intent.putExtra(Constants.TITLE_WEB_KEY, lastTermWords);
+                                    intent.putExtra(Constants.URL_WEB_KEY, buildURL);
+                                    mCurrentContext.startActivity(intent);
+                                } catch (MalformedURLException e1) {
+                                    Log.e(TAG_, e1.toString());
+                                }
                             }
                         }
                     });

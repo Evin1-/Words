@@ -30,7 +30,6 @@ import mx.evin.apps.words.view.fragments.StartingFragment;
 import mx.evin.apps.words.viewmodel.LoginVM;
 import mx.evin.apps.words.viewmodel.MainVM;
 import mx.evin.apps.words.viewmodel.ParseVM;
-import mx.evin.apps.words.viewmodel.StartupVM;
 import mx.evin.apps.words.viewmodel.async.CustomSearchAsyncTask;
 import mx.evin.apps.words.viewmodel.utils.Constants;
 
@@ -190,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
         if (last_term.equals("--")){
             getSupportFragmentManager().beginTransaction().replace(mMainFragment.getId(), new StartingFragment()).commit();
         }else {
-            MainVM.refreshCurrentTerm(last_term, this);
+            MainVM.refreshCurrentTermById(last_term, this);
             getSupportFragmentManager().beginTransaction().replace(mMainFragment.getId(), new MainFragment()).commit();
         }
     }
