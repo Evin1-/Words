@@ -20,6 +20,7 @@
         android:layout_marginTop="@dimen/f_starting_button_margin_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="search_term"
         android:text="@string/f_starting_get_started"/>
 
 </LinearLayout>
