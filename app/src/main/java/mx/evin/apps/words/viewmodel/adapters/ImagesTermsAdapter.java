@@ -83,6 +83,7 @@ public class ImagesTermsAdapter extends RecyclerView.Adapter<ImagesTermsAdapter.
         Img image = mImages.get(position);
 
         ImageView imageView = viewHolder.imageView;
+//        Picasso.with(mContext).load(image.getUrl()).fit().centerCrop().into(imageView);
         Picasso.with(mContext).load(image.getUrl()).resize(320, 180).centerCrop().into(imageView);
 
         TextView textWords = viewHolder.txtImage;

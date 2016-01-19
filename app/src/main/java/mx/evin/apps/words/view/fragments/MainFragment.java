@@ -64,7 +64,7 @@ public class MainFragment extends Fragment {
 
         imagesRecyclerView.setAdapter(mImagesTermsAdapter);
         imagesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-//        imagesRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL));
+//        imagesRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, LinearLayoutManager.HORIZONTAL));
         imagesRecyclerView.addItemDecoration(spacesItemDecoration);
     }
 }

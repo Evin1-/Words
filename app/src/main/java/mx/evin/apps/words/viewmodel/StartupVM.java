@@ -151,8 +151,27 @@ public class StartupVM {
     }
 
     public static void createImgs(){
-        RowCreator.getCreateImg("example", "http://usercontent2.hubimg.com/6849417.png",
-                "description", 1, terms.get("Object"));
+        RowCreator.getCreateImg("Oracle",
+                "http://www.bloomberg.com/ss/08/09/0918_best_brands/image/23-oracle.jpg",
+                "The software giant’s aggressive acquisition strategy " +
+                        "is paying off—boosting its reputation among " +
+                        "corporate tech buyers.",
+                1, terms.get("Object"));
+
+        RowCreator.getCreateImg("Object Oriented Programming",
+                "http://pythoncentral.io/wp-content/uploads/2012/03/object-orientated-programming-in-python.jpg",
+                "Object orientation is a central concept in Python, as well as many other languages. " +
+                        "Understanding the concept, and applying it well, will enable you to build " +
+                        "much more elegant and manageable software.",
+                1, terms.get("Object"));
+
+        RowCreator.getCreateImg("Java Class",
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/CPT-OOP-objects_and_classes_-_attmeth.svg/300px-CPT-OOP-objects_and_classes_-_attmeth.svg.png",
+                "Object oriented programming is a type of programming paradigm based around programming " +
+                        "classes and instances of classes called objects. These can be objects that " +
+                        "appear on the screen (e.g., pictures, textboxes, etc.) or are part of the " +
+                        "programming (e.g. actors, connections, particles, etc.).",
+                1, terms.get("Object"));
     }
 
 }

@@ -231,7 +231,6 @@ public class MainVM {
     }
 
     private static void refreshImages() {
-
         MainFragment.mImgs.clear();
 
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Img");
