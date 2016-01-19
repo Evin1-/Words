@@ -14,11 +14,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ScrollView;
 
 import com.parse.ParseUser;
 
@@ -30,7 +32,6 @@ import mx.evin.apps.words.view.fragments.StartingFragment;
 import mx.evin.apps.words.viewmodel.LoginVM;
 import mx.evin.apps.words.viewmodel.MainVM;
 import mx.evin.apps.words.viewmodel.ParseVM;
-import mx.evin.apps.words.viewmodel.StartupVM;
 import mx.evin.apps.words.viewmodel.async.CustomSearchAsyncTask;
 import mx.evin.apps.words.viewmodel.utils.Constants;
 
@@ -180,12 +181,30 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_history:
                         Log.d(TAG_, "History");
                         break;
+                    case R.id.nav_images:
+                        Log.d(TAG_, "Images");
+                        setVisibilityRecycler();
+                        break;
                 }
 
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             }
         });
+    }
+
+    private void setVisibilityRecycler() {
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.f_main_images_rv);
+        MenuItem imageToggle = mNavigationView.getMenu().findItem(R.id.nav_images);
+        if (recyclerView != null){
+            if (imageToggle.getTitle().equals(getString(R.string.nav_toggle_images_show))) {
+                recyclerView.setVisibility(View.VISIBLE);
+                imageToggle.setTitle(R.string.nav_toggle_images_hide);
+            }else {
+                recyclerView.setVisibility(View.GONE);
+                imageToggle.setTitle(R.string.nav_toggle_images_show);
+            }
+        }
     }
 
     private void setMainFragment() {

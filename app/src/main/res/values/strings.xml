@@ -11,7 +11,8 @@
 
     <string name="nav_change_technology">Change technology</string>
     <string name="nav_history">My history</string>
-    <string name="nav_toggle_images">Hide images</string>
+    <string name="nav_toggle_images_hide">Hide images</string>
+    <string name="nav_toggle_images_show">Show Images</string>
     <string name="nav_connect_facebook">Connect with Facebook</string>
     <string name="nav_connect_twitter">Connect with Twitter</string>
     <string name="nav_rate">Rate app</string>
