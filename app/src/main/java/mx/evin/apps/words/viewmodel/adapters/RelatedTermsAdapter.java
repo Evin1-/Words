@@ -78,7 +78,6 @@ public class RelatedTermsAdapter extends RecyclerView.Adapter<RelatedTermsAdapte
 
     @Override
     public void onBindViewHolder(RelatedTermsAdapter.ViewHolder viewHolder, int position) {
-        //TODO Do already fetched check with no try catch
         Term term = mOriginalTerms.get(position);
 
         TextView textWords = viewHolder.txtTerm;
