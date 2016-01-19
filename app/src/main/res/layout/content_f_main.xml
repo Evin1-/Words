@@ -93,12 +93,10 @@
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/f_main_related_rv"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="70dp">
-
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="@dimen/f_main_separator_height"
+        android:background="@android:color/transparent" />
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -112,4 +110,17 @@
             android:text="@string/f_placeholder_big" />
 
     </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/f_main_related_rv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/f_main_related_recycler_height">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/f_main_separator_height"
+        android:background="@android:color/transparent" />
+
 </LinearLayout>
