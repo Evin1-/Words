@@ -32,6 +32,7 @@ public class ImagesTermsAdapter extends RecyclerView.Adapter<ImagesTermsAdapter.
     private static SharedPreferences mSharedPreferences;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        //TODO Open image in new Activity
         public ImageView imageView;
         public TextView txtImage;
         public TextView txtPack;
@@ -83,7 +84,6 @@ public class ImagesTermsAdapter extends RecyclerView.Adapter<ImagesTermsAdapter.
 
         ImageView imageView = viewHolder.imageView;
         Picasso.with(mContext).load(image.getUrl()).resize(320, 180).centerCrop().into(imageView);
-//        Picasso.with(mContext).load(image.getUrl()).fit().into(imageView);
 
         TextView textWords = viewHolder.txtImage;
         textWords.setText(WordUtils.capitalize(image.getTitle()));

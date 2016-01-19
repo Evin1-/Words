@@ -151,11 +151,8 @@ public class StartupVM {
     }
 
     public static void createImgs(){
-        Term term1 = terms.get("Object");
-        Term term2 = terms.get("View");
-        Term term3 = terms.get("ViewGroup");
-
-        RowCreator.getCreateImg("example", "https://goo.gl/OI4XQ4", "description", 1, term1);
+        RowCreator.getCreateImg("example", "http://usercontent2.hubimg.com/6849417.png",
+                "description", 1, terms.get("Object"));
     }
 
 }

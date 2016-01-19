@@ -244,7 +244,6 @@ public class MainVM {
                     Img image = (Img) object;
                     MainFragment.mImgs.add(image);
                     MainFragment.mImagesTermsAdapter.notifyDataSetChanged();
-                    Log.d(TAG_, image.getTitle() + " " + image.getUrl());
                 }
             }
         });
