@@ -101,7 +101,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/f_main_images_rv"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="203dp">
 
     </android.support.v7.widget.RecyclerView>
 

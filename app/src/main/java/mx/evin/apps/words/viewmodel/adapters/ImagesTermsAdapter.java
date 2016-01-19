@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.apache.commons.lang3.text.WordUtils;
+
 import java.util.List;
 
 import mx.evin.apps.words.R;
@@ -75,16 +77,19 @@ public class ImagesTermsAdapter extends RecyclerView.Adapter<ImagesTermsAdapter.
 
     @Override
     public void onBindViewHolder(ImagesTermsAdapter.ViewHolder viewHolder, int position) {
+        //TODO Do not fix image size
+
         Img image = mImages.get(position);
 
         ImageView imageView = viewHolder.imageView;
-        Picasso.with(mContext).load(image.getUrl()).into(imageView);
+        Picasso.with(mContext).load(image.getUrl()).resize(320, 180).centerCrop().into(imageView);
+//        Picasso.with(mContext).load(image.getUrl()).fit().into(imageView);
 
         TextView textWords = viewHolder.txtImage;
-        textWords.setText(image.getTitle());
+        textWords.setText(WordUtils.capitalize(image.getTitle()));
 
         TextView textPack = viewHolder.txtPack;
-        textPack.setText(image.getDescription());
+        textPack.setText(WordUtils.capitalize(image.getDescription()))  ;
 
         viewHolder.idImage = image.getObjectId();
     }
