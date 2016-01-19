@@ -30,7 +30,7 @@ public class SearchTermFragment extends DialogFragment {
     public static TermAutoAdapter mAdapter;
 
     static {
-        mTerms = MainVM.getTerms();
+        mTerms = new ArrayList<>();
         mAdapter = new TermAutoAdapter(mTerms);
     }
 

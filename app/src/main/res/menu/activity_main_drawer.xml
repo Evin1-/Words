@@ -8,10 +8,10 @@
             android:icon="@drawable/ic_home_black_48dp"
             android:title="@string/nav_home" />
 
-        <item
-            android:id="@+id/nav_technology"
-            android:icon="@drawable/ic_android_black_48dp"
-            android:title="@string/nav_change_technology" />
+        <!--<item-->
+            <!--android:id="@+id/nav_technology"-->
+            <!--android:icon="@drawable/ic_android_black_48dp"-->
+            <!--android:title="@string/nav_change_technology" />-->
 
         <item
             android:id="@+id/nav_history"
@@ -25,15 +25,15 @@
                 android:icon="@drawable/ic_photo_black_48dp"
                 android:title="@string/nav_toggle_images_hide" />
 
-            <item
-                android:id="@+id/nav_connect_facebook"
-                android:icon="@drawable/ic_face_black_48dp"
-                android:title="@string/nav_connect_facebook" />
+            <!--<item-->
+                <!--android:id="@+id/nav_connect_facebook"-->
+                <!--android:icon="@drawable/ic_face_black_48dp"-->
+                <!--android:title="@string/nav_connect_facebook" />-->
 
-            <item
-                android:id="@+id/nav_connect_twitter"
-                android:icon="@drawable/ic_person_outline_black_48dp"
-                android:title="@string/nav_connect_twitter" />
+            <!--<item-->
+                <!--android:id="@+id/nav_connect_twitter"-->
+                <!--android:icon="@drawable/ic_person_outline_black_48dp"-->
+                <!--android:title="@string/nav_connect_twitter" />-->
         </menu>
     </item>
 

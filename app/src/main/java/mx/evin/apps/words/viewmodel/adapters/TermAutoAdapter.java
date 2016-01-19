@@ -31,8 +31,8 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
     //TODO Check if well filtered when a lot of items
     //TODO Refresh RecyclerViews when creating new AddTermFragments
 
-    private static List<Term> mOriginalTerms;
-    private static List<Term> mFilteredTerms;
+    private List<Term> mOriginalTerms;
+    private List<Term> mFilteredTerms;
     private static final String TAG_ = "TermAutoAdapterTAG_";
     private static SharedPreferences mSharedPreferences;
 

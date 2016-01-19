@@ -30,6 +30,7 @@ import android.widget.FrameLayout;
 import com.parse.ParseUser;
 
 import mx.evin.apps.words.view.fragments.AboutFragment;
+import mx.evin.apps.words.view.fragments.HistoryFragment;
 import mx.evin.apps.words.view.fragments.MainFragment;
 import mx.evin.apps.words.view.fragments.SearchTermFragment;
 import mx.evin.apps.words.view.fragments.SearchTermGoogleFragment;
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
-    private FrameLayout mMainFragment;
+    private FrameLayout mMainFrame;
     private SharedPreferences mSharedPref;
     private ActionBar mActionBar;
 
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.a_main_drawer);
         mNavigationView = (NavigationView) findViewById(R.id.a_main_nav);
-        mMainFragment = (FrameLayout) findViewById(R.id.a_main_frame);
+        mMainFrame = (FrameLayout) findViewById(R.id.a_main_frame);
 
         mSharedPref = getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         mTechnology = Constants.DEFAULT_TECHNOLOGY;
@@ -181,9 +182,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.nav_technology:
+                    case R.id.nav_home:
+                        setMainFragment();
                         break;
                     case R.id.nav_history:
+                        setHistoryFragment();
                         break;
                     case R.id.nav_images:
                         setVisibilityRecycler();
@@ -203,6 +206,15 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    private void setHistoryFragment() {
+        String last_term = mSharedPref.getString(LAST_TERM_KEY_, "--");
+        if (last_term.equals("--")){
+            getSupportFragmentManager().beginTransaction().replace(mMainFrame.getId(), new StartingFragment()).commit();
+        }else {
+            getSupportFragmentManager().beginTransaction().replace(mMainFrame.getId(), new HistoryFragment()).commit();
+        }
     }
 
     private void startFinishingActivity() {
@@ -264,10 +276,10 @@ public class MainActivity extends AppCompatActivity {
         //TODO Update current fragment instead of creating a new one
         String last_term = mSharedPref.getString(LAST_TERM_KEY_, "--");
         if (last_term.equals("--")){
-            getSupportFragmentManager().beginTransaction().replace(mMainFragment.getId(), new StartingFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(mMainFrame.getId(), new StartingFragment()).commit();
         }else {
             MainVM.refreshCurrentTermById(last_term, this);
-            getSupportFragmentManager().beginTransaction().replace(mMainFragment.getId(), new MainFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(mMainFrame.getId(), new MainFragment()).commit();
         }
     }
 
