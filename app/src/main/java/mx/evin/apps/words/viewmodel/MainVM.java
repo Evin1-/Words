@@ -123,7 +123,7 @@ public class MainVM {
                     Pack pack = ((Pack) object);
                     textViewPack.setText(pack.getName());
                 }else {
-                    textViewPack.setText(activity.getString(R.string.f__package_placeholder));
+                    textViewPack.setText(activity.getString(R.string.f_main_package_placeholder));
                 }
             }
         });

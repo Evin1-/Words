@@ -2,7 +2,8 @@
     <string name="app_name">Words</string>
 
     <string name="a_main_search_term">Search a Term&#8230;</string>
-    <string name="f_search_term_google_hint">Search a term with Google&#8230;</string>
+    <string name="a_web_default_website_title">Android Developers</string>
+
 
     <string name="mic_icon_description">Microphone icon</string>
     <string name="url_icon_description">Link icon</string>
@@ -23,15 +24,20 @@
 
     <string name="f_starting_welcome">Welcome to Words!</string>
     <string name="f_starting_get_started">Get started&#8230;</string>
+
     <string name="f_placeholder">Placeholder</string>
     <string name="f_placeholder_big">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap</string>
 
+    <string name="f_main_package_placeholder">Android Package</string>
+    <string name="f_main_more">More</string>
+
+
     <string name="f_search_term_speak_now">Speak now&#8230;</string>
     <string name="f_search_term_speak_press">Press the button&#8230;</string>
+
     <string name="f_search_term_google_btn">Search</string>
+    <string name="f_search_term_google_hint">Search a term with Google&#8230;</string>
+
     <string name="recycler_item_add_btn">Add</string>
     <string name="recycler_item_go_btn">Go</string>
-    <string name="a_web_default_website_title">Android Developers</string>
-    <string name="f__package_placeholder">Android Package</string>
-    <string name="f_main_more">More</string>
 </resources>
