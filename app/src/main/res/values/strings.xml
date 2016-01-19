@@ -44,4 +44,6 @@
     <string name="f_about_author">Project created by Edwin Hernandez</string>
     <string name="f_about_company">Mobile Apps Compnay</string>
     <string name="f_about_date">January 2016</string>
+    <string name="a_main_dialog_confirm_exit">Are you sure you want to exit the application?</string>
+    <string name="a_main_dialog_thanks">Thank you for not leaving us. We love you!</string>
 </resources>
