@@ -71,7 +71,7 @@
                     android:id="@+id/f_main_url_txt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="10"
+                    android:layout_weight="5"
                     android:ellipsize="end"
                     android:textSize="@dimen/recycler_item_pack_font_size"
                     android:singleLine="true"
