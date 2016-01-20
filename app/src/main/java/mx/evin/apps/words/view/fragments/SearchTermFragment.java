@@ -71,7 +71,7 @@ public class SearchTermFragment extends DialogFragment {
 
         rvTerms.setAdapter(mAdapter);
         rvTerms.setLayoutManager(new LinearLayoutManager(getContext()));
-        SpacesItemDecoration decoration = new SpacesItemDecoration(5);
+        SpacesItemDecoration decoration = new SpacesItemDecoration(Integer.valueOf(getString(R.string.recycler_space_decoration)));
         rvTerms.addItemDecoration(decoration);
 
         mEditText.addTextChangedListener(new TextWatcher() {
