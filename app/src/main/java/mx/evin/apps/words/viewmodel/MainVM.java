@@ -62,32 +62,58 @@ public class MainVM {
 
     private static void initializeTerms() {
         ParseQuery<ParseObject> query = new ParseQuery<>("Term");
-
+        query.fromLocalDatastore();
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
                 if (e == null) {
-                    for (ParseObject object : objects) {
-                        Term term = (Term) object;
-                        SearchTermFragment.mTerms.add(term);
-                        SearchTermVoiceFragment.mTerms.add(term);
-                        SearchTermFragment.mAdapter.notifyDataSetChanged();
-                        SearchTermVoiceFragment.mAdapter.notifyDataSetChanged();
-                        object.pinInBackground();
-                        mTerms.add(term);
-                        object.getParseObject("pack").fetchIfNeededInBackground(new GetCallback<ParseObject>() {
-                            @Override
-                            public void done(ParseObject object, ParseException e) {
-                                object.pinInBackground();
-                                SearchTermFragment.mAdapter.notifyDataSetChanged();
-                                SearchTermVoiceFragment.mAdapter.notifyDataSetChanged();
-                            }
-                        });
+                    if (objects == null || objects.size() == 0){
+                        initializeTermsOnline();
+                    }else {
+                        updateTerms(objects);
                     }
-                    SearchTermFragment.mAdapter.notifyDataSetChanged();
-                    SearchTermVoiceFragment.mAdapter.notifyDataSetChanged();
                 } else {
-                    Log.d(TAG_, "Error retrieving terms + " + e.toString());
+                    initializeTermsOnline();
+                }
+            }
+        });
+    }
+
+    private static void updateTerms(List<ParseObject> objects) {
+        for (ParseObject object : objects) {
+            notifyAdapters((Term) object);
+            object.pinInBackground();
+            object.getParseObject("pack").fetchInBackground(new GetCallback<ParseObject>() {
+                @Override
+                public void done(ParseObject object, ParseException e) {
+                    if (e == null){
+                        object.pinInBackground();
+                        notifyAdapters(null);
+                    }
+                }
+            });
+        }
+    }
+
+    private static void notifyAdapters(Term term){
+        if (term != null){
+            SearchTermFragment.mTerms.add(term);
+            SearchTermVoiceFragment.mTerms.add(term);
+            mTerms.add(term);
+        }
+        SearchTermFragment.mAdapter.notifyDataSetChanged();
+        SearchTermVoiceFragment.mAdapter.notifyDataSetChanged();
+    }
+
+    private static void initializeTermsOnline(){
+        ParseQuery<ParseObject> query = new ParseQuery<>("Term");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if (e == null) {
+                    updateTerms(objects);
+                } else {
+                    Log.d(TAG_, "TermsOnline + " + e.toString());
                 }
             }
         });

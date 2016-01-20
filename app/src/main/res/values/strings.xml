@@ -47,6 +47,6 @@
     <string name="a_main_dialog_confirm_exit">Are you sure you want to exit the application?</string>
     <string name="a_main_dialog_thanks">Thank you for not leaving us. We love you!</string>
 
-    <string name="f_search_recycler_space_decoration">1</string>
+    <string name="f_search_recycler_space_decoration">5</string>
 
 </resources>
