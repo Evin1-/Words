@@ -16,7 +16,7 @@
     <dimen name="f_starting_title_size">20sp</dimen>
     <dimen name="f_main_separator_height">5dp</dimen>
     <dimen name="f_main_card_padding">8dp</dimen>
-    <dimen name="f_main_related_card_padding">10dp</dimen>
+    <dimen name="f_main_related_card_padding">5dp</dimen>
     <dimen name="f_main_content_font_title_size">20sp</dimen>
     <dimen name="f_main_title_font_size">15sp</dimen>
     <dimen name="f_main_pack_font_size">12sp</dimen>
@@ -35,5 +35,7 @@
     <dimen name="f_search_term_linear_padding">15dp</dimen>
     <dimen name="f_main_hierarchy_font_size">13sp</dimen>
     <dimen name="f_main_horizontal_margin">5dp</dimen>
+    <dimen name="f_main_related_card_edge_padding">10dp</dimen>
+    <dimen name="f_main_related_term_font_size">13sp</dimen>
 
 </resources>
