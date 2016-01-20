@@ -19,7 +19,7 @@
     <dimen name="f_main_related_card_padding">10dp</dimen>
     <dimen name="f_main_content_font_title_size">20sp</dimen>
     <dimen name="f_main_title_font_size">15sp</dimen>
-    <dimen name="f_main_pack_font_size">13sp</dimen>
+    <dimen name="f_main_pack_font_size">12sp</dimen>
 
     <dimen name="recycler_item_card_padding">5dp</dimen>
     <dimen name="recycler_item_pack_font_size">12sp</dimen>

@@ -34,6 +34,7 @@ public class HistoryFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        //TODO Set first fragment with more space not last one
         super.onViewCreated(view, savedInstanceState);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.f_history_rv);
         SpacesItemDecoration spacesItemDecoration = new SpacesItemDecoration(Integer.valueOf(getString(R.string.f_history_recycler_space_decoration)));
