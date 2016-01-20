@@ -34,5 +34,6 @@
     <dimen name="f_search_term_voice_message_font_size">15sp</dimen>
     <dimen name="f_search_term_linear_padding">15dp</dimen>
     <dimen name="f_main_hierarchy_font_size">13sp</dimen>
+    <dimen name="f_main_horizontal_margin">5dp</dimen>
 
 </resources>
