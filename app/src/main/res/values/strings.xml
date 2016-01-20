@@ -48,5 +48,6 @@
     <string name="a_main_dialog_thanks">Thank you for not leaving us. We love you!</string>
 
     <string name="f_search_recycler_space_decoration">5</string>
+    <string name="f_history_recycler_space_decoration">10</string>
 
 </resources>
