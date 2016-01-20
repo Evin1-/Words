@@ -261,11 +261,13 @@ public class MainVM {
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
-                for (ParseObject object : objects){
-                    object.pinInBackground();
-                    Img image = (Img) object;
-                    MainFragment.mImgs.add(image);
-                    MainFragment.mImagesTermsAdapter.notifyDataSetChanged();
+                if (e == null){
+                    for (ParseObject object : objects){
+                        object.pinInBackground();
+                        Img image = (Img) object;
+                        MainFragment.mImgs.add(image);
+                        MainFragment.mImagesTermsAdapter.notifyDataSetChanged();
+                    }
                 }
             }
         });
