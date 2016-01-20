@@ -13,6 +13,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -62,6 +63,8 @@ public class SearchTermGoogleFragment extends DialogFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         //TODO Set error message on empty string
         super.onViewCreated(view, savedInstanceState);
+
+        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.f_search_google_items_rv);
         final EditText editText = (EditText) view.findViewById(R.id.f_search_term_google_input_et);

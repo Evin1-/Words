@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 
@@ -47,8 +48,11 @@ public class SearchTermFragment extends DialogFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         mEditText = (EditText) view.findViewById(R.id.f_search_term_input_et);
         mEditText.requestFocus();
+        //TODO Check if remove on production
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
         RecyclerView rvTerms = (RecyclerView) view.findViewById(R.id.f_add_term_terms_rv);

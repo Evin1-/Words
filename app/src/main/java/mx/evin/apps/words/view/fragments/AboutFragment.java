@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 
 import mx.evin.apps.words.R;
 
@@ -29,5 +30,6 @@ public class AboutFragment extends DialogFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
     }
 }

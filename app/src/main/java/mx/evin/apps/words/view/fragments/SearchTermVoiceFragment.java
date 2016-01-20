@@ -13,6 +13,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -55,6 +56,8 @@ public class SearchTermVoiceFragment extends DialogFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         if (getView() == null)
             return;
