@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -60,11 +61,13 @@ public class MainActivity extends AppCompatActivity {
     //TODO Add back button
     //TODO Set max lines Docs textview and details view
     //TODO Service that updates db
+    //TODO Add type of concept (class, interface, etc)
 
     private static final String TAG_ = "MainActivityTAG_";
     private static final String LAST_TERM_KEY_ = Constants.LAST_TERM_KEY;
     private static String GOOGLE_API_KEY;
     private static String GOOGLE_CUSTOM_SEARCH_KEY;
+    private String android_id;
     public static String mTechnology;
 
     private ActionBarDrawerToggle mDrawerToggle;
@@ -93,7 +96,15 @@ public class MainActivity extends AppCompatActivity {
         configureActionBar();
         setTechnology();
 
-        LoginVM.loginSequence(this);
+        try {
+            android_id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+        } catch (Exception e) {
+            android_id = "user_123";
+            e.printStackTrace();
+        } finally {
+            LoginVM.loginSequence(this, android_id);
+        }
+
         MainVM.initializeMain();
 
         setMainFragment();

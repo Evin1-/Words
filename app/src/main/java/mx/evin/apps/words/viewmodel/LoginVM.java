@@ -15,8 +15,10 @@ import mx.evin.apps.words.MainActivity;
 public class LoginVM {
     //TODO Login with Facebook, Twitter and Google+
     private static final String TAG_ = "ViewModelTAG_";
+    private static String mAndroidId;
 
-    public static void loginSequence(MainActivity activity) {
+    public static void loginSequence(MainActivity activity, String androidId) {
+        mAndroidId = androidId;
         ParseUser user = ParseUser.getCurrentUser();
         if (user == null) {
             Log.d(TAG_, "Not logged in");
@@ -29,7 +31,7 @@ public class LoginVM {
     }
 
     private static void TryLogin(final MainActivity activity) {
-        ParseUser.logInInBackground("my_name34", "my_pass4", new LogInCallback() {
+        ParseUser.logInInBackground(mAndroidId, "my_pass4", new LogInCallback() {
             public void done(ParseUser user, ParseException e) {
                 if (user != null) {
                     activity.userReady();
@@ -44,9 +46,9 @@ public class LoginVM {
 
     private static void startSignUp(final MainActivity activity) {
         final ParseUser user = new ParseUser();
-        user.setUsername("my_name34");
+        user.setUsername(mAndroidId);
         user.setPassword("my_pass4");
-        user.setEmail("email334@example.com");
+        user.setEmail(mAndroidId + "@example.com");
 
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
