@@ -15,6 +15,7 @@ import mx.evin.apps.words.R;
 import mx.evin.apps.words.WebActivity;
 import mx.evin.apps.words.model.entities.gsearch.Article;
 import mx.evin.apps.words.model.entities.gsearch.Item;
+import mx.evin.apps.words.model.entities.gsearch.Pagemap;
 import mx.evin.apps.words.viewmodel.utils.Constants;
 
 /**
@@ -72,12 +73,18 @@ public class TermGoogleAdapter extends RecyclerView.Adapter<TermGoogleAdapter.Vi
 
     @Override
     public void onBindViewHolder(TermGoogleAdapter.ViewHolder viewHolder, int position) {
-        Item item = mItems.get(position);
-        List<Article> article = item.getPagemap().getArticle();
-
         TextView textWords = viewHolder.txtTitle;
-        TextView textPack = viewHolder.txtDescription;
+        TextView textDesc = viewHolder.txtDescription;
         TextView textURL = viewHolder.txtURL;
+
+        Item item = mItems.get(position);
+
+        Pagemap pagemap = item.getPagemap();
+        List<Article> article = null;
+
+        if (pagemap != null){
+            article = pagemap.getArticle();
+        }
 
         if (article != null && article.size() > 0){
             String name = article.get(0).getName();
@@ -88,12 +95,12 @@ public class TermGoogleAdapter extends RecyclerView.Adapter<TermGoogleAdapter.Vi
 
             String articleBody = article.get(0).getArticlebody();
             if (articleBody == null || articleBody.length() < 1)
-                textPack.setText(item.getSnippet());
+                textDesc.setText(item.getSnippet());
             else
-                textPack.setText(articleBody);
+                textDesc.setText(articleBody);
         }else {
             textWords.setText(item.getTitle());
-            textPack.setText(item.getSnippet());
+            textDesc.setText(item.getSnippet());
         }
 
         textURL.setText(item.getLink());
