@@ -28,10 +28,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.crashlytics.android.Crashlytics;
 import com.parse.ParseUser;
 
-import io.fabric.sdk.android.Fabric;
 import mx.evin.apps.words.view.fragments.AboutFragment;
 import mx.evin.apps.words.view.fragments.HistoryFragment;
 import mx.evin.apps.words.view.fragments.MainFragment;
@@ -41,7 +39,6 @@ import mx.evin.apps.words.view.fragments.SearchTermVoiceFragment;
 import mx.evin.apps.words.view.fragments.StartingFragment;
 import mx.evin.apps.words.viewmodel.LoginVM;
 import mx.evin.apps.words.viewmodel.MainVM;
-import mx.evin.apps.words.viewmodel.ParseVM;
 import mx.evin.apps.words.viewmodel.async.CustomSearchAsyncTask;
 import mx.evin.apps.words.viewmodel.utils.Constants;
 
@@ -80,7 +77,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics());
+
+        MainVM.initializeThirdPartyLibs(this);
+
         setContentView(R.layout.activity_main);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.a_main_drawer);
@@ -94,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
         configureActionBar();
         setTechnology();
 
-        ParseVM.parseStart(this);
         LoginVM.loginSequence(this);
         MainVM.initializeMain();
 

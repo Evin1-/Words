@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -29,6 +30,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.fabric.sdk.android.Fabric;
 import mx.evin.apps.words.MainActivity;
 import mx.evin.apps.words.R;
 import mx.evin.apps.words.WebActivity;
@@ -70,9 +72,9 @@ public class MainVM {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
                 if (e == null) {
-                    if (objects == null || objects.size() == 0){
+                    if (objects == null || objects.size() == 0) {
                         initializeTermsOnline();
-                    }else {
+                    } else {
                         updateTerms(objects);
                     }
                 } else {
@@ -349,14 +351,14 @@ public class MainVM {
         query.getFirstInBackground(new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject object, ParseException e) {
-                if (e == null ){
+                if (e == null) {
                     mCurrentTerm = (Term) object;
                     refreshMainFragment((Activity) mCurrentContext);
                 } else {
-                    if (lastTermWords.contains(".")){
+                    if (lastTermWords.contains(".")) {
                         String last = lastTermWords.substring(lastTermWords.lastIndexOf(".") + 1);
                         refreshCurrentTermByName(last, context, url);
-                    }else {
+                    } else {
                         try {
                             URL auxURL = new URL(mCurrentTerm.getUrl());
                             String buildURL = auxURL.getProtocol() + "://" + auxURL.getHost() + "/" + url;
@@ -372,5 +374,10 @@ public class MainVM {
                 }
             }
         });
+    }
+
+    public static void initializeThirdPartyLibs(MainActivity mainActivity) {
+        ParseVM.parseStart(mainActivity);
+        Fabric.with(mainActivity, new Crashlytics());
     }
 }
