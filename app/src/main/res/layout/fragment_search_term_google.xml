@@ -4,10 +4,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/f_search_google_linear"
-    android:padding="50dp"
-    android:minHeight="600dp"
-    android:layout_height="600dp"
-    android:layout_width="wrap_content"
+    android:padding="15dp"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
     android:layout_gravity="center"
     android:orientation="vertical"
     android:focusableInTouchMode="true">
@@ -37,7 +36,6 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/f_search_google_items_rv"
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 

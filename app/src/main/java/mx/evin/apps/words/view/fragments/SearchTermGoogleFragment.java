@@ -1,6 +1,7 @@
 package mx.evin.apps.words.view.fragments;
 
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -52,6 +53,17 @@ public class SearchTermGoogleFragment extends DialogFragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        Dialog dialog = getDialog();
+        if (dialog != null) {
+            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+            int height = ViewGroup.LayoutParams.MATCH_PARENT;
+            dialog.getWindow().setLayout(width, height);
+        }
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -80,7 +92,7 @@ public class SearchTermGoogleFragment extends DialogFragment {
         SpacesItemDecoration decoration = new SpacesItemDecoration(5);
         recyclerView.addItemDecoration(decoration);
 
-        editText.setOnEditorActionListener(new EditText.OnEditorActionListener(){
+        editText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
