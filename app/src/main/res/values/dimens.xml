@@ -31,5 +31,6 @@
     <dimen name="f_about_title_font_size">15sp</dimen>
     <dimen name="f_about_padding">20dp</dimen>
     <dimen name="f_search_term_recycler_layout_margin">10dp</dimen>
+    <dimen name="f_search_term_voice_message_font_size">15sp</dimen>
 
 </resources>
