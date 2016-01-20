@@ -51,6 +51,7 @@ public class MainFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //TODO Fix RecyclerViews
         
         RecyclerView relatedRecyclerView = (RecyclerView) view.findViewById(R.id.f_main_related_rv);
         RecyclerView imagesRecyclerView = (RecyclerView) view.findViewById(R.id.f_main_images_rv);

@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.URLSpan;
@@ -211,10 +214,23 @@ public class MainVM {
         final int end = strBuilder.getSpanEnd(span);
         int flags = strBuilder.getSpanFlags(span);
         ClickableSpan clickable = new ClickableSpan() {
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+
+                int intColor = (Build.VERSION.SDK_INT >= 23) ?
+                        ContextCompat.getColor(mCurrentContext, R.color.color_primary_dark) :
+                        mCurrentContext.getResources().getColor(R.color.color_primary_dark);
+
+                ds.setUnderlineText(false);
+                ds.setColor(intColor);
+            }
+
             public void onClick(View view) {
                 char[] aux = new char[end - start];
                 strBuilder.getChars(start, end, aux, 0);
                 refreshCurrentTermByName(new String(aux), mCurrentContext, span.getURL());
+
             }
         };
         strBuilder.setSpan(clickable, start, end, flags);
