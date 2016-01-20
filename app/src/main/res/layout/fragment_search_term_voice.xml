@@ -38,6 +38,7 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recAutoVoice"
+        android:layout_margin="@dimen/f_search_term_recycler_layout_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

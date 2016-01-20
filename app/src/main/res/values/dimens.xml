@@ -21,12 +21,15 @@
     <dimen name="f_main_title_font_size">15sp</dimen>
     <dimen name="f_main_pack_font_size">13sp</dimen>
 
-    <dimen name="recycler_item_card_padding">8dp</dimen>
+    <dimen name="recycler_item_card_padding">5dp</dimen>
     <dimen name="recycler_item_pack_font_size">12sp</dimen>
     <dimen name="recycler_item_btn_font_size">12sp</dimen>
     <dimen name="recycler_item_text_padding">2dp</dimen>
+    <dimen name="recycler_item_term_font_size">13sp</dimen>
+
     <dimen name="f_main_related_recycler_height">65dp</dimen>
     <dimen name="f_about_title_font_size">15sp</dimen>
     <dimen name="f_about_padding">20dp</dimen>
+    <dimen name="f_search_term_recycler_layout_margin">10dp</dimen>
 
 </resources>

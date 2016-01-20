@@ -39,7 +39,7 @@
     <string name="f_search_term_google_btn">Search</string>
     <string name="f_search_term_google_hint">Search a term with Google&#8230;</string>
 
-    <string name="recycler_item_add_btn">Magic</string>
+    <string name="recycler_item_add_btn">View</string>
     <string name="recycler_item_go_btn">Go</string>
     <string name="f_about_author">Project created by Edwin Hernandez</string>
     <string name="f_about_company">Mobile Apps Company</string>
