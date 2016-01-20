@@ -89,7 +89,7 @@ public class SearchTermGoogleFragment extends DialogFragment {
 
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        SpacesItemDecoration decoration = new SpacesItemDecoration(Integer.valueOf(getString(R.string.recycler_space_decoration)));
+        SpacesItemDecoration decoration = new SpacesItemDecoration(Integer.valueOf(getString(R.string.f_search_recycler_space_decoration)));
         recyclerView.addItemDecoration(decoration);
 
         editText.setOnEditorActionListener(new EditText.OnEditorActionListener() {

@@ -81,7 +81,7 @@ public class SearchTermVoiceFragment extends DialogFragment {
 
         rvTerms.setAdapter(mAdapter);
         rvTerms.setLayoutManager(new LinearLayoutManager(getContext()));
-        SpacesItemDecoration decoration = new SpacesItemDecoration(Integer.valueOf(getString(R.string.recycler_space_decoration)));
+        SpacesItemDecoration decoration = new SpacesItemDecoration(Integer.valueOf(getString(R.string.f_search_recycler_space_decoration)));
         rvTerms.addItemDecoration(decoration);
 
         FloatingActionButton floatingActionButton = (FloatingActionButton) getView().findViewById(R.id.fab1);
