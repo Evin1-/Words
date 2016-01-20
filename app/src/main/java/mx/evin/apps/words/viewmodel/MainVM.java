@@ -337,35 +337,22 @@ public class MainVM {
                     mCurrentTerm = (Term) object;
                     refreshMainFragment((Activity) mCurrentContext);
                 } else {
-                    ParseQuery<ParseObject> query = new ParseQuery<>("Term");
-                    query.whereEqualTo("words", lastTermWords);
-                    query.getFirstInBackground(new GetCallback<ParseObject>() {
-                        @Override
-                        public void done(ParseObject object, ParseException e) {
-                            if (e == null){
-                                object.pinInBackground();
-                                mCurrentTerm = (Term) object;
-                                refreshMainFragment((Activity) mCurrentContext);
-                            } else {
-                                if (lastTermWords.contains(".")){
-                                    String last = lastTermWords.substring(lastTermWords.lastIndexOf(".") + 1);
-                                    refreshCurrentTermByName(last, context, url);
-                                }else {
-                                    try {
-                                        URL auxURL = new URL(mCurrentTerm.getUrl());
-                                        String buildURL = auxURL.getProtocol() + "://" + auxURL.getHost() + "/" + url;
+                    if (lastTermWords.contains(".")){
+                        String last = lastTermWords.substring(lastTermWords.lastIndexOf(".") + 1);
+                        refreshCurrentTermByName(last, context, url);
+                    }else {
+                        try {
+                            URL auxURL = new URL(mCurrentTerm.getUrl());
+                            String buildURL = auxURL.getProtocol() + "://" + auxURL.getHost() + "/" + url;
 
-                                        Intent intent = new Intent(mCurrentContext, WebActivity.class);
-                                        intent.putExtra(Constants.TITLE_WEB_KEY, lastTermWords);
-                                        intent.putExtra(Constants.URL_WEB_KEY, buildURL);
-                                        mCurrentContext.startActivity(intent);
-                                    } catch (MalformedURLException e1) {
-                                        Log.e(TAG_, e1.toString());
-                                    }
-                                }
-                            }
+                            Intent intent = new Intent(mCurrentContext, WebActivity.class);
+                            intent.putExtra(Constants.TITLE_WEB_KEY, lastTermWords);
+                            intent.putExtra(Constants.URL_WEB_KEY, buildURL);
+                            mCurrentContext.startActivity(intent);
+                        } catch (MalformedURLException e1) {
+                            Log.e(TAG_, e1.toString());
                         }
-                    });
+                    }
                 }
             }
         });
