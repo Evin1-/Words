@@ -1,44 +1,42 @@
-<!-- TODO Fix dimen -->
-<!-- TODO Fix view layout design -->
-<!-- fragment_edit_name.xml -->
+<!-- TODO Fix dimen --><!-- TODO Fix view layout design --><!-- fragment_edit_name.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/f_search_google_linear"
-    android:padding="15dp"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
+    android:focusableInTouchMode="true"
     android:orientation="vertical"
-    android:focusableInTouchMode="true">
+    android:padding="15dp">
 
 
     <android.support.design.widget.TextInputLayout
-        app:hintTextAppearance="@style/MainColorTextInput"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:hintTextAppearance="@style/MainColorTextInput">
 
         <EditText
-            android:hint="@string/f_search_term_google_hint"
             android:id="@+id/f_search_term_google_input_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:imeOptions="actionDone" />
+            android:hint="@string/f_search_term_google_hint"
+            android:imeOptions="actionDone"
+            android:inputType="text" />
 
     </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/f_search_term_google_search_btn"
-        android:text="@string/f_search_term_google_btn"
-        android:onClick="start_custom_google_search"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:onClick="start_custom_google_search"
+        android:text="@string/f_search_term_google_btn" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/f_search_google_items_rv"
-        android:layout_margin="@dimen/f_search_term_recycler_layout_margin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/f_search_term_recycler_layout_margin">
 
     </android.support.v7.widget.RecyclerView>
 

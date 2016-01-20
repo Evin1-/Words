@@ -1,45 +1,41 @@
-<!-- fragment_edit_name.xml -->
-<!-- TODO Fix dimens -->
-<!-- TODO Set dimens depending on screen -->
-<!-- TODO Add cancel button -->
-<!-- TODO Replace add for search in ids -->
+<!-- fragment_edit_name.xml --><!-- TODO Fix dimens --><!-- TODO Set dimens depending on screen --><!-- TODO Add cancel button --><!-- TODO Replace add for search in ids -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/edit_name"
-    android:padding="15dp"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:orientation="vertical"  >
+    android:orientation="vertical"
+    android:padding="15dp">
 
     <LinearLayout
-        android:gravity="center"
-        android:orientation="vertical"
         android:id="@+id/inputTerm"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab1"
-            android:src="@drawable/ic_mic_white_48dp"
-            android:clickable="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/ic_mic_white_48dp" />
 
         <TextView
             android:id="@+id/txtVoice"
-            android:textStyle="bold"
-            android:textSize="@dimen/f_search_term_voice_message_font_size"
-            android:text="@string/f_search_term_speak_press"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/f_search_term_speak_press"
+            android:textSize="@dimen/f_search_term_voice_message_font_size"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recAutoVoice"
-        android:layout_margin="@dimen/f_search_term_recycler_layout_margin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/f_search_term_recycler_layout_margin">
 
     </android.support.v7.widget.RecyclerView>
 

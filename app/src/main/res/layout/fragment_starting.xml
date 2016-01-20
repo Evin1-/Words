@@ -2,25 +2,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     android:layout_margin="@dimen/activity_horizontal_margin"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".view.fragments.StartingFragment">
 
     <TextView
         android:id="@+id/f_starting_welcome_txt"
-        android:textSize="@dimen/f_starting_title_size"
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/f_starting_welcome" />
+        android:gravity="center"
+        android:text="@string/f_starting_welcome"
+        android:textSize="@dimen/f_starting_title_size" />
 
     <Button
         style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_marginTop="@dimen/f_starting_button_margin_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/f_starting_button_margin_top"
         android:onClick="search_term"
-        android:text="@string/f_starting_get_started"/>
+        android:text="@string/f_starting_get_started" />
 
 </LinearLayout>

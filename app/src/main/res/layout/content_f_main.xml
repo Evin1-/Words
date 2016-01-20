@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -49,8 +49,8 @@
                     android:id="@+id/f_main_hierarchy_txt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:text="@string/f_placeholder"
                     android:textColor="@color/color_primary"
                     android:textStyle="bold" />
@@ -73,9 +73,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
                     android:ellipsize="end"
-                    android:textSize="@dimen/recycler_item_pack_font_size"
                     android:singleLine="true"
-                    android:text="@string/f_placeholder_big" />
+                    android:text="@string/f_placeholder_big"
+                    android:textSize="@dimen/recycler_item_pack_font_size" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -103,10 +103,10 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:padding="@dimen/f_main_card_padding"
             android:id="@+id/f_main_doc_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="@dimen/f_main_card_padding"
             android:text="@string/f_placeholder_big" />
 
     </android.support.v7.widget.CardView>

@@ -1,35 +1,33 @@
-<!-- TODO Fix dimen -->
-<!-- TODO Set padding dimen for tablets-->
-<!-- fragment_edit_name.xml -->
+<!-- TODO Fix dimen --><!-- TODO Set padding dimen for tablets--><!-- fragment_edit_name.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="15dp"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="15dp">
 
 
     <android.support.design.widget.TextInputLayout
-        app:hintTextAppearance="@style/MainColorTextInput"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:hintTextAppearance="@style/MainColorTextInput">
 
         <EditText
-            android:hint="@string/a_main_search_term"
             android:id="@+id/f_search_term_input_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:imeOptions="actionDone" />
+            android:hint="@string/a_main_search_term"
+            android:imeOptions="actionDone"
+            android:inputType="text" />
 
     </android.support.design.widget.TextInputLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/f_add_term_terms_rv"
-        android:layout_margin="@dimen/f_search_term_recycler_layout_margin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/f_search_term_recycler_layout_margin">
 
     </android.support.v7.widget.RecyclerView>
 
