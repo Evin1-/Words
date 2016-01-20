@@ -48,7 +48,10 @@
         <meta-data
             android:name="GOOGLE_CUSTOM_SEARCH"
             android:value="" />
-
+        <!-- Put fabric API key here-->
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="" />
     </application>
 
 </manifest>

@@ -28,8 +28,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.crashlytics.android.Crashlytics;
 import com.parse.ParseUser;
 
+import io.fabric.sdk.android.Fabric;
 import mx.evin.apps.words.view.fragments.AboutFragment;
 import mx.evin.apps.words.view.fragments.HistoryFragment;
 import mx.evin.apps.words.view.fragments.MainFragment;
@@ -78,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.a_main_drawer);
