@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:orientation="vertical"
-    android:padding="15dp">
+    android:padding="@dimen/f_search_term_linear_padding">
 
     <LinearLayout
         android:id="@+id/inputTerm"

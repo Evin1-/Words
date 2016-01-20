@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
-    android:padding="15dp">
+    android:padding="@dimen/f_search_term_linear_padding">
 
 
     <android.support.design.widget.TextInputLayout
