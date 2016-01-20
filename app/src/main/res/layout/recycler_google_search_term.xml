@@ -1,59 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- TODO Fix styles -->
+<?xml version="1.0" encoding="utf-8"?><!-- TODO Fix styles -->
 <android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="wrap_content">
 
     <LinearLayout
-        android:padding="@dimen/recycler_item_card_padding"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/recycler_item_card_padding">
 
         <TextView
             android:id="@+id/recycler_google_search_title_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:ellipsize="end"
+            android:textSize="@dimen/recycler_item_term_font_size" />
+
+        <TextView
+            android:id="@+id/recycler_google_search_description_txt"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:singleLine="true"
+            android:textSize="@dimen/recycler_item_pack_font_size"
+            android:textStyle="bold" />
 
-        <LinearLayout
-            android:orientation="vertical"
+        <TextView
+            android:id="@+id/recycler_google_search_url_txt"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:singleLine="true"
+            android:textSize="@dimen/recycler_item_pack_font_size" />
 
-            <TextView
-                android:id="@+id/recycler_google_search_description_txt"
-                android:textStyle="bold"
-                android:singleLine="true"
-                android:ellipsize="end"
-                android:textSize="@dimen/recycler_item_pack_font_size"
-                android:layout_gravity="start"
-                android:gravity="start"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="end"
+            android:text="@string/recycler_item_go_btn"
+            android:textAllCaps="true"
+            android:textColor="@color/color_accent"
+            android:textSize="@dimen/recycler_item_btn_font_size"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/recycler_google_search_url_txt"
-                android:singleLine="true"
-                android:ellipsize="end"
-                android:textSize="@dimen/recycler_item_pack_font_size"
-                android:layout_gravity="start"
-                android:gravity="start"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:textAllCaps="true"
-                android:textStyle="bold"
-                android:textSize="@dimen/recycler_item_btn_font_size"
-                android:textColor="@color/color_accent"
-                android:layout_gravity="end"
-                android:text="@string/recycler_item_go_btn"
-                android:gravity="end"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>
