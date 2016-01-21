@@ -43,6 +43,16 @@ import mx.evin.apps.words.viewmodel.MainVM;
 import mx.evin.apps.words.viewmodel.async.CustomSearchAsyncTask;
 import mx.evin.apps.words.viewmodel.utils.Constants;
 
+/**
+ * Word's Main Activity.
+ * The first activity loaded after the launcher call: handles the initial setup
+ * of third party libraries, asks the {@link MainVM} class to start
+ * observing this activity which handles the database retrieval from the cloud and UI updates,
+ * retrieves the main data from the logged in user and system context and draws the concept's
+ * information into the screen.
+ * @author evin
+ * @version %I%, %G%
+ */
 public class MainActivity extends AppCompatActivity {
     //TODO Set transparent background
     //TODO Optimize imports
@@ -58,12 +68,37 @@ public class MainActivity extends AppCompatActivity {
     //TODO Create details view
     //TODO Service that updates db
     //TODO Add type of concept (class, interface, etc)
+    //TODO Finish documentation
 
+    /**
+     * Tag used in logging.
+     */
     private static final String TAG_ = "MainActivityTAG_";
+
+    /**
+     * The last term found in the system that the current user has visited.
+     */
     private static final String LAST_TERM_KEY_ = Constants.LAST_TERM_KEY;
+
+    /**
+     * Google API key used to do the Custom Google Search retrieved from the app's meta-data
+     */
     private static String GOOGLE_API_KEY;
+
+    /**
+     * Google custom key created for the Custom Search Engine retrieved from the app's meta-data
+     */
     private static String GOOGLE_CUSTOM_SEARCH_KEY;
+
+    /**
+     * Unique Android ID
+     */
     private String android_id;
+
+    /**
+     * The last technology found in the system that the current user has set.
+     * Defaults to Android.
+     */
     public static String mTechnology;
 
     private ActionBarDrawerToggle mDrawerToggle;
@@ -73,6 +108,18 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences mSharedPref;
     private ActionBar mActionBar;
 
+    /**
+     * Sets the Views and widgets used to its references in the layouts.
+     * Retrieves the google keys needed to communicate with the APIs.
+     * Configures the ActionBar to handle a DrawerLayout with a set menu.
+     * Sets the default technology.
+     * Initializes the login sequence with the {@link mx.evin.apps.words.viewmodel.LoginVM Login ViewModel}.
+     * Initializes the main third party libraries and starting
+     * setup with {@link mx.evin.apps.words.viewmodel.MainVM}
+     * Sets the Main Fragment that the user will see
+     *
+     * @param savedInstanceState Saved bundle of a previous state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +134,10 @@ public class MainActivity extends AppCompatActivity {
 
         mSharedPref = getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         mTechnology = Constants.DEFAULT_TECHNOLOGY;
+
+        if (savedInstanceState != null){
+            Log.d(TAG_, "Previous instance found!");
+        }
 
         retrieveGoogleKeys();
         configureActionBar();
@@ -106,6 +157,10 @@ public class MainActivity extends AppCompatActivity {
         setMainFragment();
     }
 
+    /**
+     * Overrides usual behavior to close DrawerLayout if it is open instead
+     * of going back (closing application).
+     */
     @Override
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -115,6 +170,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     * @param item {@inheritDoc}
+     * @return boolean Returns true if selected item was called in the Drawer's layout otherwise
+     * returns parent's logic (true to consume it here).
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
@@ -124,12 +185,22 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Syncs the state of the DrawerLayout. {@inheritDoc}
+     * @param savedInstanceState {@inheritDoc}
+     */
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mDrawerToggle.syncState();
     }
 
+    /**
+     * Method called usually when a SearchTerm Fragment has returned with a selected Term.
+     * Removes all the foreground Fragments. Sets the new MainFragment with the selected term and
+     * technology.
+     * @param intent {@inheritDoc}
+     */
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -137,6 +208,12 @@ public class MainActivity extends AppCompatActivity {
         setMainFragment();
     }
 
+    /**
+     * Removes all foreground Fragments ({@link mx.evin.apps.words.view.fragments.SearchTermFragment
+     * SearchTermFragment} | {@link mx.evin.apps.words.view.fragments.SearchTermVoiceFragment
+     * SearchTermVoiceFragment | ...}) using the {@link mx.evin.apps.words.viewmodel.utils.Constants
+     * Constants} fragment tag).
+     */
     private void removeUnusedFragments() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment addTermFragment = fragmentManager.findFragmentByTag(Constants.FRAGMENT_TAG);
@@ -145,11 +222,21 @@ public class MainActivity extends AppCompatActivity {
             fragmentManager.beginTransaction().remove(addTermFragment).commit();
     }
 
+    /**
+     * Sets the current Technology saved in the SharedPreferences.
+     * Updates the ActionBar's subtitle with it.
+     * Defaults to Android.
+     */
     private void setTechnology() {
         mTechnology = mSharedPref.getString(Constants.TECHNOLOGY_USED_TAG, Constants.DEFAULT_TECHNOLOGY);
         mActionBar.setSubtitle(mTechnology);
     }
 
+    /**
+     * Configures the action bar with the home (hamburger) button to open the DrawerLayout.
+     * Sets the current app toolbar to the created layout toolbar.
+     * Creates the listener to watch for menu item clicks.
+     */
     private void configureActionBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.a_main_toolbar);
         setSupportActionBar(toolbar);
@@ -206,6 +293,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Opens a new {@link mx.evin.apps.words.view.fragments.HistoryFragment HistoryFragment} in the
+     * main container ({@link #mMainFrame FrameLayout})
+     */
     private void setHistoryFragment() {
         String last_term = mSharedPref.getString(LAST_TERM_KEY_, "--");
 
@@ -218,6 +309,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Creates alert when user tries to finish Activity from
+     * the {@link #mDrawerLayout DrawerLayout}
+     */
     private void startFinishingActivity() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(getString(R.string.a_main_dialog_confirm_exit));
@@ -237,6 +332,12 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    /**
+     * Creates a new Intent when the user tries to rate the app from
+     * the {@link #mDrawerLayout DrawerLayout}. It first tries to access the market app in the
+     * phone if this fails it will just open a new browser with
+     * the Play Store app's name and package information page.
+     */
     private void rateApp() {
         Uri uri = Uri.parse("market://details?id=" + getBaseContext().getPackageName());
         Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
@@ -254,6 +355,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Creates a new {@link AboutFragment}.
+     */
     private void showAbout() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(new AboutFragment(), Constants.ABOUT_FRAGMENT_TAG).commit();
@@ -273,6 +377,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Sets the MainFragment that the user will see contained in {@link #mMainFrame}. It will first
+     * check if a term has already been navigated and show its info if it has, else, it
+     * will show a generic "Get started" layout.
+     */
     private void setMainFragment() {
         //TODO Update current fragment instead of creating a new one
         String last_term = mSharedPref.getString(LAST_TERM_KEY_, "--");
@@ -287,6 +396,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Update the colored MenuItem of {@link #mNavigationView} depending of the user's current
+     * view. Defaults to the Home view.
+     * @param drawerCheck Different options to color the item depending on the view. Defined
+     *                    in {@link mx.evin.apps.words.viewmodel.utils.Constants.DRAWER_CHECK}.
+     */
     private void updateDrawerChecks(Constants.DRAWER_CHECK drawerCheck) {
         Menu menu = mNavigationView.getMenu();
         MenuItem menuItem;
@@ -302,6 +417,10 @@ public class MainActivity extends AppCompatActivity {
         menuItem.setChecked(true);
     }
 
+    /**
+     * Retrieves the Google keys needed: {@link #GOOGLE_API_KEY} and {@link
+     * #GOOGLE_CUSTOM_SEARCH_KEY} from the app's metadata set in the AndroidManifest.
+     */
     private void retrieveGoogleKeys() {
         try {
             ApplicationInfo ai = getPackageManager().getApplicationInfo(this.getPackageName(), PackageManager.GET_META_DATA);
@@ -315,6 +434,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Creates a new Fragment to search for a term
+     * ({@link mx.evin.apps.words.view.fragments.SearchTermFragment
+     * SearchTermFragment} | {@link mx.evin.apps.words.view.fragments.SearchTermVoiceFragment
+     * SearchTermVoiceFragment | ...}) on the FragmentManager setting it with a tag defined
+     * in {@link Constants}
+     * @param type_add The type of searching it was called. Defined
+     *                 in {@link mx.evin.apps.words.viewmodel.utils.Constants.TYPE_ADD}
+     */
     public void addTermGeneric(Constants.TYPE_ADD type_add) {
         FragmentManager fm = getSupportFragmentManager();
         Fragment addTermFragment;
@@ -331,18 +459,46 @@ public class MainActivity extends AppCompatActivity {
         fm.beginTransaction().add(addTermFragment, Constants.FRAGMENT_TAG).commit();
     }
 
+    /**
+     * Search for a term from the local/remote database filtering its values with an EditText.
+     * It creates a new {@link SearchTermFragment}.
+     * @param view The View that created the event. Usually the Search a Term... button, the pen
+     *             in the bottom menu or the "Getting started" message.
+     */
     public void search_term(View view) {
         addTermGeneric(Constants.TYPE_ADD.WRITTEN);
     }
 
+    /**
+     * Search for a term from the local/remote database filtering its values with a SpeechRecognition
+     * engine defined in {@link mx.evin.apps.words.viewmodel.utils.VoiceRecognizer}.
+     * It creates a new {@link SearchTermVoiceFragment}.
+     * @param view The View that created the event. Usually the microphone button at
+     *             the bottom menu.
+     */
     public void search_term_voice(View view) {
         addTermGeneric(Constants.TYPE_ADD.SPOKEN);
     }
 
+    /**
+     * Search for a term with a Custom Google Search. Using {@link #GOOGLE_CUSTOM_SEARCH_KEY}
+     * and {@link #GOOGLE_API_KEY} to make a Retrofit call to the results. It creates a
+     * new {@link SearchTermGoogleFragment}.
+     * @param view The View that created the event. Usually the magnifier button at
+     *             the bottom menu.
+     * @see <a href= "https://developers.google.com/custom-search/docs/overview"/>Google's
+     * Custom Search docs</a>
+     */
     public void search_term_google(View view) {
         addTermGeneric(Constants.TYPE_ADD.GOOGLED);
     }
 
+    /**
+     * Creates a new AsyncTask defined in {@link CustomSearchAsyncTask} when a user has
+     * called a Custom Google Search from {@link SearchTermGoogleFragment}.
+     * @param view The View that created the event. Usually the "Search" button
+     *             at {@link SearchTermGoogleFragment}.
+     */
     public void start_custom_google_search(View view) {
         //TODO Remove focus from EditText
         String searchTerm = SearchTermGoogleFragment.searchTerm;
@@ -352,6 +508,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Creates a new Intent to open a term in a WebView contained in {@link WebActivity}.
+     * It passes the main url and its title.
+     * @param view The View that created the event. Usually a CardView in
+     *             a {@link SearchTermGoogleFragment} or a link
+     *             in the docs TextView from the {@link MainFragment}.
+     */
     public void start_web_activity(View view) {
         Intent intent = new Intent(this, WebActivity.class);
 
