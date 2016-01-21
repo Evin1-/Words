@@ -15,7 +15,6 @@ public class MyTagHandler implements Html.TagHandler {
     @Override
     public void handleTag(boolean opening, String tag, Editable output, XMLReader xmlReader) {
 
-        // TODO Auto-generated method stub
         if (tag.equals("li")) {
             char lastChar = 0;
             if (output.length() > 0)

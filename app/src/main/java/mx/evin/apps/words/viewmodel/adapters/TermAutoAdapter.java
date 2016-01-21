@@ -80,7 +80,6 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(TermAutoAdapter.ViewHolder viewHolder, int position) {
-        //TODO Do already fetched check with no try catch
         Term term = mFilteredTerms.get(position);
 
         TextView textWords = viewHolder.txtTerm;
@@ -123,8 +122,6 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                //TODO Recheck this warning?
-
                 mFilteredTerms = (List<Term>) results.values;
                 notifyDataSetChanged();
             }

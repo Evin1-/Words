@@ -19,7 +19,6 @@ import retrofit2.http.Query;
  */
 public class CustomSearchAsyncTask extends AsyncTask<String, Item, Void>{
     //TODO Remove http listener
-    //TODO What happens if no results, or above limit?
 
     private static final String TAG_ = "CustomSearchATTAG_";
 
@@ -72,8 +71,6 @@ public class CustomSearchAsyncTask extends AsyncTask<String, Item, Void>{
                     publishProgress(item);
                 }
             }
-//            customSearch.getItems()
-//            Log.e(TAG_, String.valueOf(customSearch));
         }catch (Exception e){
             Log.e(TAG_, e.toString());
         }

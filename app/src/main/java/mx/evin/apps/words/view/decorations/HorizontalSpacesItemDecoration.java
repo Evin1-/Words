@@ -19,8 +19,8 @@ public class HorizontalSpacesItemDecoration extends RecyclerView.ItemDecoration 
         outRect.bottom = mSpace;
         outRect.top = mSpace;
 
-        if (parent.getChildAdapterPosition(view) != 0)
+        if (parent.getChildAdapterPosition(view) != 0){
             outRect.left = mSpace;
-//            outRect.right = mSpace;
+        }
     }
 }

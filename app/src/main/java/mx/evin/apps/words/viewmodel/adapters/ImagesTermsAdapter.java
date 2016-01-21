@@ -24,8 +24,6 @@ import mx.evin.apps.words.model.entities.parse.Img;
  */
 public class ImagesTermsAdapter extends RecyclerView.Adapter<ImagesTermsAdapter.ViewHolder>{
     //TODO Check if well filtered when a lot of items
-    //TODO Refresh RecyclerViews when creating new AddImageFragments
-
     private static List<Img> mImages;
     private Context mContext;
     private static final String TAG_ = "ImagesTermsAdapterTAG_";
@@ -44,21 +42,6 @@ public class ImagesTermsAdapter extends RecyclerView.Adapter<ImagesTermsAdapter.
             imageView = (ImageView) itemView.findViewById(R.id.recycler_images_img);
             txtImage = (TextView) itemView.findViewById(R.id.recycler_images_title_txt);
             txtPack = (TextView) itemView.findViewById(R.id.recycler_images_description_txt);
-
-            itemView.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    Log.d(TAG_, v.toString());
-//                    mSharedPreferences = v.getContext().getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = mSharedPreferences.edit();
-//                    editor.putString(Constants.LAST_TERM_KEY, idImage);
-//                    editor.apply();
-//
-//                    Intent intent = new Intent(v.getContext(), MainActivity.class);
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-//                    v.getContext().startActivity(intent);
-                }
-            });
         }
     }
 
@@ -83,7 +66,6 @@ public class ImagesTermsAdapter extends RecyclerView.Adapter<ImagesTermsAdapter.
         Img image = mImages.get(position);
 
         ImageView imageView = viewHolder.imageView;
-//        Picasso.with(mContext).load(image.getUrl()).fit().centerCrop().into(imageView);
         Picasso.with(mContext).load(image.getUrl()).resize(320, 180).centerCrop().into(imageView);
 
         TextView textWords = viewHolder.txtImage;

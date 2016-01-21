@@ -30,7 +30,7 @@ import mx.evin.apps.words.viewmodel.utils.VoiceRecognizer;
  */
 public class SearchTermVoiceFragment extends DialogFragment {
 
-    private static final String TAG_ = "SpeechRecognitionStuff";
+    private static final String TAG_ = "SpeechRecognitionTAG_";
     private TextView mTextView;
     private VoiceRecognizer mVoiceRecognizer;
 

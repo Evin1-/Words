@@ -26,8 +26,6 @@ import mx.evin.apps.words.viewmodel.utils.Constants;
  */
 public class RelatedTermsAdapter extends RecyclerView.Adapter<RelatedTermsAdapter.ViewHolder>{
     //TODO Check if well filtered when a lot of items
-    //TODO Refresh RecyclerViews when creating new AddTermFragments
-
     private static List<Term> mOriginalTerms;
     private static final String TAG_ = "RelatedTermsAdapterTAG_";
     private static SharedPreferences mSharedPreferences;

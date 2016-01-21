@@ -28,13 +28,12 @@ public class HistoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_history, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        //TODO Set first fragment with more space not last one
+        //TODO Show first term with more space not last one
         super.onViewCreated(view, savedInstanceState);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.f_history_rv);
         SpacesItemDecoration spacesItemDecoration = new SpacesItemDecoration(Integer.valueOf(getString(R.string.f_history_recycler_space_decoration)));

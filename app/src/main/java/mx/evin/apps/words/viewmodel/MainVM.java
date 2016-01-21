@@ -48,7 +48,6 @@ import mx.evin.apps.words.viewmodel.utils.MyTagHandler;
  * Created by evin on 1/10/16.
  */
 public class MainVM {
-    //TODO Offline mode first
     //TODO Check that 2 offline calls are not at the same time
     private static final String TAG_ = "MainVMTAG_";
     public static ArrayList<Term> mTerms;
@@ -129,7 +128,6 @@ public class MainVM {
     }
 
     public static void refreshMainFragment(final Activity activity) {
-        //TODO Update hierarchy, related terms and blablabal
         TextView textViewDoc = (TextView) activity.findViewById(R.id.f_main_doc_txt);
         final TextView textViewPack = (TextView) activity.findViewById(R.id.f_main_pack_txt);
         TextView textViewTitle = (TextView) activity.findViewById(R.id.f_main_title_txt);
