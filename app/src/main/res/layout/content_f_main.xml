@@ -103,8 +103,6 @@
             android:id="@+id/f_main_doc_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="100"
-            android:ellipsize="end"
             android:padding="@dimen/f_main_card_padding"
             android:text="@string/f_placeholder_big" />
 

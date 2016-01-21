@@ -29,8 +29,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.parse.ParseUser;
-
 import mx.evin.apps.words.view.fragments.AboutFragment;
 import mx.evin.apps.words.view.fragments.HistoryFragment;
 import mx.evin.apps.words.view.fragments.MainFragment;

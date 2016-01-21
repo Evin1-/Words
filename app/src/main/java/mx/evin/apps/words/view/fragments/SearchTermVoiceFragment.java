@@ -17,11 +17,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import mx.evin.apps.words.R;
-import mx.evin.apps.words.model.entities.parse.Term;
 import mx.evin.apps.words.view.decorations.SpacesItemDecoration;
+import mx.evin.apps.words.viewmodel.MainVM;
 import mx.evin.apps.words.viewmodel.adapters.TermAutoAdapter;
 import mx.evin.apps.words.viewmodel.utils.VoiceRecognizer;
 
@@ -34,12 +32,10 @@ public class SearchTermVoiceFragment extends DialogFragment {
     private TextView mTextView;
     private VoiceRecognizer mVoiceRecognizer;
 
-    public static ArrayList<Term> mTerms;
     public static TermAutoAdapter mAdapter;
 
     static {
-        mTerms = new ArrayList<>();
-        mAdapter = new TermAutoAdapter(mTerms);
+        mAdapter = new TermAutoAdapter(MainVM.mTerms);
     }
 
     public SearchTermVoiceFragment() {

@@ -11,14 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.EditText;
 
-import java.util.ArrayList;
-
 import mx.evin.apps.words.R;
-import mx.evin.apps.words.model.entities.parse.Term;
 import mx.evin.apps.words.view.decorations.SpacesItemDecoration;
+import mx.evin.apps.words.viewmodel.MainVM;
 import mx.evin.apps.words.viewmodel.adapters.TermAutoAdapter;
 
 /**
@@ -27,12 +24,10 @@ import mx.evin.apps.words.viewmodel.adapters.TermAutoAdapter;
 public class SearchTermFragment extends DialogFragment {
 
     private EditText mEditText;
-    public static ArrayList<Term> mTerms;
     public static TermAutoAdapter mAdapter;
 
     static {
-        mTerms = new ArrayList<>();
-        mAdapter = new TermAutoAdapter(mTerms);
+        mAdapter = new TermAutoAdapter(MainVM.mTerms);
     }
 
     public SearchTermFragment() {
@@ -64,8 +59,6 @@ public class SearchTermFragment extends DialogFragment {
 
         mEditText = (EditText) view.findViewById(R.id.f_search_term_input_et);
         mEditText.requestFocus();
-        //TODO Check if remove on production
-        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
         RecyclerView rvTerms = (RecyclerView) view.findViewById(R.id.f_add_term_terms_rv);
 
