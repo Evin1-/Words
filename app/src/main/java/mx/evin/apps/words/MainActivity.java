@@ -45,21 +45,17 @@ import mx.evin.apps.words.viewmodel.utils.Constants;
 
 public class MainActivity extends AppCompatActivity {
     //TODO Set transparent background
-    //TODO Remove easyLife
     //TODO Optimize imports
     //TODO Sharing and opening on push notification
     //TODO Change layout on landscape
     //TODO Select technology at first
-    //TODO Make it offline
-    //TODO Work with drawer layout options
     //TODO Create login screen
     //TODO Add push notifications magic
     //TODO Add analytics
-    //TODO Add crashalytics
     //TODO Search by package
-    //TODO Check double item bug in mItems
     //TODO Add back button
-    //TODO Set max lines Docs textview and details view
+    //TODO Set max lines in docs TextView
+    //TODO Create details view
     //TODO Service that updates db
     //TODO Add type of concept (class, interface, etc)
 

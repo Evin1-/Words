@@ -13,7 +13,6 @@ import mx.evin.apps.words.viewmodel.utils.Constants;
 public class WebActivity extends AppCompatActivity {
     //TODO Put drawer logic in a single file (VM)
     //TODO Put info in single layout and not app_bar_web app_bar_main
-    //TODO remove mItem and work only with urls
 
     private static final String TAG_ = "MainActivityTAG_";
     private WebView myWebView;
@@ -24,7 +23,6 @@ public class WebActivity extends AppCompatActivity {
         setContentView(R.layout.activity_web);
 
         myWebView = (WebView) findViewById(R.id.a_web_wv);
-//        mItem = getIntent().getParcelableExtra(Constants.ITEM_WEB_KEY);
         String receivedTitle = getIntent().getStringExtra(Constants.TITLE_WEB_KEY);
         String receivedURL = getIntent().getStringExtra(Constants.URL_WEB_KEY);
 
@@ -79,10 +77,12 @@ public class WebActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
 
         if (actionBar != null){
-            if (title.length() > 0)
+            if (title.length() > 0){
                 actionBar.setTitle(title);
-            if (url.length() > 0)
+            }
+            if (url.length() > 0){
                 actionBar.setSubtitle(url);
+            }
         }
     }
 
