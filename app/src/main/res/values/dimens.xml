@@ -37,5 +37,7 @@
     <dimen name="f_main_horizontal_margin">5dp</dimen>
     <dimen name="f_main_related_card_edge_padding">10dp</dimen>
     <dimen name="f_main_related_term_font_size">13sp</dimen>
+    <dimen name="f_main_package_font_size">12sp</dimen>
+    <dimen name="f_main_images_recycler_height">203dp</dimen>
 
 </resources>

@@ -22,7 +22,7 @@
                 android:gravity="end"
                 android:singleLine="true"
                 android:text="@string/f_placeholder"
-                android:textSize="12sp"
+                android:textSize="@dimen/f_main_package_font_size"
                 android:textStyle="bold" />
 
             <TextView
@@ -103,6 +103,8 @@
             android:id="@+id/f_main_doc_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLines="100"
+            android:ellipsize="end"
             android:padding="@dimen/f_main_card_padding"
             android:text="@string/f_placeholder_big" />
 
@@ -118,7 +120,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/f_main_images_rv"
         android:layout_width="match_parent"
-        android:layout_height="203dp">
+        android:layout_height="@dimen/f_main_images_recycler_height">
 
     </android.support.v7.widget.RecyclerView>
 
