@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             android_id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
         } catch (Exception e) {
-            android_id = "user_123";
+            android_id = Constants.DEFAULT_LOG_IN_USER;
             e.printStackTrace();
         } finally {
             LoginVM.loginSequence(this, android_id);
@@ -108,10 +108,6 @@ public class MainActivity extends AppCompatActivity {
         MainVM.initializeMain();
 
         setMainFragment();
-
-//        //TODO Remove in production
-//        easyLife();
-
     }
 
     @Override
@@ -139,12 +135,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        ParseUser.logOut();
-        super.onStop();
-    }
-
-    @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         removeUnusedFragments();
@@ -160,7 +150,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setTechnology() {
-//        mActionBar.s
         mTechnology = mSharedPref.getString(Constants.TECHNOLOGY_USED_TAG, Constants.DEFAULT_TECHNOLOGY);
         mActionBar.setSubtitle(mTechnology);
     }
@@ -226,9 +215,9 @@ public class MainActivity extends AppCompatActivity {
 
         updateDrawerChecks(Constants.DRAWER_CHECK.HISTORY);
 
-        if (last_term.equals("--")){
+        if (last_term.equals("--")) {
             getSupportFragmentManager().beginTransaction().replace(mMainFrame.getId(), new StartingFragment()).commit();
-        }else {
+        } else {
             getSupportFragmentManager().beginTransaction().replace(mMainFrame.getId(), new HistoryFragment()).commit();
         }
     }
@@ -256,9 +245,9 @@ public class MainActivity extends AppCompatActivity {
         Uri uri = Uri.parse("market://details?id=" + getBaseContext().getPackageName());
         Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
 
-        if (Build.VERSION.SDK_INT >= 21){
+        if (Build.VERSION.SDK_INT >= 21) {
             goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_DOCUMENT | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-        }else {
+        } else {
             goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
         }
 
@@ -277,11 +266,11 @@ public class MainActivity extends AppCompatActivity {
     private void setVisibilityImageRecycler() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.f_main_images_rv);
         MenuItem imageToggle = mNavigationView.getMenu().findItem(R.id.nav_images);
-        if (recyclerView != null){
+        if (recyclerView != null) {
             if (imageToggle.getTitle().equals(getString(R.string.nav_toggle_images_show))) {
                 recyclerView.setVisibility(View.VISIBLE);
                 imageToggle.setTitle(R.string.nav_toggle_images_hide);
-            }else {
+            } else {
                 recyclerView.setVisibility(View.GONE);
                 imageToggle.setTitle(R.string.nav_toggle_images_show);
             }
@@ -294,9 +283,9 @@ public class MainActivity extends AppCompatActivity {
 
         updateDrawerChecks(Constants.DRAWER_CHECK.HOME);
 
-        if (last_term.equals("--")){
+        if (last_term.equals("--")) {
             getSupportFragmentManager().beginTransaction().replace(mMainFrame.getId(), new StartingFragment()).commit();
-        }else {
+        } else {
             MainVM.refreshCurrentTermById(last_term, this);
             getSupportFragmentManager().beginTransaction().replace(mMainFrame.getId(), new MainFragment()).commit();
         }
@@ -306,7 +295,7 @@ public class MainActivity extends AppCompatActivity {
         Menu menu = mNavigationView.getMenu();
         MenuItem menuItem;
 
-        switch (drawerCheck){
+        switch (drawerCheck) {
             case HISTORY:
                 menuItem = menu.findItem(R.id.nav_history);
                 break;
@@ -317,15 +306,7 @@ public class MainActivity extends AppCompatActivity {
         menuItem.setChecked(true);
     }
 
-    private void easyLife() {
-//        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.a_main_drawer);
-//        drawerLayout.openDrawer(GravityCompat.START);
-//        findViewById(R.id.a_main_search_type_btn).callOnClick();
-//        findViewById(R.id.a_main_search_talk_icon).callOnClick();
-//        findViewById(R.id.a_main_search_google_icon).callOnClick();
-    }
-
-    private void retrieveGoogleKeys(){
+    private void retrieveGoogleKeys() {
         try {
             ApplicationInfo ai = getPackageManager().getApplicationInfo(this.getPackageName(), PackageManager.GET_META_DATA);
             Bundle bundle = ai.metaData;
@@ -338,10 +319,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void addTermGeneric(Constants.TYPE_ADD type_add){
+    public void addTermGeneric(Constants.TYPE_ADD type_add) {
         FragmentManager fm = getSupportFragmentManager();
         Fragment addTermFragment;
-        switch (type_add){
+        switch (type_add) {
             case SPOKEN:
                 addTermFragment = new SearchTermVoiceFragment();
                 break;
@@ -352,10 +333,6 @@ public class MainActivity extends AppCompatActivity {
                 addTermFragment = new SearchTermFragment();
         }
         fm.beginTransaction().add(addTermFragment, Constants.FRAGMENT_TAG).commit();
-    }
-
-    public void userReady() {
-//        StartupVM.firstTimeSetup();
     }
 
     public void search_term(View view) {
@@ -373,7 +350,7 @@ public class MainActivity extends AppCompatActivity {
     public void start_custom_google_search(View view) {
         //TODO Remove focus from EditText
         String searchTerm = SearchTermGoogleFragment.searchTerm;
-        if (searchTerm.length() > 0){
+        if (searchTerm.length() > 0) {
             SearchTermGoogleFragment.mItems.clear();
             new CustomSearchAsyncTask().execute(SearchTermGoogleFragment.searchTerm, GOOGLE_API_KEY, GOOGLE_CUSTOM_SEARCH_KEY);
         }
@@ -381,6 +358,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void start_web_activity(View view) {
         Intent intent = new Intent(this, WebActivity.class);
+
         intent.putExtra(Constants.TITLE_WEB_KEY, MainVM.mCurrentTerm.getWords());
         intent.putExtra(Constants.URL_WEB_KEY, MainVM.mCurrentTerm.getUrl());
         startActivity(intent);

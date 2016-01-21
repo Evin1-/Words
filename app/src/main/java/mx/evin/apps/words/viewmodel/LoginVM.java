@@ -26,7 +26,6 @@ public class LoginVM {
             TryLogin(activity);
         } else {
             Log.d(TAG_, "Logged in " + user.getUsername());
-            activity.userReady();
         }
     }
 
@@ -34,9 +33,9 @@ public class LoginVM {
         ParseUser.logInInBackground(mAndroidId, "my_pass4", new LogInCallback() {
             public void done(ParseUser user, ParseException e) {
                 if (user != null) {
-                    activity.userReady();
+                    Log.d(TAG_, "Logged in " + user.getUsername());
                 } else {
-                    Log.d(TAG_, "Error: User NOT LOGGED IN");
+                    Log.d(TAG_, "Error: User NOT logged in");
                     Log.d(TAG_, e.toString());
                     startSignUp(activity);
                 }
@@ -53,10 +52,9 @@ public class LoginVM {
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {
-                    Log.d(TAG_, "User SIGNED UP");
-                    activity.userReady();
+                    Log.d(TAG_, "User signed up " + mAndroidId);
                 } else {
-                    Log.d(TAG_, "Error: User NOT SIGNED UP");
+                    Log.d(TAG_, "Error: User NOT signed up");
                     Log.d(TAG_, e.toString());
                 }
             }
