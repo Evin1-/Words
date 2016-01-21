@@ -12,7 +12,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -23,16 +22,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".WebActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
+        <service
+            android:name=".viewmodel.services.DataService"
+            android:enabled="true"
+            android:exported="false" />
 
         <!-- Put parse keys here -->
         <meta-data
@@ -48,10 +51,11 @@
         <meta-data
             android:name="GOOGLE_CUSTOM_SEARCH"
             android:value="" />
-        <!-- Put fabric API key here-->
+        <!-- Put fabric API key here -->
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="" />
+
     </application>
 
 </manifest>
