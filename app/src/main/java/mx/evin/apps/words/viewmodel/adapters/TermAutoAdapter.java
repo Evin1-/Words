@@ -86,17 +86,21 @@ public class TermAutoAdapter extends RecyclerView.Adapter<TermAutoAdapter.ViewHo
         textWords.setText(term.getWords());
 
         final TextView textPack = viewHolder.txtPack;
-        term.getPack().fetchIfNeededInBackground(new GetCallback<ParseObject>() {
-            @Override
-            public void done(ParseObject object, ParseException e) {
-                if (e == null){
-                    Pack pack = (Pack) object;
-                    textPack.setText(pack.getName());
-                }else {
-                    textPack.setText("");
+        try {
+            textPack.setText(term.getPack().getName());
+        } catch (Exception e) {
+            term.getPack().fetchIfNeededInBackground(new GetCallback<ParseObject>() {
+                @Override
+                public void done(ParseObject object, ParseException e) {
+                    if (e == null){
+                        Pack pack = (Pack) object;
+                        textPack.setText(pack.getName());
+                    }else {
+                        textPack.setText("");
+                    }
                 }
-            }
-        });
+            });
+        }
 
         viewHolder.idTerm = term.getObjectId();
     }
