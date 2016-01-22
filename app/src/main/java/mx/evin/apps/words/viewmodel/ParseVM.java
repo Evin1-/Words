@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.parse.Parse;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 
 import mx.evin.apps.words.model.entities.parse.Img;
@@ -37,6 +38,7 @@ public class ParseVM {
             ParseObject.registerSubclass(Img.class);
 
             Parse.initialize(context);
+            ParseInstallation.getCurrentInstallation().saveInBackground();
         } catch (Exception e) {
             Log.e(TAG_, e.toString());
         }
