@@ -37,6 +37,15 @@
             android:enabled="true"
             android:exported="false" />
 
+        <receiver
+            android:name=".viewmodel.receivers.ConnectivityReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
         <!-- Put parse keys here -->
         <meta-data
             android:name="com.parse.APPLICATION_ID"
