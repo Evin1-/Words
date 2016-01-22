@@ -17,6 +17,7 @@
             android:id="@+id/f_search_term_input_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/f_search_term_font_size_et"
             android:hint="@string/a_main_search_term"
             android:imeOptions="actionDone"
             android:inputType="text" />

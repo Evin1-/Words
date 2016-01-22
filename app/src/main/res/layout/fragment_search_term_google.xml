@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/f_search_term_google_hint"
+            android:textSize="@dimen/f_search_term_font_size_et"
             android:imeOptions="actionDone"
             android:inputType="text" />
 
