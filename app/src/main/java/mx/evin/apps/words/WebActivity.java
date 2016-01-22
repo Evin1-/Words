@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ProgressBar;
 
 import mx.evin.apps.words.viewmodel.utils.Constants;
 
@@ -18,7 +17,6 @@ public class WebActivity extends AppCompatActivity {
 
     private static final String TAG_ = "MainActivityTAG_";
     private WebView mWebView;
-    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +24,6 @@ public class WebActivity extends AppCompatActivity {
         setContentView(R.layout.activity_web);
 
         mWebView = (WebView) findViewById(R.id.a_web_wv);
-        mProgressBar = (ProgressBar) findViewById();
 
         String receivedTitle = getIntent().getStringExtra(Constants.TITLE_WEB_KEY);
         String receivedURL = getIntent().getStringExtra(Constants.URL_WEB_KEY);
