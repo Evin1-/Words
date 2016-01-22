@@ -5,7 +5,7 @@
     android:layout_marginTop="?attr/actionBarSize">
 
     <ProgressBar
-        android:id="@+id/a_main_progress"
+        android:id="@+id/a_main_progress_bar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

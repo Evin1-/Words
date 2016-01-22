@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.a_main_drawer);
         mNavigationView = (NavigationView) findViewById(R.id.a_main_nav);
         mMainFrame = (FrameLayout) findViewById(R.id.a_main_frame);
-        mProgressBar = (ProgressBar) findViewById(R.id.a_main_progress);
+        mProgressBar = (ProgressBar) findViewById(R.id.a_main_progress_bar);
 
         mSharedPref = getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         mTechnology = Constants.DEFAULT_TECHNOLOGY;
