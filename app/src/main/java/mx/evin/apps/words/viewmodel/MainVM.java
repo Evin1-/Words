@@ -140,21 +140,13 @@ public class MainVM {
         if (actionBar != null)
             actionBar.setSubtitle(MainActivity.mTechnology + " | " + mCurrentTerm.getWords());
 
-        textViewDoc.setText(setTextViewHTML(mCurrentTerm.getDocs(), Constants.TYPE_HTML.BODY));
-        textViewDoc.setLinksClickable(true);
-        textViewDoc.setMovementMethod(LinkMovementMethod.getInstance());
-
-        textViewHierarchy.setText(setTextViewHTML(mCurrentTerm.getHierarchy(), Constants.TYPE_HTML.HIERARCHY));
-        textViewHierarchy.setLinksClickable(true);
-        textViewHierarchy.setMovementMethod(LinkMovementMethod.getInstance());
-
         mCurrentTerm.getPack().fetchIfNeededInBackground(new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject object, ParseException e) {
-                if (e == null){
+                if (e == null) {
                     Pack pack = ((Pack) object);
                     textViewPack.setText(pack.getName());
-                }else {
+                } else {
                     textViewPack.setText(activity.getString(R.string.f_main_package_placeholder));
                 }
             }
@@ -162,6 +154,15 @@ public class MainVM {
 
         textViewTitle.setText(mCurrentTerm.getWords());
         textURL.setText(mCurrentTerm.getUrl());
+
+        textViewHierarchy.setText(setTextViewHTML(mCurrentTerm.getHierarchy(), Constants.TYPE_HTML.HIERARCHY));
+        textViewHierarchy.setLinksClickable(true);
+        textViewHierarchy.setMovementMethod(LinkMovementMethod.getInstance());
+
+        textViewDoc.setText(setTextViewHTML(mCurrentTerm.getDocs(), Constants.TYPE_HTML.BODY));
+        textViewDoc.setLinksClickable(true);
+        textViewDoc.setMovementMethod(LinkMovementMethod.getInstance());
+
 
     }
 
