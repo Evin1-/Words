@@ -3,7 +3,9 @@ package mx.evin.apps.words.viewmodel;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
@@ -39,6 +41,7 @@ import mx.evin.apps.words.model.entities.parse.TermTerm;
 import mx.evin.apps.words.view.fragments.MainFragment;
 import mx.evin.apps.words.view.fragments.SearchTermFragment;
 import mx.evin.apps.words.view.fragments.SearchTermVoiceFragment;
+import mx.evin.apps.words.viewmodel.receivers.ConnectivityReceiver;
 import mx.evin.apps.words.viewmodel.utils.Constants;
 import mx.evin.apps.words.viewmodel.utils.MyTagHandler;
 
@@ -47,6 +50,7 @@ import mx.evin.apps.words.viewmodel.utils.MyTagHandler;
  */
 public class MainVM {
     //TODO Check that 2 offline calls are not at the same time
+    //TODO Change mCurrentContext to Activity
     private static final String TAG_ = "MainVMTAG_";
     public static ArrayList<Term> mTerms;
     public static ArrayList<Term> termsHistory;
@@ -58,7 +62,8 @@ public class MainVM {
         termsHistory = new ArrayList<>();
     }
 
-    public static void initializeMain() {
+    public static void initializeMain(Context context) {
+        mCurrentContext = context;
         initializeTerms();
     }
 
@@ -96,6 +101,7 @@ public class MainVM {
             });
         }
         notifyAdapters(auxTerms);
+        mCurrentContext.registerReceiver(new ConnectivityReceiver(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
 
     private static void notifyAdapters(List<Term> terms){
@@ -226,7 +232,7 @@ public class MainVM {
             public void onClick(View view) {
                 char[] aux = new char[end - start];
                 strBuilder.getChars(start, end, aux, 0);
-                refreshCurrentTermByName(new String(aux), mCurrentContext, span.getURL());
+                refreshCurrentTermByName(new String(aux), span.getURL());
 
             }
         };
@@ -313,8 +319,7 @@ public class MainVM {
 
     }
 
-    public static void refreshCurrentTermById(final String lastTermId, final Context context) {
-        mCurrentContext = context;
+    public static void refreshCurrentTermById(final String lastTermId) {
         ParseObject query = ParseObject.createWithoutData("Term", lastTermId);
         query.fetchFromLocalDatastoreInBackground(new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
@@ -337,9 +342,8 @@ public class MainVM {
         });
     }
 
-    public static void refreshCurrentTermByName(final String lastTermWords, final Context context, final String url) {
+    public static void refreshCurrentTermByName(final String lastTermWords, final String url) {
         //TODO What if it finds 2 objects
-        mCurrentContext = context;
         ParseQuery<ParseObject> query = new ParseQuery<>("Term");
         query.fromLocalDatastore();
         query.whereEqualTo("words", lastTermWords);
@@ -352,7 +356,7 @@ public class MainVM {
                 } else {
                     if (lastTermWords.contains(".")) {
                         String last = lastTermWords.substring(lastTermWords.lastIndexOf(".") + 1);
-                        refreshCurrentTermByName(last, context, url);
+                        refreshCurrentTermByName(last, url);
                     } else {
                         try {
                             URL auxURL = new URL(mCurrentTerm.getUrl());
