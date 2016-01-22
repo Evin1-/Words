@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     //TODO Service that updates db
     //TODO Add type of concept (class, interface, etc)
     //TODO Finish documentation
+    //TODO Scroll to the top after new link
 
     /**
      * Tag used in logging.

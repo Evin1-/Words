@@ -18,6 +18,7 @@ import android.text.style.ClickableSpan;
 import android.text.style.URLSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
@@ -41,6 +42,7 @@ import mx.evin.apps.words.model.entities.parse.TermTerm;
 import mx.evin.apps.words.view.fragments.MainFragment;
 import mx.evin.apps.words.view.fragments.SearchTermFragment;
 import mx.evin.apps.words.view.fragments.SearchTermVoiceFragment;
+import mx.evin.apps.words.viewmodel.animations.Animator;
 import mx.evin.apps.words.viewmodel.receivers.ConnectivityReceiver;
 import mx.evin.apps.words.viewmodel.utils.Constants;
 import mx.evin.apps.words.viewmodel.utils.MyTagHandler;
@@ -56,6 +58,8 @@ public class MainVM {
     public static ArrayList<Term> termsHistory;
     public static Term mCurrentTerm;
     public static Context mCurrentContext;
+    public static ProgressBar mProgressBar;
+    public static Animator animator;
 
     static {
         mTerms = new ArrayList<>();
@@ -63,7 +67,9 @@ public class MainVM {
     }
 
     public static void initializeMain(Context context) {
+        animator = new Animator();
         mCurrentContext = context;
+        mProgressBar = ((MainActivity) context).mProgressBar;
         initializeTerms();
     }
 
@@ -130,6 +136,7 @@ public class MainVM {
     }
 
     public static void refreshMainFragment(final Activity activity) {
+        animator.fadeOut(mProgressBar);
         TextView textViewDoc = (TextView) activity.findViewById(R.id.f_main_doc_txt);
         final TextView textViewPack = (TextView) activity.findViewById(R.id.f_main_pack_txt);
         TextView textViewTitle = (TextView) activity.findViewById(R.id.f_main_title_txt);
@@ -320,6 +327,7 @@ public class MainVM {
     }
 
     public static void refreshCurrentTermById(final String lastTermId) {
+        mProgressBar.setVisibility(View.VISIBLE);
         ParseObject query = ParseObject.createWithoutData("Term", lastTermId);
         query.fetchFromLocalDatastoreInBackground(new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
@@ -343,7 +351,7 @@ public class MainVM {
     }
 
     public static void refreshCurrentTermByName(final String lastTermWords, final String url) {
-        //TODO What if it finds 2 objects
+        mProgressBar.setVisibility(View.VISIBLE);
         ParseQuery<ParseObject> query = new ParseQuery<>("Term");
         query.fromLocalDatastore();
         query.whereEqualTo("words", lastTermWords);
@@ -365,6 +373,7 @@ public class MainVM {
                             Intent intent = new Intent(mCurrentContext, WebActivity.class);
                             intent.putExtra(Constants.TITLE_WEB_KEY, lastTermWords);
                             intent.putExtra(Constants.URL_WEB_KEY, buildURL);
+                            animator.fadeOut(mProgressBar);
                             mCurrentContext.startActivity(intent);
                         } catch (MalformedURLException e1) {
                             Log.e(TAG_, e1.toString());
