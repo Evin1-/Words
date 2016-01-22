@@ -82,9 +82,10 @@ public class MainVM {
     }
 
     private static void updateTerms(List<ParseObject> objects) {
+        ArrayList<Term> auxTerms = new ArrayList<>();
         ParseObject.pinAllInBackground(objects);
         for (ParseObject object : objects) {
-            notifyAdapters((Term) object);
+            auxTerms.add((Term) object);
             object.getParseObject("pack").fetchInBackground(new GetCallback<ParseObject>() {
                 @Override
                 public void done(ParseObject object, ParseException e) {
@@ -94,12 +95,12 @@ public class MainVM {
                 }
             });
         }
+        notifyAdapters(auxTerms);
     }
 
-    private static void notifyAdapters(Term term){
-        if (term != null){
-            mTerms.add(term);
-        }
+    private static void notifyAdapters(List<Term> terms){
+        mTerms.clear();
+        mTerms.addAll(terms);
         SearchTermFragment.mAdapter.notifyDataSetChanged();
         SearchTermVoiceFragment.mAdapter.notifyDataSetChanged();
     }

@@ -1,16 +1,55 @@
 package mx.evin.apps.words.viewmodel.services;
 
-import android.app.Service;
+import android.app.IntentService;
 import android.content.Intent;
-import android.os.IBinder;
+import android.util.Log;
 
-public class DataService extends Service {
-    public DataService() {
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.util.List;
+
+public class DataService extends IntentService {
+    private static final String TAG_ = "DataServiceTAG_";
+    // TODO Create Cloud Code to only update ids not in the offline mode already.
+
+
+    public DataService(String name) {
+        super(name);
     }
 
     @Override
-    public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
-        throw new UnsupportedOperationException("Not yet implemented");
+    protected void onHandleIntent(Intent intent) {
+        String[] entities = {
+                "Img",
+                "Pack",
+                "Technology",
+                "Term",
+                "TermHierarchy",
+                "TermImplementation",
+                "TermTerm",
+                "UserTechnology",
+                "UserTerm",
+        };
+
+        for (String entity : entities) {
+            updateLocalTable(entity);
+        }
+    }
+
+    private void updateLocalTable(String entity) {
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(entity);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if (e == null){
+                    ParseObject.pinAllInBackground(objects);
+                }else {
+                    Log.e(TAG_, e.toString());
+                }
+            }
+        });
     }
 }
