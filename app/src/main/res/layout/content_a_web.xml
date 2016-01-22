@@ -4,6 +4,14 @@
     android:layout_height="match_parent"
     android:layout_marginTop="?attr/actionBarSize">
 
+    <ProgressBar
+        android:id="@+id/a_web_progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/a_main_progress_bar_margin_top"
+        android:visibility="gone" />
+
     <WebView
         android:id="@+id/a_web_wv"
         android:layout_width="match_parent"

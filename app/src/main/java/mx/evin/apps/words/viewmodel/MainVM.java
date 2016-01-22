@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -32,6 +33,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.fabric.sdk.android.Fabric;
 import mx.evin.apps.words.MainActivity;
 import mx.evin.apps.words.R;
 import mx.evin.apps.words.WebActivity;
@@ -386,6 +388,6 @@ public class MainVM {
 
     public static void initializeThirdPartyLibs(MainActivity mainActivity) {
         ParseVM.parseStart(mainActivity);
-//        Fabric.with(mainActivity, new Crashlytics());
+        Fabric.with(mainActivity, new Crashlytics());
     }
 }

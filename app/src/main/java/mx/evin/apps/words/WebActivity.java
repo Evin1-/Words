@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import mx.evin.apps.words.viewmodel.utils.Constants;
 
@@ -16,18 +17,22 @@ public class WebActivity extends AppCompatActivity {
     //TODO Put info in single layout and not app_bar_web app_bar_main
 
     private static final String TAG_ = "MainActivityTAG_";
-    private WebView myWebView;
+    private WebView mWebView;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web);
 
-        myWebView = (WebView) findViewById(R.id.a_web_wv);
+        mWebView = (WebView) findViewById(R.id.a_web_wv);
+        mProgressBar = (ProgressBar) findViewById();
+
         String receivedTitle = getIntent().getStringExtra(Constants.TITLE_WEB_KEY);
         String receivedURL = getIntent().getStringExtra(Constants.URL_WEB_KEY);
 
         configureActionBar();
+
         configureWebView(receivedTitle, receivedURL);
     }
 
@@ -38,9 +43,9 @@ public class WebActivity extends AppCompatActivity {
     }
 
     private void configureWebView(String title, String url) {
-        WebSettings webSettings = myWebView.getSettings();
+        WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        myWebView.setWebViewClient(new WebViewClient() {
+        mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
@@ -55,10 +60,10 @@ public class WebActivity extends AppCompatActivity {
         });
 
         if (title != null && url != null) {
-            myWebView.loadUrl(url);
+            mWebView.loadUrl(url);
             updateTitleBar(title, url);
         }else {
-            myWebView.loadUrl(Constants.DEFAULT_WEBSITE_URL);
+            mWebView.loadUrl(Constants.DEFAULT_WEBSITE_URL);
             updateTitleBar(getString(R.string.a_web_default_website_title), Constants.DEFAULT_WEBSITE_URL);
         }
     }
