@@ -5,18 +5,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
+
+import mx.evin.apps.words.viewmodel.services.DataService;
 
 public class ConnectivityReceiver extends BroadcastReceiver {
     private static final String TAG_ = "ConnectivityTAG_";
+    private static boolean isReceiving = false;
 
     public ConnectivityReceiver() {
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
-//        context.getconn
-        Log.d(TAG_, "Connected!: " + isWifiConnected(context));
+        if (!isMyServiceRunning() && isWifiConnected(context) && !isReceiving){
+            isReceiving = true;
+            DataService.isRunning = true;
+            Intent broadcastIntent = new Intent(context, DataService.class);
+            context.startService(broadcastIntent);
+        }
     }
 
     private boolean isWifiConnected(Context context){
@@ -24,5 +30,9 @@ public class ConnectivityReceiver extends BroadcastReceiver {
         NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
 
         return  activeNetwork != null && activeNetwork.getType() == ConnectivityManager.TYPE_WIFI;
+    }
+
+    private boolean isMyServiceRunning() {
+        return DataService.isRunning;
     }
 }

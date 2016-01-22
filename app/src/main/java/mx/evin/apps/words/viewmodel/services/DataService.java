@@ -13,11 +13,19 @@ import java.util.List;
 
 public class DataService extends IntentService {
     private static final String TAG_ = "DataServiceTAG_";
+    public static boolean isRunning = false;
     // TODO Create Cloud Code to only update ids not in the offline mode already.
 
 
     public DataService() {
         super(DataService.class.getName());
+    }
+
+
+    @Override
+    public void onDestroy() {
+        isRunning = false;
+        super.onDestroy();
     }
 
     @Override
