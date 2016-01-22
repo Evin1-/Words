@@ -361,6 +361,9 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().add(new AboutFragment(), Constants.ABOUT_FRAGMENT_TAG).commit();
     }
 
+    /**
+     * Either hides or shows the images after a click in a {@link #mDrawerLayout} menuItem.
+     */
     private void setVisibilityImageRecycler() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.f_main_images_rv);
         MenuItem imageToggle = mNavigationView.getMenu().findItem(R.id.nav_images);
