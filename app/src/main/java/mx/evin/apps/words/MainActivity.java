@@ -28,6 +28,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 
 import mx.evin.apps.words.view.fragments.AboutFragment;
 import mx.evin.apps.words.view.fragments.HistoryFragment;
@@ -105,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
     private FrameLayout mMainFrame;
     private SharedPreferences mSharedPref;
     private ActionBar mActionBar;
+    public ProgressBar mProgressBar;
 
     /**
      * Sets the Views and widgets used to its references in the layouts.
@@ -129,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.a_main_drawer);
         mNavigationView = (NavigationView) findViewById(R.id.a_main_nav);
         mMainFrame = (FrameLayout) findViewById(R.id.a_main_frame);
+        mProgressBar = (ProgressBar) findViewById(R.id.a_main_progress);
 
         mSharedPref = getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         mTechnology = Constants.DEFAULT_TECHNOLOGY;
@@ -139,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
         retrieveGoogleKeys();
         configureActionBar();
+        configureProgressBar();
         setTechnology();
 
         try {
@@ -153,6 +157,13 @@ public class MainActivity extends AppCompatActivity {
         MainVM.initializeMain(this);
 
         setMainFragment();
+    }
+
+    /**
+     * Simple configuration of the ProgressBar. Set it as Indeterminate
+     */
+    private void configureProgressBar() {
+        mProgressBar.setIndeterminate(true);
     }
 
     /**

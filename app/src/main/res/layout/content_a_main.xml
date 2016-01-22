@@ -4,6 +4,15 @@
     android:layout_height="match_parent"
     android:layout_marginTop="?attr/actionBarSize">
 
+    <ProgressBar
+        android:id="@+id/a_main_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:indeterminateDuration="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/a_main_progress_bar_margin_top"
+        android:visibility="gone" />
+
     <FrameLayout
         android:id="@+id/a_main_frame"
         android:layout_width="match_parent"
