@@ -16,8 +16,8 @@ public class DataService extends IntentService {
     // TODO Create Cloud Code to only update ids not in the offline mode already.
 
 
-    public DataService(String name) {
-        super(name);
+    public DataService() {
+        super(DataService.class.getName());
     }
 
     @Override
