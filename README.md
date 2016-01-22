@@ -2,6 +2,11 @@
 Words is an information app that lets you navigate through diverse concepts of particular technologies (Android, iOS, SharePoint, Management, between others).
 https://play.google.com/store/apps/details?id=mx.evin.apps.words
 
+<p align="center">
+  <img src="https://dl2.pushbulletusercontent.com/OYURaxeHK5KulPmp47pBKYyxuMNxh7IU/Screenshot_2016-01-19-04-23-29.png" width="350"/>
+  <img src="https://dl2.pushbulletusercontent.com/sqGEeCWLLpczfaXkycWIYqM1KWsyYDku/Screenshot_2016-01-19-04-24-43.png" width="350"/>
+</p>
+
 It's built in so you can review the most important terms without the need of a Web explorer or even Internet after a first-time app run, the terms will download automatically.
 The version 1.0 contains more than 100 Android concepts and components, all double-checked with their principal and supported documentation if we don't have a term's data it will just send you to the main source.
 Navigate through the terms with related concepts so you can learn or study a whole branch of the technology with no need of rewrite a URL or do a Google Search.
