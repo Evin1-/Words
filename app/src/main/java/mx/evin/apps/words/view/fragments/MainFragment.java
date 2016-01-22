@@ -1,6 +1,8 @@
 package mx.evin.apps.words.view.fragments;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,8 +17,10 @@ import mx.evin.apps.words.R;
 import mx.evin.apps.words.model.entities.parse.Img;
 import mx.evin.apps.words.model.entities.parse.Term;
 import mx.evin.apps.words.view.decorations.HorizontalSpacesItemDecoration;
+import mx.evin.apps.words.viewmodel.MainVM;
 import mx.evin.apps.words.viewmodel.adapters.ImagesTermsAdapter;
 import mx.evin.apps.words.viewmodel.adapters.RelatedTermsAdapter;
+import mx.evin.apps.words.viewmodel.utils.Constants;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +33,7 @@ public class MainFragment extends Fragment {
     public static RelatedTermsAdapter mRelatedTermsAdapter;
     public static ArrayList<Img> mImgs;
     public static ImagesTermsAdapter mImagesTermsAdapter;
+    private SharedPreferences mSharedPreferences;
 
     static {
         mTerms = new ArrayList<>();
@@ -45,6 +50,7 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mSharedPreferences = container.getContext().getSharedPreferences(Constants.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         return inflater.inflate(R.layout.fragment_main, container, false);
     }
 
@@ -52,7 +58,10 @@ public class MainFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //TODO Do not set fixed RecyclerViews sizes
-        
+        String last_term = mSharedPreferences.getString(Constants.LAST_TERM_KEY, "--");
+
+        MainVM.refreshCurrentTermById(last_term);
+
         RecyclerView relatedRecyclerView = (RecyclerView) view.findViewById(R.id.f_main_related_rv);
         RecyclerView imagesRecyclerView = (RecyclerView) view.findViewById(R.id.f_main_images_rv);
         HorizontalSpacesItemDecoration spacesItemDecoration = new HorizontalSpacesItemDecoration(7);
@@ -63,7 +72,6 @@ public class MainFragment extends Fragment {
 
         imagesRecyclerView.setAdapter(mImagesTermsAdapter);
         imagesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-//        imagesRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, LinearLayoutManager.HORIZONTAL));
         imagesRecyclerView.addItemDecoration(spacesItemDecoration);
     }
 }
