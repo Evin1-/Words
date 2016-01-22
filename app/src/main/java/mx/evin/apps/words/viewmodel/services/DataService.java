@@ -31,15 +31,15 @@ public class DataService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         String[] entities = {
-                "Img",
-                "Pack",
-                "Technology",
+//                "Img",
+//                "Pack",
+//                "Technology",
                 "Term",
-                "TermHierarchy",
-                "TermImplementation",
-                "TermTerm",
-                "UserTechnology",
-                "UserTerm",
+//                "TermHierarchy",
+//                "TermImplementation",
+//                "TermTerm",
+//                "UserTechnology",
+//                "UserTerm",
         };
 
         for (String entity : entities) {
