@@ -138,6 +138,11 @@ public class MainVM {
     }
 
     public static void refreshMainFragment(final Activity activity) {
+
+        if (activity == null){
+            return;
+        }
+
         animator.fadeOut(mProgressBar);
         TextView textViewDoc = (TextView) activity.findViewById(R.id.f_main_doc_txt);
         final TextView textViewPack = (TextView) activity.findViewById(R.id.f_main_pack_txt);
@@ -152,8 +157,13 @@ public class MainVM {
 
         MainActivity mainActivity = (MainActivity) activity;
         ActionBar actionBar = mainActivity.getSupportActionBar();
-        if (actionBar != null)
+        if (actionBar != null){
             actionBar.setSubtitle(MainActivity.mTechnology + " | " + mCurrentTerm.getWords());
+        }
+
+        if (mCurrentTerm == null || textViewTitle == null){
+            return;
+        }
 
         mCurrentTerm.getPack().fetchIfNeededInBackground(new GetCallback<ParseObject>() {
             @Override
